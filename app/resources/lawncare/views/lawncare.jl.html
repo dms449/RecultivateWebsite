@@ -1,0 +1,29 @@
+<script>
+  function postEstimate(estimate_value){
+    document.getElementById("estimate").value = estimate_value)
+  }
+</script>
+<h2 class="text-centered"> Local Lawncare Savings</h2>
+<p class="text-centered"> Something about lawncare calculation <p>
+<div class="container">
+
+  <form action="$(Genie.Router.linkto(:calculate_estimate))" method="POST">
+  <!--<form action="postEstimate($(calculate()))">-->
+    <div class="form-row">
+      <div class="col">
+        <input type="text" class="form-control" placeholder="Acres" name="acres">
+      </div>
+      <div class="col">
+        <input type="text" class="form-control" placeholder="address" name="address">
+      </div>
+      <div class="col-1">
+        <button type="submit" class="btn btn-primary mb-2">Estimate</button>
+      </div>
+    </div>
+  </form>
+  <h3>$(raw"$") $(estimate)</h3>
+</div>
+  
+</body>
+</html>
+
