@@ -1,8 +1,8 @@
 module LawncareController
   using Genie.Renderer.Html
   using Genie.Requests, Genie.Router
-  const current_estimate = 0.0
-  
+  include("helpers/maps_stuff.jl")
+
 
   function lawncarePage(estimate=0.0)
     println("current estimate = $estimate")
@@ -10,7 +10,12 @@ module LawncareController
   end
 
   function getEstimate(acres, address)
-    return 30+ 20*parse(Float32, acres)
+    response = queryDistance(address)
+    #if (#SOMETHING)
+    #else
+    mins = getDistanceMins(response)
+
+    return 30+ 20*parse(Float32, acres) + mins
   end
 
 
