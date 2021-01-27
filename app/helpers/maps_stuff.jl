@@ -11,6 +11,7 @@ addrToHttp(addr::Address) = "$(replace(addr.street, " "=>"+"))+$(addr.city),$(ad
 
 # define the home address
 const HOME = Address("1004 Arnold Rd", "Madison", "AL")
+const API_KEY = "AIzaSyA8ui-L61_oqwSBNHfVzCU5sJBrjGhuYCM"
 
 """
 get the distance between two addresses. 
@@ -18,7 +19,7 @@ get the distance between two addresses.
 Assumes driving
 """
 function queryDistance(origin::Address, dst::Address) 
-  return HTTP.request("GET", "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=$(addrToHttp(origin))&destinations=$(addrToHttp(dst))&key=AIzaSyA8ui-L61_oqwSBNHfVzCU5sJBrjGhuYCM")
+  return HTTP.request("GET", "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=$(addrToHttp(origin))&destinations=$(addrToHttp(dst))&key=$API_KEY")
 end
 
 """
@@ -29,7 +30,7 @@ queryDistance(dest::Address) = queryDistance(HOME, dest)
 """
 Extract the number of minutes (rounded down to the nearest minute)
 """
-function getDistanceMins(HTTP.Messages.Response response)
+function getDistanceMins(response::HTTP.Messages.Response)
   j = JSON.parse(String(response.body))
   seconds = j["rows"][1]["elements"][1]["duration"]["value"]
   return floor(seconds/60)
