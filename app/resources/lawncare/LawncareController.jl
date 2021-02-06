@@ -1,5 +1,6 @@
 module LawncareController
   using Genie.Renderer.Html
+  using Genie.Sessions: session
   using Genie.Requests, Genie.Router
   include("../../helpers/maps_stuff.jl")
 
@@ -12,47 +13,56 @@ module LawncareController
   #TODO route should include the fields for the form
 
 
+  function lawncarePage()
+    #set!(session(Genie.Requests.payload()), :current_page, get_route(:lawncare_page))
+    street=payload(:street, "")
+    city=payload(:city, "Madison")
+    #state=payload(:state, "")
+    acres=payload(:acres, "0.25")
 
-  """
 
-  """
-  function lawncarePage(est=0.0, est_warn="")
-    html(:lawncare, :lawncare, estimate=est, estimate_warning=est_warn)
+    est = ""
+    est_warn = ""
+
+    # try to parse the acres
+    acre_num = 0.0
+    try
+      acre_num = parse(Float32, acres)
+    catch e
+      est_warn = "Invalid `acres` entry."
+    end
+
+    # if no errors have occured yet
+    if (est_warn == "")
+      #est, est_warn = getEstimate(acre_num, Address(street, city, "AL"))
+    end
+
+    html(:lawncare, :lawncare, street=street, city=city, acres=acres, estimate=est, estimate_warning=est_warn)
   end
+
 
   """
   
   """
-  function getEstimate(acres, address::Address)
+  function getEstimate(acres::Float32, address::Address)
+    #if (address.street == "" | address.city == "" | address.state == "")
+    #  return "", "At least one address field is empty."
+    #end
+
+    if (uppercase(address.state) != "AL")
+      return "", "State `$(address.state)` not available for this service"
+    end
+
+
     response = queryDistance(address)
     # TODO make sure response is valid
     #if (#SOMETHING)
     #else
     mins = getDistanceMins(response)
 
-    return 20*(parse(Float32, acres) - 0.25)^2 + mins + 35
+    return "$(20*(acres - 0.25)^2 + mins + 35)", ""
   end
 
-
-  """
-  
-  """
-  function calculateEstimate()
-    println( "Estimate for $(@params(:acres)) located at $(@params(:street)), $(@params(:city)), $(@params(:state))")
-
-    warn = ""
-    estimate = 0.0
-
-    warn = checkPostPayload(postpayload())
-
-    # calculate the estimate if all of the necessary fields are filled
-    if (warn == "")
-      estimate = getEstimate(@params(:acres), Address(@params(:street), @params(:city), @params(:state)))
-    end
-
-    # reload the page
-    lawncarePage(estimate, warn)
-  end
 
 
   """
@@ -62,8 +72,8 @@ module LawncareController
   * invalid city, state (find an api for verifying address?)
   * check that the  0.0 < acres < 5.0
   """
-  function checkPostPayload(payload::Dict)::String
-  #TODO
+  function checkPayload(payload::Dict)::String
+    
   end
 end
 
