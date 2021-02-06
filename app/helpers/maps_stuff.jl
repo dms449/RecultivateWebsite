@@ -11,7 +11,19 @@ addrToHttp(addr::Address) = "$(replace(addr.street, " "=>"+"))+$(addr.city),$(ad
 
 # define the home address
 const HOME = Address("1004 Arnold Rd", "Madison", "AL")
-const API_KEY = "AIzaSyA8ui-L61_oqwSBNHfVzCU5sJBrjGhuYCM"
+API_KEY = ""
+
+"""
+
+"""
+function load_key(path="recultivate_google_api_key.txt")
+  open(path, "r") do io
+    API_KEY = read(io, String)
+  end
+  if (API_KEY == "")
+    @warn "Failed to load api key at `$path`"
+  end
+end
 
 """
 get the distance between two addresses. 
@@ -19,6 +31,7 @@ get the distance between two addresses.
 Assumes driving
 """
 function queryDistance(origin::Address, dst::Address) 
+  if (API_KEY == "") load_key() end
   return HTTP.request("GET", "https://maps.googleapis.com/maps/api/distancematrix/json?units=imperial&origins=$(addrToHttp(origin))&destinations=$(addrToHttp(dst))&key=$API_KEY")
 end
 
