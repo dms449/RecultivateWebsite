@@ -1,48 +1,47 @@
-<h2 class="text-centered"> Local Lawncare Savings</h2>
-<p class="text-centered"> We calculate the cost of each yard by its size and proximity
-to our business. This incentivises those closest to us with lower prices for them and less travel for us! <p>
-<div class="container">
 
-  <form action="$(Genie.Router.linkto(:lawncare_page))" method="GET">
-  <!--<form action="postEstimate($(calculate()))">-->
-    <legend class="text-center header"> Calculate your lawncare estimate:</legend>
-    <div class="form-group"> 
-      <div class="form-row ">
-        <div class="col-6">
-          <label>street</label>
-          <input type="text" class="form-control" placeholder="street" name="street" value="$street">
-        </div>
+<div class=container>
+  <h2 class="text-centered"> Local Lawncare Savings</h2>
+  <p class="text-centered"> We calculate the cost of each yard by its size and proximity
+  to our business. This incentivises those closest to us with lower prices for them and less travel for us! <p>
+  <div class="container">
 
-        <div class="col-4">
-          <label>city</label>
-          <select class="form-control" name="city">
-            <option  value="madison" selected>Madison</option>
-            <option value="huntsville">Huntsville</option>
-          </select>
-        </div>
-        <div class="col-1">
-          <label>state</label>
-          <input type="text" readonly class="form-control-plaintext" value="AL">
-        </div>
+    <form action="$(Genie.Router.linkto(:lawncare_page))" method="GET">
+    <!--<form action="postEstimate($(calculate()))">-->
+      <legend class="text-center header"> Calculate your lawncare estimate:</legend>
+      <div class="form-group"> 
+        <div class="form-row ">
+          <div class="col-6">
+            <label>street</label>
+            <input type="text" class="form-control" placeholder="street" name="street" value="$street">
+          </div>
 
-        <div class="col-1">
-          <label>acres</label>
-          <input type="float" min="0.0" step="any" class="form-control" placeholder="Acres" name="acres" value="$acres">
+          <div class="col-4">
+            <label>city</label>
+            <select class="form-control" name="city">
+              <option  value="madison" selected>Madison</option>
+              <option value="huntsville">Huntsville</option>
+            </select>
+          </div>
+          <div class="col-1">
+            <label>state</label>
+            <input type="text" readonly class="form-control-plaintext" value="AL">
+          </div>
+
+          <div class="col-1">
+            <label>acres</label>
+            <input type="float" min="0.0" step="any" class="form-control" placeholder="Acres" name="acres" value="$acres">
+          </div>
         </div>
       </div>
-    </div>
 
 
-    <div class="form-row">
-      <div class="mr-auto">
-        <button type="submit" class="btn btn-primary mb-2">Estimate</button>
+      <div class="form-row">
+        <div class="mr-auto">
+          <button type="submit" class="btn btn-primary mb-2">Estimate</button>
+        </div>
+        <div class="p2"><legend class="header">Your Estimate: $(raw"$") $(estimate)</legend></div>
       </div>
-      <div class="p2"><legend class="header">Your Estimate: $(raw"$") $(estimate)</legend></div>
-    </div>
-    <div class="text-danger">$estimate_warning</div>
-  </form>
+      <div class="text-danger">$estimate_warning</div>
+    </form>
+  </div>
 </div>
-  
-</body>
-</html>
-

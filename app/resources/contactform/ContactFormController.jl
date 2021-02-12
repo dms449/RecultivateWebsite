@@ -14,6 +14,6 @@ module ContactFormController
       write(io, @params(:msg))
     end;
 
-    redirect(get(session(), :current_page))
+    redirect(:home_page)
   end
 end

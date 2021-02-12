@@ -42,25 +42,30 @@ module LawncareController
 
 
   """
-  
+  Returns the String dollar value and any error message
   """
   function getEstimate(acres::Float32, address::Address)
-    #if (address.street == "" | address.city == "" | address.state == "")
-    #  return "", "At least one address field is empty."
-    #end
+    # parse the JSON body of the HTTP response
+    response_data = JSON.parse(String(queryDistance(address).body))
 
-    if (uppercase(address.state) != "AL")
-      return "", "State `$(address.state)` not available for this service"
+    # verify response is ok (did we successfully make a query?)
+    if (response_data["status"] == "OK")
+
+      # get the first item (Will I ever need anything other than this??)
+      item = response_data["rows"][1]["elements"][1]
+
+      # is this element ok? (was it able to locate and calculate for the provided address)
+      if (item["status"] == "OK")
+        mins = floor(item["duration"]["value"]/60)
+        return "$(20*(acres - 0.25)^2 + mins + 35)", ""
+      else 
+        @warn item["status"]
+        return "∞", item["status"]
+      end
+    else 
+      @warn response_data["error_message"]
+      return "∞", response_data["error_message"]
     end
-
-
-    response = queryDistance(address)
-    # TODO make sure response is valid
-    #if (#SOMETHING)
-    #else
-    mins = getDistanceMins(response)
-
-    return "$(20*(acres - 0.25)^2 + mins + 35)", ""
   end
 
 

@@ -1,1 +1,0 @@
-"/home/dms449/julia-1.5.1/bin/julia" --color=yes --depwarn=no -q -- ../bootstrap.jl -r %*

@@ -1,5 +1,6 @@
 # App
 build/*
+bin/*
 cache/*
 config/secrets.jl
 docs/build
