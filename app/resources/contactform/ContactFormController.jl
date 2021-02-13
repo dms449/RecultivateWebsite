@@ -10,7 +10,7 @@ module ContactFormController
 
   function contactSubmit()
 
-    open("myfile.txt", "w") do io
+    open("data/myfile.txt", "w") do io
       write(io, @params(:msg))
     end;
 

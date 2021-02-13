@@ -5,6 +5,7 @@ cache/*
 config/secrets.jl
 docs/build
 log/*
+data/
 sessions/*
 !*.gitkeep
 Manifest.toml
