@@ -7,6 +7,9 @@ module ContactFormController
 
 
   #currentPage::Symbol
+  function contactForm()
+    return html(:contactForm, :contactForm)
+  end
 
   function contactSubmit()
 
