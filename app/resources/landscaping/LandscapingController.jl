@@ -1,11 +1,12 @@
 module LandscapingController
 
 
-  using Genie.Sessions: session, set!
+  using Genie.Sessions, Genie.Router, Genie.Requests
   using Genie.Renderer.Html
+  include("../../helpers/random.jl")
 
   function landscapingPage()
-    #set!(session(Genie.Requests.payload()), :current_page, get_route(:landscaping_page))
-    html(:landscaping, :landscaping)
+    Sessions.set!(Sessions.session(Requests.payload()), :current_page, :landscaping_page)
+    html(:landscaping, :landscaping, activePage=activePage)
   end
 end

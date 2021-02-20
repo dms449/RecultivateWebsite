@@ -33,14 +33,14 @@
   <!--<div class="jumbotron">-->
 <nav class="navbar navbar-expand-sm my-4">
   <!-- Brand -->
-  <a class="navbar-brand" href="/">recultivate</a>
+  <a class="navbar-brand " href="/">recultivate</a>
 
   <!-- Links -->
   <ul class="navbar-nav mx-auto">
-    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-    <li class="nav-item"><a class="nav-link" href="/landscaping">Landscaping</a></li>
-    <li class="nav-item"><a class="nav-link" href="/lawncare">Lawncare</a></li>
-    <li class="nav-item"><a class="nav-link" href="/about">About</a></li>
+    <li class="nav-item"><a class="nav-link $(activePage(:home_page))" href="/">Home</a></li>
+    <li class="nav-item"><a class="nav-link $(activePage(:landscaping_page))" href="/landscaping">Landscaping</a></li>
+    <li class="nav-item"><a class="nav-link $(activePage(:lawncare_page))" href="/lawncare">Lawncare</a></li>
+    <li class="nav-item"><a class="nav-link $(activePage(:about_page))" href="/about">About</a></li>
   </ul>
 
   <!-- -->
@@ -59,8 +59,8 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        $(ContactFormController.contactForm())
- <!--       <form action="$(Genie.Router.linkto(:contact_submit))" method="POST">
+        <!--$(ContactFormController.contactForm())-->
+        <form action="$(Genie.Router.linkto(:contact_submit))" method="POST">
         
           <div class="form-group row">
             <div class="col-sm-6">
@@ -84,7 +84,6 @@
           </div>
           <button type="submit" class="btn float-right my-btn px-3">Submit</button>
         </form>
- -->
       </div>
     </div>
   </div>

@@ -1,8 +1,8 @@
 module LawncareController
   using Genie.Renderer.Html
-  using Genie.Sessions: session
-  using Genie.Requests, Genie.Router
-  include("../../helpers/maps_stuff.jl")
+  using Genie.Sessions, Genie.Requests, Genie.Router
+  include("maps_stuff.jl")
+  include("../../helpers/random.jl")
 
   #TODO limit number of requests for estimates for each device  per day
   #TODO address autocompletion (https://developers.google.com/maps/documentation/javascript/places-autocomplete)
@@ -14,6 +14,7 @@ module LawncareController
 
 
   function lawncarePage()
+    Sessions.set!(Sessions.session(Requests.payload()), :current_page, :lawncare_page)
     #set!(session(Genie.Requests.payload()), :current_page, get_route(:lawncare_page))
     street=payload(:street, "")
     city=payload(:city, "Madison")
@@ -34,10 +35,10 @@ module LawncareController
 
     # if no errors have occured yet
     if (est_warn == "")
-      #est, est_warn = getEstimate(acre_num, Address(street, city, "AL"))
+      est, est_warn = getEstimate(acre_num, Address(street, city, "AL"))
     end
 
-    html(:lawncare, :lawncare, street=street, city=city, acres=acres, estimate=est, estimate_warning=est_warn)
+    html(:lawncare, :lawncare, activePage=activePage, street=street, city=city, acres=acres, estimate=est, estimate_warning=est_warn)
   end
 
 
@@ -57,7 +58,7 @@ module LawncareController
       # is this element ok? (was it able to locate and calculate for the provided address)
       if (item["status"] == "OK")
         mins = floor(item["duration"]["value"]/60)
-        return "$(20*(acres - 0.25)^2 + mins + 35)", ""
+        return "$(cost(acres, mins))", ""
       else 
         @warn item["status"]
         return "∞", item["status"]
@@ -79,6 +80,13 @@ module LawncareController
   """
   function checkPayload(payload::Dict)::String
     
+  end
+
+  """
+  The cost function for calculating a lawncare estimate
+  """
+  function cost(acres, mins)
+    return 20*(acres-0.25)^2 + mins + 40
   end
 end
 

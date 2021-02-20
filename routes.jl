@@ -8,6 +8,8 @@ using ScheduleVisitFormController
 using AboutController
 using HomeController
 
+Genie.Sessions.init()
+
 
 route("/", HomeController.homePage, named=:home_page)
 route("/landscaping", LandscapingController.landscapingPage, named=:landscaping_page)

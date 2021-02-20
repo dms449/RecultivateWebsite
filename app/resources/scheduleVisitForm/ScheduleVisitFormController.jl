@@ -3,7 +3,7 @@ module ScheduleVisitFormController
   #
 
   using Genie.Renderer.Html
-  using Genie.Router, Genie.Renderer, Genie.Requests
+  using Genie.Router, Genie.Renderer, Genie.Requests, Genie.Sessions
 
   function scheduleVisitForm()
     f=payload(:first, "")
@@ -19,7 +19,7 @@ module ScheduleVisitFormController
     open("schedule_visit-$l_$f.txt", "w") do io
       write(io, @params(:msg))
      end;
-     redirect(:lawncare)
+     redirect(Sessions.get(Router.@params, :current_page))
   end
 
 end
