@@ -489,9 +489,9 @@ ul.no-bullets{
   color:white;
 }
 
-.caption .p{
-  font-size: 100px;
-  font-weight: 1200px;
+.caption > .h1{
+  font-size: 150px;
+  font-weight: 300%;
 }
 
 /* iPad Landscape */
