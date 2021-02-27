@@ -1,45 +1,68 @@
 <div class="container">
-  <h1> Landscaping </h1>
 
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <% for (i,v) in enumerate(imgs)%>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="$(i-1)" class="active" aria-current="true" aria-label="Slide $(i-1)"></button>
+      <% end %>
+    </div>
 
-  <div class="container">
-    <h2>Lawncare Pricing</h2>
-    <table class="table table-striped ">
-      <thead>
-        <tr class="table_hrow">
-          <th></th>
-          <th>Single Visit</th>
-          <th>Monthly - Basic</th>
-          <th>Monthly - Full</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <th scope="row">mow</td>
-          <td class="table_row"><span>✔</span></td>
-          <td class="table_row"><span>✔</span></td>
-          <td class="table_row"><span>✔</span></td>
-        </tr>
-        <tr>
-          <th scope="row">weedeat</td>
-          <td class="table_row"><span>✔</span></td>
-          <td class="table_row"><span>✔</span></td>
-          <td class="table_row"><span>✔</span></td>
-        </tr>
-        <tr>
-          <td class="table_row_header">edge</td>
-          <td class="table_row"><span>✔</span></td>
-          <td class="table_row"><span>✔</span></td>
-          <td class="table_row"><span>✔</span></td>
-        </tr>
-        <tr>
-          <td>blow walkways/patios</td>
-          <td><span>✔</span></td>
-          <td><span>✔</span></td>
-          <td><span>✔</span></td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="carousel-inner">
+      <% for (ind, image) in enumerate(imgs)%>
+        <div class="carousel-item $(ind==0 ? "active" : "")">
+          <img src="$image" class="d-block w-100" alt="$image">
+        </div>
+      <% end %>
+
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
   </div>
+
+
+  <h2>Lawncare Pricing</h2>
+  <table class="table table-striped ">
+    <thead>
+      <tr class="table_hrow">
+        <th></th>
+        <th>Single Visit</th>
+        <th>Monthly - Basic</th>
+        <th>Monthly - Full</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <th scope="row">mow</td>
+        <td class="table_row"><span>✔</span></td>
+        <td class="table_row"><span>✔</span></td>
+        <td class="table_row"><span>✔</span></td>
+      </tr>
+      <tr>
+        <th scope="row">weedeat</td>
+        <td class="table_row"><span>✔</span></td>
+        <td class="table_row"><span>✔</span></td>
+        <td class="table_row"><span>✔</span></td>
+      </tr>
+      <tr>
+        <td class="table_row_header">edge</td>
+        <td class="table_row"><span>✔</span></td>
+        <td class="table_row"><span>✔</span></td>
+        <td class="table_row"><span>✔</span></td>
+      </tr>
+      <tr>
+        <td>blow walkways/patios</td>
+        <td><span>✔</span></td>
+        <td><span>✔</span></td>
+        <td><span>✔</span></td>
+      </tr>
+    </tbody>
+  </table>
 </div>
 
