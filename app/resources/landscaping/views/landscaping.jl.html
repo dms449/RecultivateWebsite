@@ -1,15 +1,23 @@
 <div class="container">
 
-  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="overflow:hidden">
     <div class="carousel-indicators">
-      <% for (i,v) in enumerate(imgs)%>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="$(i-1)" class="active" aria-current="true" aria-label="Slide $(i-1)"></button>
+      <!-- <% for (i,v) in enumerate(imgs)%> -->
+      <% @foreach(1:length(imgs)) do i %>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="$(i)" class="active" aria-current="true" aria-label="Slide $(i)"></button>
       <% end %>
     </div>
 
     <div class="carousel-inner">
-      <% for (ind, image) in enumerate(imgs)%>
-        <div class="carousel-item $(ind==0 ? "active" : "")">
+      <!-- first image -->
+      <div class="carousel-item active">
+        <img src="$(imgs[1])" class="d-block w-100"alt="$(imgs[1])" style="max-height: 500px; width=auto;">
+      </div>
+
+      
+      <!-- the rest of the images -->
+      <% @foreach(imgs[2:end]) do image %>
+        <div class="carousel-item">
           <img src="$image" class="d-block w-100" alt="$image">
         </div>
       <% end %>
@@ -27,10 +35,11 @@
   </div>
 
 
+
   <h2>Lawncare Pricing</h2>
   <table class="table table-striped ">
     <thead>
-      <tr class="table_hrow">
+      <tr class="table_row">
         <th></th>
         <th>Single Visit</th>
         <th>Monthly - Basic</th>

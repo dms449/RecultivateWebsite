@@ -42,34 +42,35 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
+        <% partial("app/resources/contactform/views/contactform.jl.html", context = @__MODULE__) %>
         <!--$(ContactFormController.contactForm())-->
-        <form action="$(Genie.Router.linkto(:contact_submit))" method="POST">
+        <!-- <form action="$(Genie.Router.linkto(:contact_submit))" method="POST"> -->
         
-          <div class="row mb-3">
-            <div class="col-6">
-              <input type="text" placeholder="first name" class="form-control" name="first">
-            </div>
-            <div class="col-6">
-              <input type="text" placeholder="last name" class="form-control" name="last">
-            </div>
-          </div>
-          <div class="row mb-3">
-            <div class="col-4">
-              <input type="tel" placeholder="phone" class="form-control" name="phone">
-            </div>
-            <div class="col-8">
-              <input type="email" placeholder="email" class="form-control" name="email">
-            </div>
-          </div>
-          <div class="row mb-3">
-            <div class="col-12">
-              <label for="msg">Message</label>
-              <textarea class="form-control" name="msg"></textarea>
-            </div>
-          </div>
-          <button type="submit" class="btn float-end my-btn px-3">Submit</button>
+        <!--   <div class="row mb-3"> -->
+        <!--     <div class="col-6"> -->
+        <!--       <input type="text" placeholder="first name" class="form-control" name="first"> -->
+        <!--     </div> -->
+        <!--     <div class="col-6"> -->
+        <!--       <input type="text" placeholder="last name" class="form-control" name="last"> -->
+        <!--     </div> -->
+        <!--   </div> -->
+        <!--   <div class="row mb-3"> -->
+        <!--     <div class="col-4"> -->
+        <!--       <input type="tel" placeholder="phone" class="form-control" name="phone"> -->
+        <!--     </div> -->
+        <!--     <div class="col-8"> -->
+        <!--       <input type="email" placeholder="email" class="form-control" name="email"> -->
+        <!--     </div> -->
+        <!--   </div> -->
+        <!--   <div class="row mb-3"> -->
+        <!--     <div class="col-12"> -->
+        <!--       <label for="msg">Message</label> -->
+        <!--       <textarea class="form-control" name="msg"></textarea> -->
+        <!--     </div> -->
+        <!--   </div> -->
+        <!--   <button type="submit" class="btn float-end my-btn px-3">Submit</button> -->
 
-        </form>
+        <!-- </form> -->
       </div>
     </div>
   </div>

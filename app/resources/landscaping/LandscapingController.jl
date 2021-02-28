@@ -8,8 +8,8 @@ module LandscapingController
   function landscapingPage()
     Sessions.set!(Sessions.session(Requests.payload()), :current_page, :landscaping_page)
 
-    imgs = filter(isfile, readdir("./public/img", sort=false, join=true))
-    imgs = [joinpath("/img",basename(p)) for p in imgs]
+    imgs = filter(isfile, readdir("./public/img/landscaping/carosel", sort=false, join=true))
+    imgs = [joinpath("/img/landscaping/carosel",basename(p)) for p in imgs]
     println(imgs)
     html(:landscaping, :landscaping, activePage=activePage, imgs=imgs)
   end

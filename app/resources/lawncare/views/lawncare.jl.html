@@ -57,8 +57,7 @@
         <button type="button" class="close" data-dismiss="modal">&times;</button>
       </div>
       <div class="modal-body">
-        <!--$(ScheduleVisitFormController.scheduleVisitForm())-->
-        $(Genie.Router.linkto(:schedule_visit_page))
+        <% partial("app/resources/scheduleVisitForm/views/scheduleVisitForm.jl.html", context = @__MODULE__) %>
       </div>
   </div>
 </div>

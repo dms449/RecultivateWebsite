@@ -2,7 +2,7 @@ module LawncareController
   using Genie.Renderer.Html
   using Genie.Sessions, Genie.Requests, Genie.Router
   include("maps_stuff.jl")
-  include("../../helpers/random.jl")
+  include("../../helpers/lawncare_equation.jl")
 
   #TODO limit number of requests for estimates for each device  per day
   #TODO address autocompletion (https://developers.google.com/maps/documentation/javascript/places-autocomplete)
@@ -86,7 +86,7 @@ module LawncareController
   The cost function for calculating a lawncare estimate
   """
   function cost(acres, mins)
-    return 20*(acres-0.25)^2 + mins + 40
+    return lawncare_cost_eq(acres, mins)
   end
 end
 
