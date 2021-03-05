@@ -9,13 +9,13 @@
     <!--<form action="postEstimate($(calculate()))">-->
       <legend class="text-center header"> Calculate your lawncare estimate:</legend>
       <!-- <div class="form-group"> --> 
-      <div class="row g-3">
+      <div class="row g-3 my-3">
         <div class="col-6">
           <label for="street">street</label>
           <input type="text" class="form-control" placeholder="street" name="street" value="$street">
         </div>
 
-        <div class="col-4">
+        <div class="col-3">
           <label>city</label>
           <select class="form-select" name="city">
             <option value="madison">Madison</option>
@@ -31,13 +31,17 @@
           <label>acres</label>
           <input type="float" min="0.0" step="any" class="form-control" placeholder="Acres" name="acres" value="$acres">
         </div>
+
+        <div class="col-1">
+          <label></label>
+          <button type="submit" class="btn btn-primary mb-2">Estimate</button>
+        </div>
       </div>
       <!-- </div> -->
 
 
       <div class="row">
         <div class="mr-auto">
-          <button type="submit" class="btn btn-primary mb-2">Estimate</button>
         </div>
         <div class="p2"><legend class="header">Your Estimate: $(raw"$") $(estimate)</legend></div>
       </div>

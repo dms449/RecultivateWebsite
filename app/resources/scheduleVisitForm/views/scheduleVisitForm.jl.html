@@ -1,23 +1,23 @@
 <form action="$(Genie.Router.linkto(:schedule_visit_submit))" method="POST">
 
   <div class="row mb-3">
-    <div class="col-sm-6">
-      <input type="text" placeholder="first name" class="form-control" name="first" value="$()">
+    <div class="col-6">
+      <input type="text" placeholder="first name" class="form-control" name="first" >
     </div>
-    <div class="col-sm-6">
+    <div class="col-6">
       <input type="text" placeholder="last name" class="form-control" name="last">
     </div>
   </div>
   <div class="row mb-3">
-    <div class="col-sm-7">
+    <div class="col-7">
       <label for="street">street address 1</label>
-      <input type="address" placeholder="street" class="form-control" name="street" value="$(street)">
+      <input type="address" placeholder="street" class="form-control" name="street" value="$street">
     </div>
-    <div class="col-sm-4">
+    <div class="col-4">
       <label for="addr1">city</label>
-      <input type="" placeholder="city" class="form-control" name="city" value="$(city)">
+      <input type="" placeholder="city" class="form-control" name="city" value="$city">
     </div>
-    <div class="col-sm-1">
+    <div class="col-1">
       <label for="state">state</label>
       <input type="text" readonly class="form-control-plaintext" value="AL">
     </div>
@@ -28,5 +28,5 @@
       <textarea class="form-control" name="msg"></textarea>
     </div>
   </div>
-  <button type="submit" class="btn float-right my-btn px-3">Submit</button>
+  <button type="submit" class="btn float-end my-btn px-3">Submit</button>
 </form>

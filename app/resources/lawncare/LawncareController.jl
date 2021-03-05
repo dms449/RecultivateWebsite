@@ -3,6 +3,7 @@ module LawncareController
   using Genie.Sessions, Genie.Requests, Genie.Router
   include("maps_stuff.jl")
   include("../../helpers/lawncare_equation.jl")
+  include("../../helpers/random.jl")
 
   #TODO limit number of requests for estimates for each device  per day
   #TODO address autocompletion (https://developers.google.com/maps/documentation/javascript/places-autocomplete)

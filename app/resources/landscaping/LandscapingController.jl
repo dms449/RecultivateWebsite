@@ -13,4 +13,9 @@ module LandscapingController
     println(imgs)
     html(:landscaping, :landscaping, activePage=activePage, imgs=imgs)
   end
+
+
+  function landscapingPortfolioPage()
+    html(:landscapingPortfolio, :landscapingPortfolio, activePage=activePage, imgs=imgs)
+  end
 end

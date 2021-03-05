@@ -1,17 +1,18 @@
 <div class="container">
 
-  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="overflow:hidden">
+  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="max-height: 500px; overflow:hidden">
     <div class="carousel-indicators">
       <!-- <% for (i,v) in enumerate(imgs)%> -->
-      <% @foreach(1:length(imgs)) do i %>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="$(i)" class="active" aria-current="true" aria-label="Slide $(i)"></button>
+      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 0"></button>
+      <% @foreach(1:length(imgs)-1) do i %>
+        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="$i" aria-current="true" aria-label="Slide $i"></button>
       <% end %>
     </div>
 
     <div class="carousel-inner">
       <!-- first image -->
       <div class="carousel-item active">
-        <img src="$(imgs[1])" class="d-block w-100"alt="$(imgs[1])" style="max-height: 500px; width=auto;">
+        <img src="$(imgs[1])" class="d-block w-100" alt="$(imgs[1])">
       </div>
 
       
