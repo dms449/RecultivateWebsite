@@ -39,7 +39,7 @@ module LawncareController
       est, est_warn = getEstimate(acre_num, Address(street, city, "AL"))
     end
 
-    html(:lawncare, :lawncare, activePage=activePage, street=street, city=city, acres=acres, estimate=est, estimate_warning=est_warn)
+    html(:lawncare, :lawncare, activePage=activePage, street=street, city=city, acres=acres, estimate="\$$est", estimate_warning=est_warn)
   end
 
 
