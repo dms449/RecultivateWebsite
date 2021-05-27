@@ -10,7 +10,6 @@ module LandscapingController
 
     imgs = filter(isfile, readdir("./public/img/landscaping/carosel", sort=false, join=true))
     imgs = [joinpath("/img/landscaping/carosel",basename(p)) for p in imgs]
-    println(imgs)
     html(:landscaping, :landscaping, activePage=activePage, imgs=imgs)
   end
 

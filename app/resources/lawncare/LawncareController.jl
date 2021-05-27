@@ -13,33 +13,55 @@ module LawncareController
   #TODO 'schedule a visit' button
   #TODO route should include the fields for the form
 
+  struct Item
+    name::String
+    desc::String
+    value::Float32
+  end
+
 
   function lawncarePage()
     Sessions.set!(Sessions.session(Requests.payload()), :current_page, :lawncare_page)
     #set!(session(Genie.Requests.payload()), :current_page, get_route(:lawncare_page))
     street=payload(:street, "")
-    city=payload(:city, "Madison")
+    city=payload(:city, "madison")
     #state=payload(:state, "")
     acres=payload(:acres, "0.25")
+    freq=payload(:freq, "1")
 
 
     est = ""
-    est_warn = ""
+    warnings = [] 
+    items = []
 
     # try to parse the acres
     acre_num = 0.0
     try
       acre_num = parse(Float32, acres)
     catch e
-      est_warn = "Invalid `acres` entry."
+      push!(warnings, "Invalid `acres` entry.")
+    end
+
+    # try to parse the acres
+    try
+      freq_num = parse(Int, freq)
+      if freq_num >1 
+        push!(items, Item("Discount", "scheduled for $freq_num  month", -5.0))
+      end
+    catch e
+      push!(warnings, "Invalid `freq` entry. (This shouldn't be possible)")
     end
 
     # if no errors have occured yet
-    if (est_warn == "")
-      est, est_warn = getEstimate(acre_num, Address(street, city, "AL"))
+    if (isempty(warnings))
+      est, warning = getEstimate(acre_num, Address(street, city, "AL"))
+      println("1). $items ")
+      push!(items, Item("Basic Lawncare", "a description", est))
+      if warning != "" push!(warnings, warning) end
     end
 
-    html(:lawncare, :lawncare, activePage=activePage, street=street, city=city, acres=acres, estimate="\$$est", estimate_warning=est_warn)
+    println("2). $items ")
+    html(:lawncare, :lawncare, activePage=activePage, street=street, city=city, acres=acres, items=items, warnings=warnings)
   end
 
 
@@ -59,14 +81,14 @@ module LawncareController
       # is this element ok? (was it able to locate and calculate for the provided address)
       if (item["status"] == "OK")
         mins = floor(item["duration"]["value"]/60)
-        return "$(cost(acres, mins))", ""
+        return cost(acres, mins), ""
       else 
         @warn item["status"]
-        return "∞", item["status"]
+        return 0, item["status"]
       end
     else 
       @warn response_data["error_message"]
-      return "∞", response_data["error_message"]
+      return 0, response_data["error_message"]
     end
   end
 
