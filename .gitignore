@@ -45,3 +45,6 @@ node_modules/
 
 # api key file
 recultivate_google_api_key.txt
+
+# images
+public/img/*

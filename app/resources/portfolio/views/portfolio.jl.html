@@ -1,0 +1,87 @@
+<div class="container">
+  
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <h1 class="fw-light">Some of our Projects</h1>
+        <p class="lead text-muted">Something about our projects </p>
+      </div>
+    </div>
+  </section>
+
+  <div class="album py-5 bg-light">
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+          <% @foreach(projects) do p %>
+
+            <div class="col">
+              <div class="card shadow-sm">
+
+                <% partial("app/resources/portfolio/views/portfolio_carosel.jl.html", imgs=p.imgs, id=p.title, context = @__MODULE__) %>
+
+                <!-- image carosel -->
+                <!-- <div id="$(p.title)" class="carousel slide" data-bs-ride="carousel" style="max-height: 500px; overflow:hidden"> -->
+                <!--   <div class="carousel-indicators"> -->
+                <!--     <!-1- <% for (i,v) in enumerate(imgs)%> -1-> -->
+                <!--     <button type="button" data-bs-target="$(p.title)" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 0"></button> -->
+                <!--     <% @foreach(1:length($(p.imgs))-1) do i %> -->
+                <!--       <button type="button" data-bs-target="$(p.title)" data-bs-slide-to="$i" aria-current="true" aria-label="Slide $i"></button> -->
+                <!--     <% end %> -->
+                <!--   </div> -->
+
+                <!--   <div class="carousel-inner"> -->
+                <!--     <!-1- first image -1-> -->
+                <!--     <div class="carousel-item active"> -->
+                <!--       <img src="$(p.imgs[1])" class="d-block w-100" alt="$(p.imgs[1])"> -->
+                <!--     </div> -->
+
+                    
+                <!--     <!-1- the rest of the images -1-> -->
+                <!--     <% @foreach($(p.imgs[2:end])) do image %> -->
+                <!--       <div class="carousel-item"> -->
+                <!--         <img src="$image" class="d-block w-100" alt="$image"> -->
+                <!--       </div> -->
+                <!--     <% end %> -->
+
+                <!--   </div> -->
+
+                <!--   <button class="carousel-control-prev" type="button" data-bs-target="$(p.title)"  data-bs-slide="prev"> -->
+                <!--     <span class="carousel-control-prev-icon" aria-hidden="true"></span> -->
+                <!--     <span class="visually-hidden">Previous</span> -->
+                <!--   </button> -->
+                <!--   <button class="carousel-control-next" type="button" data-bs-target="$(p.title)"  data-bs-slide="next"> -->
+                <!--     <span class="carousel-control-next-icon" aria-hidden="true"></span> -->
+                <!--     <span class="visually-hidden">Next</span> -->
+                <!--   </button> -->
+                <!-- </div> -->
+                <!-- end image carosel -->
+
+                <!-- <img src="$(p.imgs[1])" class="img-thumbnail" alt="$(p.title)"> -->
+                <div class="card-body">
+                  <p class="card-text">$(p.desc)</p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                    </div>
+                    <small class="text-muted">$("~ \$")$(p.cost)</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+          <% end %>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="portfolioCarosel" tabindex="-1">
+  <div class="modal-dialog modal-xlg">
+    <div class="modal-content">
+      <% partial("app/resources/portfolio/views/portfolio_carosel.jl.html", context = @__MODULE__) %>
+    </div>
+  </div>
+</div>

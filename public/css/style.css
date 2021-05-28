@@ -7,13 +7,14 @@ body {
     font-size: 16px;
 	letter-spacing: 0.8px;
 }
-.special_header {
-	font-family: Cormorant Garamond, sans-serif;
-	font-weight: 200;
-}
 
 h1, h2, h3, h4, h5, h6 {
 	font-family: Montserrat, sans-serif;
+	font-weight: 200;
+}
+
+.special-header {
+	font-family: Cormorant Garamond, sans-serif;
 	font-weight: 200;
 }
 
@@ -66,6 +67,14 @@ a:hover, a:focus, a:active, a:visited {
 .content-ct {
 	text-align: center;
 }
+
+/* .thumb-post img { */
+/*   object-fit: none; /1* Do not scale the image *1/ */
+/*   object-position: center; /1* Center the image within the element *1/ */
+/*   width: 100%; */
+/*   max-height: 250px; */
+/*   margin-bottom: 1rem; */
+/* } */
 
 /* ------------------
 	Navigation

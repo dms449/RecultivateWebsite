@@ -10,7 +10,7 @@ module ScheduleVisitFormController
     l=payload(:last, "")
     s=payload(:street, "")
     c=payload(:city, "Madison")
-    html(:scheduleVisitForm, :scheduleVisitForm, first=f, last=l, street=s, city=c)
+    html(:scheduleViitForm, :scheduleVisitForm, first=f, last=l, street=s, city=c)
   end
 
   function scheduleVisitSubmit()
