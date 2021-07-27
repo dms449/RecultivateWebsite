@@ -340,6 +340,10 @@ a span.ti-twitter-alt {
   color:black;
 } 
 
+.tan-list-group-item{
+  background-color: #dcd1b9;
+}
+
 
 
 .footer div p{
@@ -464,6 +468,23 @@ ul.no-bullets{
     }
 }
 
+.my-overlay{ 
+  position: absolute;
+  left:400px;
+  top:200px;
+  z-index:2;
+/*   /1* display: none; *1/ */
+/*   /1* width: 100%; *1/ */
+/*   /1* height: 100%; *1/ */
+/*   /1* top: 0; *1/ */
+/*   /1* left: 50; *1/ */
+/*   /1* right: 0; *1/ */
+/*   /1* bottom: 0; *1/ */
+/*   background-color: #dcd1b9; */
+/*   z-index: 2; */
+/*   /1* cursor: pointer; *1/ */
+}
+
 
 /* image stuff */
 /* ---------------------------------------------------------------------*/
@@ -479,6 +500,7 @@ ul.no-bullets{
   position:relative;
   display:inline-block;
 }
+
 .img-container .img-overlay{
   position:absolute;
   top:0;

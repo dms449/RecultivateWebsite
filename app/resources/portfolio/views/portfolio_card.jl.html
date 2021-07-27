@@ -1,0 +1,22 @@
+<div class="modal fade" id="portfolioCarosel$(project.id)" tabindex="-1">
+  <div class="modal-dialog modal-xl">
+    <div class="modal-content">
+      <% partial("app/resources/portfolio/views/portfolio_carosel.jl.html", imgs=project.imgs, id=project.id, context = @__MODULE__) %>
+    </div>
+  </div>
+</div>
+
+<div class="col">
+  <div class="card shadow-sm"> 
+    <!-- <button type="button" data-bs-toggle="modal" data-bs-target="#portfolioCarosel$(project.id)" ><img src="$(project.imgs[1])" class="img-thumbnail" alt="$(project.title)"></button> -->
+    <img src="$(project.imgs[1])" class="img-thumbnail" data-bs-toggle="modal" data-bs-target="#portfolioCarosel$(project.id)" alt="$(project.title)">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center">
+        <p class="card-text">$(project.title)</p>
+        <p class="text-muted">$("~ \$")$(project.cost)</p>
+      </div>
+      <p class="card-text">$(project.desc)</p>
+    </div>
+  </div>
+</div>
+

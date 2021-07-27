@@ -1,13 +1,12 @@
 
 <link href="/css/lawncare_style.css" rel="stylesheet">
-<div class=container>
+<div class="container mb-4">
   <section class="py-5 text-center container">
     <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
+      <div class="col-lg-10 col-md-12 mx-auto">
         <h1 class="fw-light">Local Lawncare Savings</h1>
         <p class="lead text-muted">We calculate the cost of each yard by its size and proximity
-  to our business. This incentivises those closest to us with lower prices for them and less overhead for us.
-        Use the calculator below to determine an estimate for your yard.</p>
+  to our business. This incentivises those closest to us with lower prices for them and less overhead for us.</p>
       </div>
     </div>
   </section>
@@ -17,6 +16,7 @@
   <!-- <% end %> -->
 
   <div class=" container"> 
+    <hr class="my-4">
     <div class="row g-5">
 
       <div class="col-md-5 col-lg-4 order-md-last">
@@ -71,8 +71,13 @@
             <div class="col-md-5">
               <label for="city" class="form-label">City</label>
               <select class="form-select" name="city" required>
-                <option value="madison">Madison<option>
-                <option value="huntsville">Hunstville</option>
+                <% @foreach(["madison","huntsville"]) do c %>
+                  <% if c==city %>
+                    <option value="$c" selected>$c</option>
+                  <% else %>
+                    <option value="$c">$c</option>
+                  <%end%>
+                <%end%>
               </select>
               <div class="invalid-feedback">
                 Please select a valid city.
@@ -89,41 +94,49 @@
               </div>
             </div>
 
-            <div class="col-md-3">
-              <label for="acres" class="form-label">Acres</label>
+            <div class="col-md-2">
+              <label for="acres" class="form-label">Lot Size</label>
               <input type="text" class="form-control" name="acres" placeholder="" value="$acres" required>
               <div class="invalid-feedback">
                 Approximate acreage is required.
               </div>
             </div>
+            <div class="col-md-1">
+              <label></label>
+              <input type="text" readonly class="form-control-plaintext" value="acres">
+            </div>
+
+            <div class="col-md-2">
+              <label for="repeat" class="form-label">Repeat</label>
+              <select class="form-select" name="repeat" required>
+                <option value="0">0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">2</option>
+                <option value="4">4</option>
+              </select>
+              <div class="invalid-feedback">
+                Repeat value must be selected
+              </div>
+            </div>
+
+            <div class="col-md-3">
+              <label for="" class="form-label"></label>
+              <input type="text" readonly class="form-control-plaintext" value="visits per month">
+            </div>
+
+            <div class="col-md-7">
+              <label for="" class="form-label"></label>
+              <p class="text-muted"><small>(save $("\$5.00 per visit when you schedule at least twice / month"))</small></p>
+            </div>
           </div>
-
-
-          <hr class="my-4">
-
-          <h4 class="mb-3">Frequency</h4>
-
-          <div class="my-3">
-            <div class="form-check">
-              <input id="single" name="freq" type="radio" class="form-check-input" value="1" checked required>
-              <label class="form-check-label" for="single">Single time only</label>
-            </div>
-            <div class="form-check">
-              <input id="2times" name="freq" type="radio" class="form-check-input" value="2" required>
-              <label class="form-check-label" for="2times">2/month (-5))</label>
-            </div>
-            <div class="form-check">
-              <input id="4times" name="freq" type="radio" class="form-check-input" value="4" required>
-              <label class="form-check-label" for="4times">4/month (-5)</label>
-            </div>
+          <div class="row justify-content-center">
+            <button type="submit" class="w-50 btn btn-primary btn-lg">Calculate</button>
           </div>
-
-          <hr class="my-4">
-
-          <button type="submit" class="w-100 btn btn-primary btn-lg">Calculate</button>
         </form>
       </div>
     </div>
+    <hr class="my-4">
 
 
     <!-- <div class="row justify-content-center"> -->
@@ -149,6 +162,9 @@
       </div>
       <div class="modal-body">
         <% partial("app/resources/scheduleVisitForm/views/scheduleVisitForm.jl.html", context = @__MODULE__) %>
+      </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn w-40 my-btn py-2n">Submit</button>
       </div>
     </div>
   </div>

@@ -3,6 +3,7 @@ build/*
 bin/*
 cache/*
 config/secrets.jl
+config/service_account.json
 docs/build
 log/*
 data/

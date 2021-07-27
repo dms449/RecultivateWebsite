@@ -18,6 +18,8 @@
   <!-- Popper JS -->
   <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script> -->
 
+  <!-- tab icon -->
+  <link rel="icon" href="/favicon.png">
 </head>
 <body>
 
@@ -36,11 +38,8 @@
         <% partial("app/resources/contactform/views/contactform.jl.html", context = @__MODULE__) %>
       </div>
 
-      <div class="modal-footer">
-        <!-- <div class="position-absolute bottom-0 start-50 translate-middle-x"> -->
-        <div class="translate-middle-x">
-          <button type="button" class="btn btn-primary">Submit</button>
-        </div>
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn w-40 my-btn py-2n btn-lg">Submit</button>
       </div>
     </div>
   </div>
@@ -50,7 +49,10 @@
 <div class="mx-5">
   <nav class="navbar navbar-expand-sm py-5">
     <!-- Brand -->
-    <a class="navbar-brand " style="font-size: 30px !important; font-weight: 900 !important;"href="/">recultivate</a>
+    <a class="navbar-brand " style="font-size: 30px !important; font-weight: 900 !important;"href="/">
+      <img src="/img/logos/4-22.png" alt="HTML tutorial" style="width:63px;">
+
+    </a>
 
     <!-- Links -->
     <ul class="navbar-nav mx-auto">
@@ -74,12 +76,12 @@
 </div>
 
 
-<footer id="sticky-footer">
+<footer id="sticky-footer" class="footer">
   <div class="container justify-content-center">
     <div class="row py-5" align="center">
       <div class="col-sm">
         <h4>Location</h4>
-        <p> Madison, AL </p>
+        <p style="color: black;"> Madison, AL </p>
       </div>
       <div class="col-sm">
         <h4 style="font-weight:150%">Contact</h4>

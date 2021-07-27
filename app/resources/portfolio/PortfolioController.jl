@@ -4,6 +4,7 @@ module PortfolioController
   include("../../helpers/random.jl")
 
   struct PortfolioProject
+    id::String
     title::String
     cost::String
     desc::String
@@ -17,7 +18,7 @@ module PortfolioController
     project_dirs = filter(isdir, readdir("./public/img/landscaping/portfolio", sort=false, join=true))
 
     projects = []
-    for p in project_dirs
+    for (i,p) in enumerate(project_dirs)
       info = split(basename(p), '_')
       title = info[1]
       cost = length(info) >= 2 ? info[2] : ""
@@ -35,7 +36,7 @@ module PortfolioController
       end
       
 
-      push!(projects, PortfolioProject(title, cost, desc, imgs))
+      push!(projects, PortfolioProject(repr(i), title, cost, desc, imgs))
     end
 
     # imgs = [joinpath("/img/landscaping/carosel",basename(p)) for p in imgs]

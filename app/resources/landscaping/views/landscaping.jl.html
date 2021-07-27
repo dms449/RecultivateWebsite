@@ -1,11 +1,11 @@
 <div class="container">
 
-  <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel" style="max-height: 500px; overflow:hidden">
+  <div id="landscapingExamples" class="carousel slide" data-bs-ride="carousel" style="max-height: 500px; overflow:hidden">
     <div class="carousel-indicators">
       <!-- <% for (i,v) in enumerate(imgs)%> -->
-      <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 0"></button>
+      <button type="button" data-bs-target="#landscapingExamples" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 0"></button>
       <% @foreach(1:length(imgs)-1) do i %>
-        <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="$i" aria-current="true" aria-label="Slide $i"></button>
+        <button type="button" data-bs-target="#landscapingExamples" data-bs-slide-to="$i" aria-current="true" aria-label="Slide $i"></button>
       <% end %>
     </div>
 
@@ -25,65 +25,91 @@
 
     </div>
 
-    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="prev">
+    <button class="carousel-control-prev" type="button" data-bs-target="#landscapingExamples"  data-bs-slide="prev">
       <span class="carousel-control-prev-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Previous</span>
     </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators"  data-bs-slide="next">
+    <button class="carousel-control-next" type="button" data-bs-target="#landscapingExamples"  data-bs-slide="next">
       <span class="carousel-control-next-icon" aria-hidden="true"></span>
       <span class="visually-hidden">Next</span>
     </button>
   </div>
 
   <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <h1 class="fw-light">Album example</h1>
-        <p class="lead text-muted">Something short and leading about the collection below—its contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply skip over it entirely.</p>
+    <div class="row py-lg-5"> <div class="col-lg-10 col-md-12 mx-auto">
+        <h1 class="fw-light">Our Portfolio</h1>
+        <p class="lead text-muted">We have a growing portfolio of small landscaping projects and are always looking to add more. If you have a project in mind and would like a quote please contact us. In the meantime, enjoy browsing through our portfolio. </p>
         <p>
-        <a href="/landscaping/portfolio" class="btn btn-primary my-2">Full Portfolio &#8594;</a>
+        <a href="/landscaping/portfolio" class="btn btn-primary my-2">View Full Portfolio &#8594;</a>
         </p>
       </div>
     </div>
   </section>
 
+  <section class="py-5 text-center container">
+    <div class="row py-lg-5">
+      <div class="col-lg-6 col-md-8 mx-auto">
+        <img src="/img/dan_mowing_1.jpg" alt="Dan" class="rounded d-block" style="max-height:1000px;z-index:-1;" >
+      </div>
 
-  <h2>Lawncare Pricing</h2>
-  <table class="table table-striped ">
-    <thead>
-      <tr class="table_row">
-        <th></th>
-        <th>Single Visit</th>
-        <th>Monthly - Basic</th>
-        <th>Monthly - Full</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <th scope="row">mow</td>
-        <td class="table_row"><span>✔</span></td>
-        <td class="table_row"><span>✔</span></td>
-        <td class="table_row"><span>✔</span></td>
-      </tr>
-      <tr>
-        <th scope="row">weedeat</td>
-        <td class="table_row"><span>✔</span></td>
-        <td class="table_row"><span>✔</span></td>
-        <td class="table_row"><span>✔</span></td>
-      </tr>
-      <tr>
-        <td class="table_row_header">edge</td>
-        <td class="table_row"><span>✔</span></td>
-        <td class="table_row"><span>✔</span></td>
-        <td class="table_row"><span>✔</span></td>
-      </tr>
-      <tr>
-        <td>blow walkways/patios</td>
-        <td><span>✔</span></td>
-        <td><span>✔</span></td>
-        <td><span>✔</span></td>
-      </tr>
-    </tbody>
-  </table>
+      <div class="col-lg-6 col-md-4 position-relative">
+        <div class="position-absolute top-50 start-0 p-5 translate-middle-y " style="background-color: #dcd1b9; width: 600px;">
+          <h1 class="fw-light">Services We Provide</h1>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item" style="background-color: #dcd1b9;"></li>
+            <li class="list-group-item" style="background-color: #dcd1b9;">Landscape design</li>
+            <li class="list-group-item" style="background-color: #dcd1b9;">Landscape Installation</li>
+            <li class="list-group-item" style="background-color: #dcd1b9;">Flagstone Hardscapes</li>
+            <li class="list-group-item" style="background-color: #dcd1b9;">Brush Clearing and Weeding</li>
+            <li class="list-group-item" style="background-color: #dcd1b9;">Shrub Trimming and Pruning</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
 </div>
 
+
+
+<!--<div class="modal fade" id="viewModal" tabindex="-1" >-->
+<!--  <div class="modal-dialog">-->
+<!--    <!-1-"$(Genie.router.linkto(:contactPage()))"-1->-->
+<!--    <!-1- Modal content-1->-->
+<!--    <div class="modal-content">-->
+<!--      <% partial("app/resources/contactform/views/portfoliomodal.jl.html", context = @__MODULE__) %>-->
+<!--    </div>-->
+<!--  </div>-->
+<!--</div>-->
+
+  <!-- <h2>Lawncare Pricing</h2> -->
+  <!-- <table class="table "> -->
+  <!--   <thead> -->
+  <!--     <tr class="table_row"> -->
+  <!--       <th>Dos</th> -->
+  <!--       <th>Don'ts</th> -->
+  <!--     </tr> -->
+  <!--   </thead> -->
+  <!--   <tbody> -->
+  <!--     <tr> -->
+  <!--       <td class="table_row"><span>Brush clearing and weeding </span></td> -->
+  <!--       <td class="table_row"><span>✔</span></td> -->
+  <!--     </tr> -->
+  <!--     <tr> -->
+  <!--       <td class="table_row"><span>Trimming and runing</span></td> -->
+  <!--       <td class="table_row"><span>✔</span></td> -->
+  <!--     </tr> -->
+  <!--     <tr> -->
+  <!--       <td class="table_row"><span>Setting plants</span></td> -->
+  <!--       <td class="table_row"><span>✔</span></td> -->
+  <!--     </tr> -->
+  <!--     <tr> -->
+  <!--       <td class="table_row"><span>Laying flagstone hardscapes</span></td> -->
+  <!--       <td class="table_row"><span>✔</span></td> -->
+  <!--     </tr> -->
+  <!--     <tr><td class="table_row text-muted"><span>Lawncare chemical treatments</span></td><td></td></tr> -->
+  <!--   </tbody> -->
+  <!-- </table> -->
+
+
+  

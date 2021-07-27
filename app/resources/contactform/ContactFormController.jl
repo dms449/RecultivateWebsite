@@ -15,7 +15,7 @@ module ContactFormController
 
     open("data/myfile.txt", "w") do io
       write(io, @params(:msg))
-    end;
+    end
 
     redirect(Sessions.get(Sessions.session(Router.@params), :current_page))
   end

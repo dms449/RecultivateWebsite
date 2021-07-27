@@ -2,31 +2,67 @@
 
   <div class="row mb-3">
     <div class="col-6">
+      <label for="first">First</label>
       <input type="text" placeholder="first name" class="form-control" name="first" >
     </div>
     <div class="col-6">
+      <label for="last">Last</label>
       <input type="text" placeholder="last name" class="form-control" name="last">
     </div>
   </div>
   <div class="row mb-3">
     <div class="col-7">
-      <label for="street">street address 1</label>
+      <label for="street">Street address 1</label>
       <input type="address" class="form-control" placeholder="street" name="street" value="$(replace(street, '+'=>' '))" required>
     </div>
     <div class="col-4">
-      <label for="addr1">city</label>
-      <input type="" placeholder="city" class="form-control" name="city" value="$city">
+      <label for="addr1">City</label>
+      <select class="form-select" name="city" required>
+        <% @foreach(["madison","huntsville"]) do c %>
+          <% if c==city %>
+            <option value="$c" selected>$c</option>
+          <% else %>
+            <option value="$c">$c</option>
+          <%end%>
+        <%end%>
+      </select>
     </div>
     <div class="col-1">
-      <label for="state">state</label>
+      <label for="state">State</label>
       <input type="text" readonly class="form-control-plaintext" value="AL">
     </div>
   </div>
+  <div class="row mb-2">
+    <div class="col-3">
+      <label for="date">Date</label>
+      <input type="" placeholder="date" class="form-control" name="date">
+    </div>
+    <div class="col-9">
+      <label for="reason-group">Reason for visit</label>
+      <div class="form-group" id="reason-group">
+
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="reason" id="lawncareradio" value="lawncare">
+          <label class="form-check-label" for="lawncareradio">lawncare</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="reason" id="landscapingradio" value="landscaping">
+          <label class="form-check-label" for="landscapingradio">landscaping</label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input class="form-check-input" type="radio" name="reason" id="otherradio" value="other">
+          <label class="form-check-label" for="otherradio">other</label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+  <hr class="my-4">
   <div class="row mb-3">
     <div class="col-12">
-      <label for="msg">Message</label>
+      <label for="msg">Notes</label>
       <textarea class="form-control" name="msg"></textarea>
     </div>
   </div>
-  <button type="submit" class="btn float-end my-btn px-3">Submit</button>
 </form>

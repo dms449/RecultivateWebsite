@@ -1,7 +1,7 @@
 module LawncareController
   using Genie.Renderer.Html
   using Genie.Sessions, Genie.Requests, Genie.Router
-  include("maps_stuff.jl")
+  include("../../helpers/google_maps.jl")
   include("../../helpers/lawncare_equation.jl")
   include("../../helpers/random.jl")
 
@@ -27,7 +27,7 @@ module LawncareController
     city=payload(:city, "madison")
     #state=payload(:state, "")
     acres=payload(:acres, "0.25")
-    freq=payload(:freq, "1")
+    repeat=payload(:repeat, "1")
 
 
     est = ""
@@ -44,23 +44,21 @@ module LawncareController
 
     # try to parse the acres
     try
-      freq_num = parse(Int, freq)
-      if freq_num >1 
-        push!(items, Item("Discount", "scheduled for $freq_num  month", -5.0))
+      repeat_num = parse(Int, repeat)
+      if repeat_num >1 
+        push!(items, Item("Discount", "scheduled for $repeat_num  month", -5.0))
       end
     catch e
-      push!(warnings, "Invalid `freq` entry. (This shouldn't be possible)")
+      push!(warnings, "Invalid `repeat` entry. (This shouldn't be possible)")
     end
 
     # if no errors have occured yet
     if (isempty(warnings))
       est, warning = getEstimate(acre_num, Address(street, city, "AL"))
-      println("1). $items ")
       push!(items, Item("Basic Lawncare", "a description", est))
       if warning != "" push!(warnings, warning) end
     end
 
-    println("2). $items ")
     html(:lawncare, :lawncare, activePage=activePage, street=street, city=city, acres=acres, items=items, warnings=warnings)
   end
 

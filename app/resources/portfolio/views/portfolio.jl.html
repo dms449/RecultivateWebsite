@@ -12,13 +12,19 @@
   <div class="album py-5 bg-light">
     <div class="container">
       <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <!-- <div class="col"> -->
+        <% @foreach(projects) do p %>
+          <% partial("app/resources/portfolio/views/portfolio_card.jl.html", project=p, context = @__MODULE__) %>
+        <% end %>
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
+</div>
 
-          <% @foreach(projects) do p %>
+              <!-- <div class="card shadow-sm"> -->
 
-            <div class="col">
-              <div class="card shadow-sm">
-
-                <% partial("app/resources/portfolio/views/portfolio_carosel.jl.html", imgs=p.imgs, id=p.title, context = @__MODULE__) %>
+                <!-- <% partial("app/resources/portfolio/views/portfolio_carosel.jl.html", imgs=p.imgs, id=p.title, context = @__MODULE__) %> -->
 
                 <!-- image carosel -->
                 <!-- <div id="$(p.title)" class="carousel slide" data-bs-ride="carousel" style="max-height: 500px; overflow:hidden"> -->
@@ -57,31 +63,12 @@
                 <!-- </div> -->
                 <!-- end image carosel -->
 
-                <!-- <img src="$(p.imgs[1])" class="img-thumbnail" alt="$(p.title)"> -->
-                <div class="card-body">
-                  <p class="card-text">$(p.desc)</p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                      <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                    </div>
-                    <small class="text-muted">$("~ \$")$(p.cost)</small>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-          <% end %>
-
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="modal fade" id="portfolioCarosel" tabindex="-1">
-  <div class="modal-dialog modal-xlg">
-    <div class="modal-content">
-      <% partial("app/resources/portfolio/views/portfolio_carosel.jl.html", context = @__MODULE__) %>
-    </div>
-  </div>
-</div>
+                <!-- <img src="$(p.imgs[1])" class="img-thumbnail" data-toggle="modal" data-target="#portfolioCarosel" alt="$(p.title)"> -->
+                <!-- <div class="card-body"> -->
+                <!--   <div class="d-flex justify-content-between align-items-center"> -->
+                <!--     <p class="card-text">$(p.title)</p> -->
+                <!--     <p class="text-muted">$("~ \$")$(p.cost)</p> -->
+                <!--   </div> -->
+                <!--   <p class="card-text">$(p.desc)</p> -->
+                <!-- </div> -->
+              <!-- </div> -->
