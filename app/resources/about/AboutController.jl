@@ -3,7 +3,7 @@ module AboutController
 
   using Genie.Renderer.Html
   using Genie.Sessions, Genie.Requests
-  include("../../helpers/random.jl")
+  import GeneralUtils: activePage
 
   function aboutPage()
     Sessions.set!(Sessions.session(Requests.payload()), :current_page, :about_page)

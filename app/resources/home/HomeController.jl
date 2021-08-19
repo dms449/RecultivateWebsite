@@ -2,7 +2,7 @@ module HomeController
 
   using Genie.Renderer.Html
   using Genie.Sessions, Genie.Requests, Genie.Router
-  include("../../helpers/random.jl")
+  import GeneralUtils: activePage
   
 
   function homePage()

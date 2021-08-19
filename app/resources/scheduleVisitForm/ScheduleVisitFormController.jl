@@ -17,9 +17,9 @@ module ScheduleVisitFormController
     f=payload(:first, "")
     l=payload(:last, "")
     open("schedule_visit-$l_$f.txt", "w") do io
-      write(io, @params(:msg))
+      write(io, Router.params(:msg))
      end;
-     redirect(Sessions.get(Router.@params, :current_page))
+     redirect(Sessions.get(Router.params, :current_page))
   end
 
 end

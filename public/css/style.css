@@ -37,6 +37,10 @@ a:hover, a:focus, a:active, a:visited {
     text-decoration: none;
 }
 
+.recultivate_text {
+	font-family: Montserrat, sans-serif;
+}
+
 /* Buttons override */
 .btn {
 	text-transform: uppercase;

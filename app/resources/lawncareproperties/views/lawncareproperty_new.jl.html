@@ -1,0 +1,47 @@
+<form class="row py-1 g-3" method="POST" action="$(Genie.Router.linkto(:create_lawncare_property))" >
+
+  <div class="row">
+    <div class="col">
+      <label for="person">Client</label>
+      <select class="form-select" name="person" required>
+        <% for_each(persons) do person %>
+          <option value="$person.id" selected>$(person.first * " " * person.last)</option>
+        <%end%>
+      </select>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-7">
+      <label for="street">Street address 1</label>
+      <input type="address" class="form-control" placeholder="111 Broad St" name="street" required>
+    </div>
+    <div class="col-4">
+      <label for="addr1">City</label>
+      <select class="form-select" name="city" required>
+        <% @foreach(["madison","huntsville"]) do c %>
+          <% if c=="madison" %>
+            <option value="$c" selected>$c</option>
+          <% else %>
+            <option value="$c">$c</option>
+          <%end%>
+        <%end%>
+      </select>
+    </div>
+    <div class="col-1">
+      <label for="state">State</label>
+      <input type="text" name="state" readonly class="form-control-plaintext" value="AL">
+    </div>
+  </div>
+  <div class="row mb-2">
+    <div class="col-3">
+      <label for="acres">Acres</label>
+      <input type="number" placeholder="0.25" class="form-control" name="acres" value="0.3">
+    </div>
+  </div>
+
+  <div class="row mb-2">
+    <div class="col"><button type="submit" class="btn btn-primary">Create</button></div>
+  </div>
+
+</form>

@@ -7,7 +7,7 @@ plotly()
 """
 function lawncare_cost_eq(acres, mins, cutoff=50.0)::Float32
   #return 20*(acres-0.25)^2 + mins*(1.5+atan(mins-)) + 35
-  v = Float32(20*(acres-0.25)^2 + mins^(4/3) + 35)
+  v = Float32(30*(acres-0.25)^3.5 + mins^(4/3) + 35)
   return v < cutoff ? Float32(cutoff) : v
 end
 

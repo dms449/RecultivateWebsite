@@ -3,7 +3,7 @@ module LandscapingController
 
   using Genie.Sessions, Genie.Router, Genie.Requests
   using Genie.Renderer.Html
-  include("../../helpers/random.jl")
+  import GeneralUtils: activePage
 
   function landscapingPage()
     Sessions.set!(Sessions.session(Requests.payload()), :current_page, :landscaping_page)
@@ -16,7 +16,7 @@ module LandscapingController
   end
 
 
-  function landscapingPortfolioPage()
-    html(:landscapingPortfolio, :landscapingPortfolio, activePage=activePage, imgs=imgs)
-  end
+  # function landscapingPortfolioPage()
+  #   html(:landscapingPortfolio, :landscapingPortfolio, activePage=activePage, imgs=imgs)
+  # end
 end

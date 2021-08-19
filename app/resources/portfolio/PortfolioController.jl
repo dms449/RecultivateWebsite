@@ -1,7 +1,7 @@
 module PortfolioController
   using Genie.Sessions, Genie.Router, Genie.Requests
   using Genie.Renderer.Html
-  include("../../helpers/random.jl")
+  import GeneralUtils: activePage
 
   struct PortfolioProject
     id::String
@@ -13,7 +13,7 @@ module PortfolioController
   
 
   function portfolioPage()
-    Sessions.set!(Sessions.session(Requests.payload()), :current_page, :portfolio_page)
+    Sessions.set!(Sessions.session(Requests.payload()), :current_page, :landscaping_page)
 
     project_dirs = filter(isdir, readdir("./public/img/landscaping/portfolio", sort=false, join=true))
 

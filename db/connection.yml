@@ -1,21 +1,21 @@
-env:
+env: ENV["GENIE_ENV"]
 
 dev:
-  adapter:
-  database:
-  host:
-  username:
-  password:
-  port:
+  adapter: MySQL
+  database: recultivate
+  host: 127.0.0.1
+  username: dms
+  password: Recultivate!t23
+  port: 3306
   config:
 
 prod:
-  adapter:
-  database:
-  host:
-  username:
-  password:
-  port:
+  adapter: MySQL
+  database: recultivate
+  host: 127.0.0.1
+  username: dms
+  password: Recultivate!t23
+  port: 3306
   config:
 
 test:

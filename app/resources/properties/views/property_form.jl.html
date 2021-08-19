@@ -1,0 +1,45 @@
+  <!-- <div class="row mb-3"> -->
+
+    <!-- <div class="col-4"> -->
+    <!--   <label for="person_id">Person</label> -->
+    <!--   <select class="form-select" name="per" required> -->
+    <!--     <% @foreach(["madison","huntsville"]) do c %> -->
+    <!--       <% if c==city %> -->
+    <!--         <option value="$c" selected>$c</option> -->
+    <!--       <% else %> -->
+    <!--         <option value="$c">$c</option> -->
+    <!--       <%end%> -->
+    <!--     <%end%> -->
+    <!--   </select> -->
+    <!-- </div> -->
+
+  <!-- </div> -->
+
+<div class="row mb-3">
+  <div class="col-7">
+    <label for="street">Street address 1</label>
+    <input type="address" class="form-control" placeholder="street" name="street" value="$(replace(street, '+'=>' '))" required>
+  </div>
+  <div class="col-4">
+    <label for="addr1">City</label>
+    <select class="form-select" name="city" required>
+      <% @foreach(["madison","huntsville"]) do c %>
+        <% if c==city %>
+          <option value="$c" selected>$c</option>
+        <% else %>
+          <option value="$c">$c</option>
+        <%end%>
+      <%end%>
+    </select>
+  </div>
+  <div class="col-1">
+    <label for="state">State</label>
+    <input type="text" name="state" readonly class="form-control-plaintext" value="AL">
+  </div>
+</div>
+<div class="row mb-2">
+  <div class="col-3">
+    <label for="acres">Acres</label>
+    <input type="number" placeholder="0.25" class="form-control" name="acres" value="0.25">
+  </div>
+</div>

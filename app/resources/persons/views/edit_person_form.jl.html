@@ -1,0 +1,39 @@
+<div class="row mb-3">
+  <div class="col-5">
+    <label for="first">First</label>
+    <input type="text" placeholder="first name" class="form-control" name="first" >
+  </div>
+  <div class="col-5">
+    <label for="last">Last</label>
+    <input type="text" placeholder="last name" class="form-control" name="last">
+  </div>
+  <div class="col-2">
+    <label for="mi">mi</label>
+    <input type="text" placeholder="mi" class="form-control" name="mi">
+  </div>
+</div>
+<div class="row mb-3">
+  <div class="col-7">
+    <label for="email">Email</label>
+    <input type="email" class="form-control" name="email" required>
+  </div>
+  <div class="col-4">
+    <label for="phone">Phone</label>
+    <input type="phone" class="form-control" default="(111) 111-1111" name="phone" required>
+  </div>
+
+  <div class="row mb-3">
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="email" id="email_radio" checked <%if %>disabled<% %>>
+      <label class="form-check-label" for="email_radio">
+        email
+      </label>
+    </div>
+    <div class="form-check">
+      <input class="form-check-input" type="radio" name="phone" id="phone_radio" disabled>
+      <label class="form-check-label" for="phone_radio">
+        phone
+      </label>
+    </div>
+  </div>
+</div>
