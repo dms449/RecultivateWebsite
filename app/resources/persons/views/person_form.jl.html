@@ -1,0 +1,41 @@
+<div class="container">
+  <div class="row mb-3">
+    <div class="col-5">
+      <label for="first">First</label>
+      <input type="text" placeholder="first name" class="form-control" name="first" value="<% if person!=Missing%>$(person.first)<%end%>">
+    </div>
+    <div class="col-5">
+      <label for="last">Last</label>
+      <input type="text" placeholder="last name" class="form-control" name="last" value="(person.last)">
+    </div>
+    <div class="col-2">
+      <label for="mi">mi</label>
+      <input type="text" placeholder="mi" class="form-control" name="mi" value="(person.mi)">
+    </div>
+  </div>
+  <div class="row mb-3">
+    <div class="col-7">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" name="email" value="(person.email)" required>
+    </div>
+    <div class="col-4">
+      <label for="phone">Phone</label>
+      <input type="phone" class="form-control" name="phone" value="(person.phone)" required>
+    </div>
+
+    <div class="row mb-3">
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="preferred_method" id="email_radio" <%if true%> checked<%end%>>
+        <label class="form-check-label" for="email_radio">
+          email
+        </label>
+      </div>
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="preferred_method" id="phone_radio">
+        <label class="form-check-label" for="phone_radio">
+          phone
+        </label>
+      </div>
+    </div>
+  </div>
+</div>

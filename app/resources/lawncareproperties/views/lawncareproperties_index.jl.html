@@ -1,0 +1,51 @@
+<div class="container">
+  
+
+  <!-- add new property -->
+  <a class="btn btn-primary" data-bs-toggle="collapse" href="#createLawncareProperty" role="button" aria-expanded="false" aria-controls="createLawncareProperty">
+    Create New Lawncare Property
+  </a>
+  <div class="collapse" id="createLawncareProperty">
+
+    <form action="$(Genie.Router.linkto(:create_lawncare_property))" method="POST" class="row g-3 align-items-center">
+      <% partial(joinpath(Genie.config.path_resources, "lawncareproperties", "views", "lawncareproperty_form.jl.html"), lp=lp, property=property, properties=properties, groups=groups, payment_methods=payment_methods, context=@__MODULE__) %>
+
+      <div class="row justify-content-center mb-2">
+        <button type="submit" class="w-50 btn btn-primary btn-lg">Create</button>
+      </div>
+    </form>
+  </div>
+
+
+  <!-- show properties -->
+  <div class="row justify-content-center py-5"><h3>Lawncare Properties</h3></div>
+  <hr class="my-4">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">active</th>
+        <th scope="col">client</th>
+        <th scope="col">address</th>
+        <th scope="col">weeks</th>
+        <th scope="col">cost</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% for_each(lawn_properties) do row %>
+      <tr>
+        <th scope="row">$(row.lawn_id)</th>
+        <td>$(row.active)</td>
+        <td><a href="/persons/$(row.person_id)/edit">$(row.first*" "*row.last)</a></td>
+        <td><a href="/properties/$(row.property_id)/edit">$(row.address*" "*row.city)</a></td>
+        <td>$(row.weeks_between_visits)</td>
+        <td>$(row.cost)</td>
+        <td><a class="btn btn-primary" href="/lawncare-properties/$(row.lawn_id)/edit" role="button">Edit</a></td>
+      </tr>
+    <% end %>
+
+    </tbody>
+  </table>
+</div>
+

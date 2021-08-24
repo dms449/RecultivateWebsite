@@ -18,7 +18,7 @@
     <div class="col-4">
       <label for="addr1">City</label>
       <select class="form-select" name="city" required>
-        <% @foreach(["madison","huntsville"]) do c %>
+        <% for_each(["madison","huntsville"]) do c %>
           <% if c==city %>
             <option value="$c" selected>$c</option>
           <% else %>

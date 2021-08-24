@@ -1,0 +1,124 @@
+<!-- <form class="row py-1 g-3" method="POST" action="$(Genie.Router.linkto(:create_lawncare_property))" > -->
+
+<div class="container"> 
+
+  <!-- PROPERTY -->
+  <div class="row g-3 align-content-center">
+    <!-- <div class="justify-content-center gy-3"><h4>Property</h4></div> -->
+    <div class="col-sm-2 mb-3 align-content-center">
+
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="exisingProperty" id="existingProperty" value="">
+        <label class="form-check-label" for="existingProperty">existing</label>
+      </div>
+      
+      <!-- <label for="property">Property</label> -->
+      <select class="form-select" name="property_id" required>
+        <% for_each(properties) do p %>
+          <% if p == property %>
+        <option value="$p.id" selected>$(p.address)</option>
+          <% else %>
+        <option value="$p.id">$(p.address)</option>
+          <% end %>
+        <%end%>
+      </select>
+
+    </div>
+
+
+
+    <!-- <div class="col-sm-10"> -->
+    <!--   <div class="form-check"> -->
+    <!--     <input class="form-check-input" type="radio" name="newProperty" id="newProperty" value=""> -->
+    <!--     <label class="form-check-label" for="newProperty">new </label> -->
+    <!--   </div> -->
+
+    <!--   <div class="collapse" id="createProperty"> -->
+    <!--     <% partial(joinpath(Genie.config.path_resources, "properties", "views", "property_form.jl.html"), property=property, context=@__MODULE__) %> -->
+    <!--   </div> -->
+    <!-- </div> -->
+  <!-- </div> -->
+
+
+  <div class="row">
+    <!-- <% if property == Missing %> -->
+    <div class="col">
+    </div>
+
+    <!-- <% else %> -->
+    <!--   <% partial(joinpath(Genie.config.path_resources, "properties", "views", "property_form.jl.html"), property=property, context=@__MODULE__) %> -->
+    <!-- <% end %> -->
+  </div>
+
+  <hr class="my-4">
+
+  <!-- <div class="row mb-2"> -->
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="checkbox" value="" name="active" id="active" checked>
+    <label class="form-check-label" for="active">Active</label>
+  </div>
+
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="checkbox" name="weedeat" id="weedeat" checked>
+    <label class="form-check-label" for="weedeat">Weedeat</label>
+  </div>
+
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="checkbox" name="edge" id="edge" checked>
+    <label class="form-check-label" for="edge">Edge</label>
+  </div>
+
+  <div class="form-check form-check-inline">
+    <input class="form-check-input" type="checkbox" name="blow" id="blow" checked>
+    <label class="form-check-label" for="blow">Blow</label>
+  </div>
+  <!-- </div> -->
+
+  <div class="row mb-3">
+    <div class="col-auto">
+      <label for="">Cost</label>
+      <input type="float" class="form-control" name="cost" required>
+    </div>
+
+    <div class="col-auto">
+      <label for="weeks">Period (weeks)</label>
+      <select class="form-select" id="weeks" name="weeks" required>
+        <option value="1" selected>1</option>
+        <% for_each([2, 3, 4]) do i %>
+          <option value="$i">$i</option>
+        <%end%>
+      </select>
+    </div> 
+
+    <div class="col-auto">
+      <label for="group_id">Group</label>
+      <select class="form-select" id="group_id" name="group_id" required>
+        <option value="$(groups[1])" selected>$(groups[1])</option>
+        <% for_each(groups[2:end]) do i %>
+          <option value="$i">$i</option>
+        <%end%>
+      </select>
+    </div>
+
+    <div class="col-auto">
+      <label for="payment_method">Payment Method</label>
+      <select class="form-select" id="payment_method" name="payment_method" required>
+        <option value="$(payment_methods[1])" selected>$(payment_methods[1])</option>
+        <% for_each(payment_methods[2:end]) do i %>
+          <option value="$i">$i</option>
+        <%end%>
+      </select>
+    </div>
+
+    <div class="col-auto">
+      <label for="deck">Deck Height</label>
+      <input type="number" placeholder="0.25" class="form-control" name="deck" id="deck">
+    </div>
+
+  </div>
+
+</div>
+
+  <!-- <div><input type="hidden" class="form-control" name="lawncare_property_id" value="$(lp.id)"></div> -->
+
+<!-- </form> -->

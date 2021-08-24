@@ -1,4 +1,5 @@
-  <!-- <div class="row mb-3"> -->
+  
+<!-- <div class="row mb-3"> -->
 
     <!-- <div class="col-4"> -->
     <!--   <label for="person_id">Person</label> -->
@@ -14,32 +15,66 @@
     <!-- </div> -->
 
   <!-- </div> -->
+<div class="container">
 
-<div class="row mb-3">
-  <div class="col-7">
-    <label for="street">Street address 1</label>
-    <input type="address" class="form-control" placeholder="street" name="street" value="$(replace(street, '+'=>' '))" required>
-  </div>
-  <div class="col-4">
-    <label for="addr1">City</label>
-    <select class="form-select" name="city" required>
-      <% @foreach(["madison","huntsville"]) do c %>
-        <% if c==city %>
-          <option value="$c" selected>$c</option>
-        <% else %>
-          <option value="$c">$c</option>
+  <!-- PERSON -->
+  <div class="row g-3 mb-3">
+    <div class="justify-content-center gy-3"><h4>Person</h4></div>
+    <div class="col-sm-2 mb-3">
+
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="exisingPerson" id="existingPerson" value="">
+        <label class="form-check-label" for="existingPerson">existing</label>
+      </div>
+
+      <select class="form-select" name="person_id" required>
+        <% for_each(persons) do p %>
+          <% if person==p %>
+        <option value="$p.id" selected>$(p.first * " " * p.last)</option>
+          <% else %>
+        <option value="$p.id">$(p.first * " " * p.last)</option>
+          <% end %>
         <%end%>
-      <%end%>
-    </select>
+      </select>
+    </div>
+
+    <div class="col-sm-10">
+      <div class="form-check">
+        <input class="form-check-input" type="radio" name="newPerson" id="newPerson" value="">
+        <label class="form-check-label" for="newPerson">new</label>
+      </div>
+
+      <!-- <% partial(joinpath(Genie.config.path_resources, "persons", "views", "person_form.jl.html"), person=Missing, context=@__MODULE__) %> -->
+    </div>
   </div>
-  <div class="col-1">
-    <label for="state">State</label>
-    <input type="text" name="state" readonly class="form-control-plaintext" value="AL">
+
+  <div class="row">
+    <div class="col-3">
+      <label for="address">Street address 1</label>
+      <input type="address" class="form-control" placeholder="address" name="address" value="$(replace(property.address, '+'=>' '))" required>
+
+    </div>
+    <div class="col-3">
+      <label for="addr1">City</label>
+      <select class="form-select" name="city" required>
+        <% for_each(["madison","huntsville"]) do c %>
+          <% if c==property.city %>
+            <option value="$c" selected>$c</option>
+          <% else %>
+            <option value="$c">$c</option>
+          <%end%>
+        <%end%>
+      </select>
+    </div>
+    <div class="col-1">
+      <label for="state">State</label>
+      <input type="text" name="state" readonly class="form-control-plaintext" value="AL">
+    </div>
   </div>
-</div>
-<div class="row mb-2">
-  <div class="col-3">
-    <label for="acres">Acres</label>
-    <input type="number" placeholder="0.25" class="form-control" name="acres" value="0.25">
+  <div class="row g-3">
+    <div class="col-3">
+      <label for="acres">Acres</label>
+      <input type="number" placeholder="0.25" class="form-control" name="acres" value="property.acres">
+    </div>
   </div>
 </div>

@@ -12,6 +12,7 @@ using HomeController
 using DashboardController
 using LawncarePropertiesController
 using LawncareEventsController
+using PropertiesController
 
 # using Genie.Renderer.Html: html
 
@@ -35,15 +36,21 @@ route("/schedule", ScheduleVisitFormController.scheduleVisitSubmit, method=POST,
 # end
 route("/dashboard", DashboardController.dashboard, named=:employee_dashboard) 
 
-# LawncareProperties
+# LAWNCARE PROPERTIES
 route("/lawncare-properties", LawncarePropertiesController.index, named=:lawncare_properties_index) 
 route("/lawncare-properties/:id::Int/edit", LawncarePropertiesController.edit, named=:edit_lawncare_property) 
 route("/lawncare-properties/:id::Int/update", LawncarePropertiesController.update, method=POST, named=:update_lawncare_property) 
 route("/lawncare-properties/new", LawncarePropertiesController.new, named=:new_lawncare_properties) 
 route("/lawncare-properties/create", LawncarePropertiesController.create, method=POST, named=:create_lawncare_property) 
 
-# route("/lawncare-events", LawncareEventsController.index, named=:lawncare_events_page)
+# LAWNCARE EVENTS
 route("/lawncare-events/create", LawncareEventsController.create, method=POST, named=:create_lawncare_event)
+
+# PROPERTIES
+route("/properties", PropertiesController.index, named=:properties_index) 
+route("/properties/:id::Int/edit", PropertiesController.edit, named=:edit_property) 
+route("/properties/:id::Int/update", PropertiesController.update, named=:update_property) 
+# route("/lawncare-events", LawncareEventsController.index, named=:lawncare_events_page)
 
 # route("/person/new", Person)
 
