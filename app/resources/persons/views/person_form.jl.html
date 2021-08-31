@@ -1,41 +1,82 @@
-<div class="container">
-  <div class="row mb-3">
+<form action="$(person!=nothing ? Genie.Router.linkto(:update_person, id=person.id) : Genie.Router.linkto(:create_person))" method="POST" class="row g-3 align-items-center">
+
+  <div class="row m-3">
     <div class="col-5">
       <label for="first">First</label>
-      <input type="text" placeholder="first name" class="form-control" name="first" value="<% if person!=Missing%>$(person.first)<%end%>">
+      <% if person != nothing %>
+      <input type="text" placeholder="first name" class="form-control" name="first" value="$(person.first)" required>
+      <% else %>
+      <input type="text" placeholder="first name" class="form-control" name="first" value="" required>
+      <% end %>
     </div>
+
     <div class="col-5">
       <label for="last">Last</label>
-      <input type="text" placeholder="last name" class="form-control" name="last" value="(person.last)">
+      <% if person != nothing %>
+      <input type="text" placeholder="last name" class="form-control" name="last" value="(person.last)" required>
+      <% else %>
+      <input type="text" placeholder="last name" class="form-control" name="last" value="" required>
+      <% end %>
     </div>
+
+
     <div class="col-2">
       <label for="mi">mi</label>
+      <% if person != nothing %>
       <input type="text" placeholder="mi" class="form-control" name="mi" value="(person.mi)">
+      <% else %>
+      <input type="text" placeholder="mi" class="form-control" name="mi" value="">
+      <% end %>
     </div>
   </div>
+
   <div class="row mb-3">
     <div class="col-7">
       <label for="email">Email</label>
+      <% if person != nothing %>
       <input type="email" class="form-control" name="email" value="(person.email)" required>
+      <% else %>
+      <input type="email" class="form-control" name="email" value="" required>
+      <% end %>
+      <div class="invalid-feedback">
+        Invalid email format
+      </div>
     </div>
+
     <div class="col-4">
       <label for="phone">Phone</label>
+      <% if person != nothing %>
       <input type="phone" class="form-control" name="phone" value="(person.phone)" required>
+      <% else %>
+      <input type="phone" class="form-control" name="phone" value="" required>
+      <% end %>
+      <div class="invalid-feedback">
+        Invalid phone number
+      </div>
     </div>
 
     <div class="row mb-3">
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="preferred_method" id="email_radio" <%if true%> checked<%end%>>
-        <label class="form-check-label" for="email_radio">
-          email
-        </label>
+        <label class="form-check-label" for="email_radio">email</label>
+        <% if person != nothing && person.contact_preference=="email"%>
+        <input class="form-check-input" type="radio" name="contact_preference" id="email_radio" checked>
+        <% else %>
+        <input class="form-check-input" type="radio" name="contact_preference" id="email_radio" >
+        <% end %>
       </div>
       <div class="form-check">
-        <input class="form-check-input" type="radio" name="preferred_method" id="phone_radio">
-        <label class="form-check-label" for="phone_radio">
-          phone
-        </label>
+        <label class="form-check-label" for="phone_radio">phone</label>
+        <% if person != nothing && person.contact_preference=="phone"%>
+        <input class="form-check-input" type="radio" name="contact_preference" id="phone_radio" checked>
+        <% else %>
+        <input class="form-check-input" type="radio" name="contact_preference" id="phone_radio">
+        <% end %>
       </div>
     </div>
   </div>
-</div>
+
+  <div class="row justify-content-center m-2">
+    <button type="submit" class="w-35 btn btn-primary">$(person==nothing ? "Create" : "Update")</button>
+  </div>
+</form>
+

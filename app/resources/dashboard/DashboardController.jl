@@ -20,12 +20,12 @@ module DashboardController
     week_begin = td - Dates.Day(dayofweek(td)%7)
     week_end = week_begin + Dates.Day(6)
 
-    lawn_prop_df = SearchLight.query(lawncare_properties_query) |> DataFrame
-    lawn_records_df = SearchLight.query(last_record_query) |> DataFrame
-    df = hcat(lawn_prop_df, lawn_records_df)
-
+    df = SearchLight.query(lawn_events_sql)
     df = df[df.active .== 1,:]
-    return df[((week_end.-df.last_visit) .÷ 7) .>= Dates.Day.(df.weeks_between_visits), :]
+    new_properties = df[ismissing.(df.last_visit),:]
+    others = dropmissing(df, :last_visit) 
+    properties_due = others[((week_end.-others.last_visit) .÷ 7) .>= Dates.Day.(others.weeks_between_visits), :]
+    return vcat(new_properties, properties_due)
   end
 
 

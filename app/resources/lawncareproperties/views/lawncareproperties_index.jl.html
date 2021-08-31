@@ -3,17 +3,11 @@
 
   <!-- add new property -->
   <a class="btn btn-primary" data-bs-toggle="collapse" href="#createLawncareProperty" role="button" aria-expanded="false" aria-controls="createLawncareProperty">
-    Create New Lawncare Property
+    Create
   </a>
   <div class="collapse" id="createLawncareProperty">
+    <% partial(joinpath(Genie.config.path_resources, "lawncareproperties", "views", "lawncareproperty_form.jl.html"), lp=nothing, property=nothing, properties=properties, groups=groups, payment_methods=payment_methods, context=@__MODULE__) %>
 
-    <form action="$(Genie.Router.linkto(:create_lawncare_property))" method="POST" class="row g-3 align-items-center">
-      <% partial(joinpath(Genie.config.path_resources, "lawncareproperties", "views", "lawncareproperty_form.jl.html"), lp=lp, property=property, properties=properties, groups=groups, payment_methods=payment_methods, context=@__MODULE__) %>
-
-      <div class="row justify-content-center mb-2">
-        <button type="submit" class="w-50 btn btn-primary btn-lg">Create</button>
-      </div>
-    </form>
   </div>
 
 

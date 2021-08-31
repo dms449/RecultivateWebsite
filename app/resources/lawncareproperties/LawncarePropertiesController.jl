@@ -15,27 +15,24 @@ module LawncarePropertiesController
   function index()
     Sessions.set!(Sessions.session(Requests.payload()), :current_page, :lawncareproperties_index)
     lawn_prop_df = SearchLight.query(lawncare_properties_query) |> DataFrame
-    return html(:lawncareproperties, :lawncareproperties_index, layout=:employee, lp=LawncareProperty(), property=Property(), properties=all(Property), groups=[1,2], payment_methods=["cash", "card","check"], lawn_properties=collect(eachrow(lawn_prop_df)), activePage=activePage)
+    return html(:lawncareproperties, :lawncareproperties_index, layout=:employee, lp=nothing, property=nothing, properties=all(Property), groups=[1,2], payment_methods=["cash", "card","check"], lawn_properties=collect(eachrow(lawn_prop_df)), activePage=activePage)
   end
 
   function edit()
     try
-      lp = SearchLight.find(LawncareProperty, id=payload(:id))[1]
-      property = SearchLight.find(Property, id=lp.property_id)[1]
-      @info "id=$(property.id) address = $(property.address)"
+      lp = SearchLight.findone(LawncareProperty, id=payload(:id))
+      property = SearchLight.findone(Property, id=lp.property_id)
       return html(:lawncareproperties, :lawncareproperty_form, layout=:employee, lp=lp, property=property, properties=all(Property), groups=[1,2], payment_methods=instances(PaymentMethods), activePage=activePage)
     catch e
-      println(e)
-      return redirect(Sessions.get(Sessions.session(Router.params())), :lawncare_properties_index)
+      @warn e
+      return redirect(:lawncare_properties_index)
     end
 
   end
 
 
   function new()
-    lp = LawncareProperty()
-
-    return html(:lawncareproperties, :lawncareproperty_form, layout=:employee, lp=lp, properties=all(Property), groups=[1,2], payment_methods=instances(PaymentMethods), activePage=activePage)
+    return html(:lawncareproperties, :lawncareproperty_form, layout=:employee, lp=nothing, properties=all(Property), groups=[1,2], payment_methods=instances(PaymentMethods), activePage=activePage)
   end
 
 
@@ -55,9 +52,9 @@ module LawncarePropertiesController
                            )
       save!(lp)
     catch e
-      println(e)
+      @warn e
     finally
-      redirect(Sessions.get(Sessions.session(Router.params()), :lawncare_properties_index))
+      redirect(:lawncare_properties_index)
     end
   end
 
@@ -65,18 +62,18 @@ module LawncarePropertiesController
     try
       lp = SearchLight.find(LawncareProperty, id=payload(:id))
 
-      # lp.property_id = parse(Int, payload(:property_id)),
-      # lp.active = parse(Bool, payload(:active)),
-      # lp.weeks_between_visits = parse(Int, payload(:weeks)),
-      # lp.group_id = parse(Int, payload(:group_id)),
-      # lp.cost = parse(Float32, payload(:cost)),
-      # lp.payment_method = payload(:payment_method),
-      # lp.deck_height = parse(Float32, payload(:deck_height)),
-      # lp.weedeat = parse(Bool, payload(:weedeat)),
-      # lp.edge = parse(Bool, payload(:edge)),
-      # lp.blow = parse(Bool, payload(:blow))
+      lp.property_id = parse(Int, payload(:property_id))
+      lp.active = parse(Bool, payload(:active))
+      lp.weeks_between_visits = parse(Int, payload(:weeks))
+      lp.group_id = parse(Int, payload(:group_id))
+      lp.cost = parse(Float32, payload(:cost))
+      lp.payment_method = payload(:payment_method)
+      lp.deck_height = parse(Float32, payload(:deck_height))
+      lp.weedeat = parse(Bool, payload(:weedeat))
+      lp.edge = parse(Bool, payload(:edge))
+      lp.blow = parse(Bool, payload(:blow))
                            
-      # save!(lp)
+      save!(lp)
     catch e
       println(e)
     finally

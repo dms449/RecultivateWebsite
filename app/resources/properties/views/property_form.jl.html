@@ -1,35 +1,12 @@
-  
-<!-- <div class="row mb-3"> -->
-
-    <!-- <div class="col-4"> -->
-    <!--   <label for="person_id">Person</label> -->
-    <!--   <select class="form-select" name="per" required> -->
-    <!--     <% @foreach(["madison","huntsville"]) do c %> -->
-    <!--       <% if c==city %> -->
-    <!--         <option value="$c" selected>$c</option> -->
-    <!--       <% else %> -->
-    <!--         <option value="$c">$c</option> -->
-    <!--       <%end%> -->
-    <!--     <%end%> -->
-    <!--   </select> -->
-    <!-- </div> -->
-
-  <!-- </div> -->
-<div class="container">
+<form action="$(property!=nothing ? Genie.Router.linkto(:update_property, id=property.id) : Genie.Router.linkto(:create_property))" method="POST" class="row g-3 align-items-center">
 
   <!-- PERSON -->
-  <div class="row g-3 mb-3">
-    <div class="justify-content-center gy-3"><h4>Person</h4></div>
-    <div class="col-sm-2 mb-3">
-
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="exisingPerson" id="existingPerson" value="">
-        <label class="form-check-label" for="existingPerson">existing</label>
-      </div>
-
+  <div class="row g-3 m-2">
+    <div class="col-auto">
+      <label for="person_id">person</label>
       <select class="form-select" name="person_id" required>
         <% for_each(persons) do p %>
-          <% if person==p %>
+          <% if person != nothing && person==p %>
         <option value="$p.id" selected>$(p.first * " " * p.last)</option>
           <% else %>
         <option value="$p.id">$(p.first * " " * p.last)</option>
@@ -37,28 +14,23 @@
         <%end%>
       </select>
     </div>
-
-    <div class="col-sm-10">
-      <div class="form-check">
-        <input class="form-check-input" type="radio" name="newPerson" id="newPerson" value="">
-        <label class="form-check-label" for="newPerson">new</label>
-      </div>
-
-      <!-- <% partial(joinpath(Genie.config.path_resources, "persons", "views", "person_form.jl.html"), person=Missing, context=@__MODULE__) %> -->
-    </div>
   </div>
 
-  <div class="row">
+  <div class="row g-3 m-2">
     <div class="col-3">
       <label for="address">Street address 1</label>
+      <% if property != nothing %>
       <input type="address" class="form-control" placeholder="address" name="address" value="$(replace(property.address, '+'=>' '))" required>
+      <% else %>
+      <input type="address" class="form-control" placeholder="address" name="address" value="" required>
+      <%end%>
 
     </div>
     <div class="col-3">
       <label for="addr1">City</label>
       <select class="form-select" name="city" required>
         <% for_each(["madison","huntsville"]) do c %>
-          <% if c==property.city %>
+          <% if property != nothing && c==property.city %>
             <option value="$c" selected>$c</option>
           <% else %>
             <option value="$c">$c</option>
@@ -70,11 +42,19 @@
       <label for="state">State</label>
       <input type="text" name="state" readonly class="form-control-plaintext" value="AL">
     </div>
-  </div>
-  <div class="row g-3">
     <div class="col-3">
       <label for="acres">Acres</label>
+
+      <% if property != nothing %>
       <input type="number" placeholder="0.25" class="form-control" name="acres" value="property.acres">
+      <% else %>
+      <input type="number" placeholder="0.25" class="form-control" name="acres" value="">
+      <% end %>
     </div>
+
   </div>
-</div>
+
+  <div class="row justify-content-center m-2">
+    <button type="submit" class="w-35 btn btn-primary">$(property==nothing ? "Create" : "Update")</button>
+  </div>
+</form>

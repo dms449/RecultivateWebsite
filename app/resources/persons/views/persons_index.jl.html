@@ -1,0 +1,50 @@
+<div class="container">
+  
+
+  <!-- add new property -->
+  <a class="btn btn-primary" data-bs-toggle="collapse" href="#createPerson" role="button" aria-expanded="false" aria-controls="createPerson">
+    Create
+  </a>
+  <div class="collapse" id="createPerson">
+
+    <form action="$(Genie.Router.linkto(:create_person))" method="POST" class="row g-3 align-items-center">
+      <% partial(joinpath(Genie.config.path_resources, "persons", "views", "person_form.jl.html"), context=@__MODULE__) %>
+      <div class="row justify-content-center m-2">
+        <button type="submit" class="w-35 btn btn-primary">Add</button>
+      </div>
+    </form>
+  </div>
+
+
+  <!-- show properties -->
+  <div class="row justify-content-center py-5"><h3> Persons</h3></div>
+  <hr class="my-4">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">first</th>
+        <th scope="col">last</th>
+        <th scope="col">mi</th>
+        <th scope="col">email</th>
+        <th scope="col">phone</th>
+        <th scope="col">contact method</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% for_each(persons) do p %>
+      <tr>
+        <th scope="row">$(p.first)</th>
+        <td>$(p.last)</td>
+        <td>$(p.mi)</td>
+        <td>$(p.email)</td>
+        <td>$(p.phone)</td>
+        <td>$(p.contact_method)</td>
+        <td><a class="btn btn-primary" href="/persons/$(row.person_id)/edit" role="button">Edit</a></td>
+      </tr>
+    <% end %>
+
+    </tbody>
+  </table>
+</div>
+
