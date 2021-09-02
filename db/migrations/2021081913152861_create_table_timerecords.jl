@@ -11,7 +11,7 @@ function up()
       column(:contractor_id, :int)
       column(:hours, :float)
       column(:date, :date)
-      column(:description, :string, limit=300)
+      column(:notes, :string, limit=300)
     ]
   end
 

@@ -6,11 +6,12 @@ function up()
   create_table(:groups) do
     [
       primary_key()
-      column(:column_name, :column_type)
+      column(:name, :string, limit=25)
+      column(:leader_id, :int)
     ]
   end
 
-  add_index(:groups, :column_name)
+  add_index(:groups, :name)
 end
 
 function down()

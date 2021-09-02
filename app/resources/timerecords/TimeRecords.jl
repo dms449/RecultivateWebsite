@@ -13,7 +13,7 @@ export TimeRecord
   contractor_id::Int = 0
   hours::Float32 = 0
   date::Date = today()
-  description::String = ""
+  notes::String = ""
 end
 
 end

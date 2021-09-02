@@ -35,7 +35,7 @@ route("/schedule", ScheduleVisitFormController.scheduleVisitSubmit, method=POST,
 # route("/dashboard", named=:contractor_dashboard) do; @authenticated!
 #   DashboardController.dashboard()
 # end
-route("/dashboard", DashboardController.dashboard, named=:employee_dashboard) 
+route("/dashboard", DashboardController.dashboard, named=:dashboard) 
 
 # LAWNCARE PROPERTIES
 route("/lawncare-properties", LawncarePropertiesController.index, named=:lawncare_properties_index) 

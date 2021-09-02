@@ -14,8 +14,9 @@ module LawncarePropertiesController
 
   function index()
     Sessions.set!(Sessions.session(Requests.payload()), :current_page, :lawncareproperties_index)
-    lawn_prop_df = SearchLight.query(lawncare_properties_query) |> DataFrame
-    return html(:lawncareproperties, :lawncareproperties_index, layout=:employee, lp=nothing, property=nothing, properties=all(Property), groups=[1,2], payment_methods=["cash", "card","check"], lawn_properties=collect(eachrow(lawn_prop_df)), activePage=activePage)
+    lawn_prop_df = SearchLight.query(lawncare_properties_query) 
+    groups = SearchLight.query("SELECT id FROM groups").id
+    return html(:lawncareproperties, :lawncareproperties_index, layout=:employee, lp=nothing, property=nothing, properties=all(Property), groups=groups, payment_methods=["cash", "card","check"], lawn_properties=collect(eachrow(lawn_prop_df)), activePage=activePage)
   end
 
   function edit()

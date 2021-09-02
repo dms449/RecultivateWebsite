@@ -10,6 +10,8 @@ module DashboardController
   using DbTools
   using Dates
   using LawncareEvents
+  using Contractors
+  using Groups
   import GeneralUtils: activePage
 
   export get_properties_due
@@ -41,9 +43,12 @@ module DashboardController
     properties_due = collect(eachrow(get_properties_due()))
     error = payload(:error, "")
 
+    # get all contractors
+    contractors = collect(eachrow(SearchLight.query(contractors_sql)))
+
     # get all groups
-    groups = collect(unique(SearchLight.query("select `group_id` from contractors").group_id))
-    return html(:dashboard, :dashboard, layout=:employee, properties_due=properties_due, td=today(), groups=groups, error=error, activePage=activePage)
+    groups = all(Group)
+    return html(:dashboard, :dashboard, layout=:employee, properties_due=properties_due, td=today(), groups=groups, contractors=contractors, error=error, activePage=activePage)
   end
 
 
