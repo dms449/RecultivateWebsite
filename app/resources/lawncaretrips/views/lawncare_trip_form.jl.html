@@ -1,0 +1,19 @@
+
+<form method="POST" action="$(Genie.Router.linkto(:create_lawncare_trip))" >
+  <div class="row py-1 g-3">
+    <!-- <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"> -->
+    <div class="col-2"><input type="date" class="form-control datepicker" name="date" placeholder="Select Date" value=$(string(td))></div>
+    <div class="col-1"><input type="float" class="form-control" name="hours" value=""></div>
+    <div class="col-1">
+      <select class="form-select" name="group_id" required>
+        <% for_each(groups) do group %>
+          <% if group.id==trip.group_id %>
+            <option value="$(group.id)" selected>$(group.name)</option>
+          <% else %>
+          <option value="$(group.id)">$(group.name)</option>
+          <%end%>
+        <%end%>
+      </select>
+    </div>
+  <!-- <div><input type="hidden" class="form-control" name="lawncare_property_id" value="$(property.lawn_id)"></div> -->
+</form>

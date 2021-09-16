@@ -8,9 +8,9 @@
     <div class="col-1">cost</div>
     <div class="col-1">group_id</div>
   </div>
-  <% for_each(properties_due) do property %>
-    <% partial(joinpath(Genie.config.path_resources, "lawncareevents", "views", "lawncare_event_form.jl.html"), property=property, td=td, groups=groups, context=@__MODULE__) %>
-  <% end %>
+  <!-- <% for_each(properties_due) do property %> -->
+    <!-- <% partial(joinpath(Genie.config.path_resources, "lawncareevents", "views", "lawncare_event_form.jl.html"), property=property, td=td, groups=groups, context=@__MODULE__) %> -->
+  <!-- <% end %> -->
 </div>
 
 <!--<div class="container">--> 
@@ -20,7 +20,7 @@
 
 <!--<div class="modal fade" id="personModal" tabindex="-1" >-->
   <!--<div class="modal-dialog">-->
-  <!--  <!-1-"$(Genie.router.linkto(:contactPage()))"-1->-->
+  <!--  <!-1-"$(Genie.Router.linkto(:contactPage()))"-1->-->
   <!--  <!-1- Modal content-1->-->
   <!--  <div class="modal-content">-->
 <!--    <div class="modal-header">-->

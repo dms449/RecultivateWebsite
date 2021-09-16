@@ -1,0 +1,115 @@
+
+<script src="/js/lawncare_trips.js"></script>
+<div class="row">
+
+  
+
+  <!-- add new property -->
+  <!-- <a class="btn btn-primary mb-3" data-bs-toggle="collapse" href="#createTrip" role="button" aria-expanded="false" aria-controls="createTrip"> -->
+  <!--   Create -->
+  <!-- </a> -->
+  <!-- <div class="collapse" id="createTrip"> -->
+  <!-- <hr class="my-4"> -->
+  <div class="col-auto">
+    <form method="POST" action="$(Genie.Router.linkto(:create_lawncare_trip))" >
+      <div class="row py-1 g-3 justify-content-center">
+        <!-- <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"> -->
+        <div class="col-md-2">Trip Information</div>
+        <div class="col-md-2"><input type="date" class="form-control datepicker" name="date" placeholder="Select Date" value=$(string(td)) required></div>
+        <div class="col-md-2"><input type="number" class="form-control" name="hours" value=""required></div>
+        <div class="col-md-2" required>
+          <select class="form-select" name="group_id" required>
+            <% for_each(groups) do group %>
+              <!-- <% if group.id==trip.group_id %> -->
+              <!--   <option value="$(group.id)" selected>$(group.name)</option> -->
+              <!-- <% else %> -->
+              <option value="$(group.id)">$(group.name)</option>
+              <!-- <%end%> -->
+            <%end%>
+          </select>
+        </div>
+      </div>
+        
+      <div class="row justify-content-center py-5"><h3> Stops </h3></div>
+      <hr class="my-4">
+      <div class="container" id="eventsContainer">
+
+      </div>
+
+      <!-- <button class="btn btn-secondary px-5" type="button" id="addEventBtn">+</button> -->
+
+      <div><button type="submit" class="btn btn-primary">submit</button></div>
+    </form>
+  </div>
+
+  <div class="col-auto">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">id</th>
+          <th scope="col">active</th>
+          <th scope="col">client</th>
+          <th scope="col">address</th>
+          <th scope="col">weeks</th>
+          <th scope="col">cost</th>
+          <th scope="col"></th>
+        </tr>
+      </thead>
+      <tbody>
+      <% for_each(lawn_properties) do row %>
+        <tr>
+          <th scope="row">$(row.lawn_id)</th>
+          <td>$(row.active)</td>
+          <td><a href="/persons/$(row.person_id)/edit">$(row.first*" "*row.last)</a></td>
+          <td><a href="/properties/$(row.property_id)/edit">$(row.address*" "*row.city)</a></td>
+          <td>$(row.weeks_between_visits)</td>
+          <td>$(row.cost)</td>
+          <!-- <td><a class="btn btn-secondary" id="lp$(row.lawn_id)" role="button">add</a></td> -->
+          <td><button class="btn btn-secondary" onclick="addEvent('$(row.lawn_id)', '$(row.first)', '$(row.address)')" type="button">add</button></td>
+        </tr>
+      <% end %>
+
+      </tbody>
+    </table>
+      <!--   <% for_each(trips) do trip %> -->
+
+  </div>
+
+
+
+
+      <!-- <div><input type="hidden" class="form-control" name="lawncare_property_id" value="$(property.lawn_id)"></div> -->
+
+    <!-- <% partial(joinpath(Genie.config.path_resources, "properties", "views", "property_form.jl.html"),person=nothing, property=nothing, persons=persons, context=@__MODULE__) %> -->
+
+
+  <!-- show properties -->
+  <div class="row justify-content-center py-5"><h3> Trips</h3></div>
+  <hr class="my-4">
+  <table class="table">
+    <thead>
+      <tr>
+        <th scope="col">id</th>
+        <th scope="col">date</th>
+        <th scope="col">group</th>
+        <th scope="col">hours</th>
+        <!-- <th scope="col">locations</th> -->
+        <!-- <th scope="col"></th> -->
+      </tr>
+    </thead>
+    <tbody>
+    <!-- <% for_each(trips) do row %> -->
+    <!--   <tr> -->
+    <!--     <th scope="row">$(row.id)</th> -->
+    <!--     <td>$(row.date)</td> -->
+    <!--     <td>$(row.group)</td> -->
+    <!--     <td>$(row.hours)</td> -->
+    <!--     <!-1- <td><a class="btn btn-primary" href="/properties/$(row.property_id)/edit" role="button">Edit</a></td> -1-> -->
+    <!--   </tr> -->
+    <!-- <% end %> -->
+
+    </tbody>
+  </table>
+</div>
+
+

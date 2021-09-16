@@ -26,7 +26,7 @@
 
   <!--<div class="jumbotron">-->
 <div class="mx-5">
-  <script src="/js/application.js"></script>
+  <!-- <script src="/js/application.js"></script> -->
 
   <nav class="navbar navbar-expand-sm py-5">
     <!-- Brand -->
@@ -36,8 +36,6 @@
 
   <!-- <!-1-   <!-2- Links -2-> -1-> -->
   <!--   <ul class="navbar-nav mx-auto"> -->
-  <!-- <!-1-     <li class="nav-item"><a class="px-3 nav-link $(activePage(:dashboard))" href="/dashboard">Dashboard</a></li> -1-> -->
-  <!-- <!-1-     <!-2- <li class="nav-item"><a class="px-3 nav-link $(activePage(:landscaping_page))" Landscaping</a></li> -2-> -1-> -->
   <!-- <!-1-     <li class="nav-item"><a class="px-3 nav-link" >Lawncare</a></li> -1-> -->
   <!-- <!-1-     <li class="nav-item"><a class="px-3 nav-link" >TimeRecords</a></li> -1-> -->
   <!-- <!-1-     <li class="nav-item"><a class="px-3 nav-link">Personal</a></li> -1-> -->
@@ -53,9 +51,8 @@
   </nav>
 
   <div class="row">
-    <div class="col-auto">
-
-      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block sidebar collapse">
+    <div class="col-md-2">
+      <nav id="sidebarMenu" class="d-md-block sidebar collapse">
         <div class="position-sticky pt-3">
           <ul class="nav flex-column">
             <li class="nav-item">
@@ -120,7 +117,7 @@
       </nav>
     </div>
 
-    <div class="col-auto">
+    <div class="col-md-10">
       <%
         @yield
       %>

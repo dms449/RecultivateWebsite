@@ -12,7 +12,7 @@ export LawncareEvent
   lawncare_property_id::Int = 0
   cost::Float32 = 0
   hours::Float32 = 0
-  group_id::Int = 0
+  trip_id::Int = 0
   transaction_id::Int = 0
   notes::String = ""
 end

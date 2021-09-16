@@ -12,6 +12,7 @@ using HomeController
 using DashboardController
 using LawncarePropertiesController
 using LawncareEventsController
+using LawncareTripsController
 using PropertiesController
 using PersonsController
 
@@ -63,6 +64,8 @@ route("/persons/create", PersonsController.create, method=POST, named=:create_pe
 # route("/lawncare-events", LawncareEventsController.index, named=:lawncare_events_page)
 # route("/lawncare-events", LawncareEventsController.index, named=:lawncare_events_page)
 
+route("/lawncare-trips", LawncareTripsController.index, named=:lawncare_trips_index) 
+route("/lawncare-trips/create", LawncareTripsController.create, method=POST, named=:create_lawncare_trip) 
 # route("/person/new", Person)
 
 # route("/login") do; 

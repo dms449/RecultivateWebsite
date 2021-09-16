@@ -12,7 +12,7 @@ module DashboardController
   using LawncareEvents
   using Contractors
   using Groups
-  import GeneralUtils: activePage
+  # import GeneralUtils: activePage
 
   export get_properties_due
 
@@ -31,7 +31,6 @@ module DashboardController
   end
 
 
-
   function build_client_string(df::DataFrame)
     return df.first .* " " .* df.last .* " - " .* df.address .* ", " .* df.city
   end
@@ -46,9 +45,14 @@ module DashboardController
     # get all contractors
     contractors = collect(eachrow(SearchLight.query(contractors_sql)))
 
+    # get recent trips
+    # recent_trips = collect(eachrow(SearchLight.query(recent_trips_sql)))
+    recent_trips = nothing
+
     # get all groups
     groups = all(Group)
-    return html(:dashboard, :dashboard, layout=:employee, properties_due=properties_due, td=today(), groups=groups, contractors=contractors, error=error, activePage=activePage)
+    # return html("dashboard", "employee")
+    return html(:dashboard, :dashboard, layout=:employee, properties_due=properties_due, td=today(), trips=recent_trips, groups=groups, contractors=contractors, error=error)
   end
 
 

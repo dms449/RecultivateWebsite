@@ -10,7 +10,7 @@ function up()
       column(:lawncare_property_id, :int)
       column(:cost, :float)
       column(:hours, :float)
-      column(:group_id, :int)
+      column(:trip_id, :int)
       column(:transaction_id, :int)
       column(:notes, :string, limit="300")
     ]
