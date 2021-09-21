@@ -16,9 +16,7 @@ using LawncareTripsController
 using PropertiesController
 using PersonsController
 
-# using Genie.Renderer.Html: html
-
-
+# using Genie.Renderer.Html: html 
 
 Genie.Sessions.init()
 

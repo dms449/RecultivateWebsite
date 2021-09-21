@@ -22,7 +22,7 @@ module DashboardController
     week_begin = td - Dates.Day(dayofweek(td)%7)
     week_end = week_begin + Dates.Day(6)
 
-    df = SearchLight.query(lawn_events_sql)
+    df = SearchLight.query(lawn_events_query)
     df = df[df.active .== 1,:]
     new_properties = df[ismissing.(df.last_visit),:]
     others = dropmissing(df, :last_visit) 

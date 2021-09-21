@@ -197,6 +197,16 @@ a:hover, a:focus, a:active, a:visited {
     border-radius: 50%;
 }
 
+.table {
+  display:block;
+  overflow-y : scroll;
+}
+
+.thead.fixed {
+    top: 0;
+    z-index: 2;
+    position: sticky;
+ }
 
 .pricing_table .overflow {
   overflow: auto;
