@@ -5,7 +5,7 @@ using Dates
 using DataFrames
 import YAML
 
-export lawncare_properties_query, last_record_query, properties_query, lawn_events_sql, contractors_query
+export lawncare_properties_query, last_record_query, properties_query, lawn_events_query, clients_query
 export format_phone_string
 
 function format_phone_string(phone_string::String)
@@ -99,19 +99,6 @@ last_record_query = "SELECT
     GROUP BY lawncare_property_id
   "
 
-contractors_query = "SELECT 
-    contractors.id,
-    contractors.user_id,
-    contractors.pay_rate,
-    contractors.group_id,
-    persons.id as person_id,
-    persons.first,
-    persons.last,
-    persons.email
-  FROM contractors
-    CROSS JOIN persons
-      ON contractors.person_id = persons.id
-"
 
 active_lawncare_clients_query = "SELECT 
     persons.first,

@@ -20,7 +20,7 @@ module LawncareTripsController
     lps = collect(eachrow(lp_df))
 
     # get contractors
-    c_df = collect(eachrow(SearchLight.query(contractors_sql)))
+    c_df = collect(eachrow(SearchLight.query(contractors_query)))
 
     # get mygroup. i.e. the group associated with this person
     mygroup=nothing
@@ -60,7 +60,7 @@ module LawncareTripsController
 
 
       # create time records for any contractors 
-      # contractors = collect(eachrow(SearchLight.query(contractors_sql)))
+      # contractors = collect(eachrow(SearchLight.query(contractors_query)))
       for c in all(Contractor)
 
         # test if this contractor id was present in the payload as a field

@@ -4,9 +4,9 @@ import SearchLight: AbstractModel, DbId
 import Base: @kwdef
 import Dates: Date, today
 
-export LawncareTrip, recent_trips_sql
+export LawncareTrip, recent_trips_query
 
-recent_trips_sql = "
+recent_trips_query = "
     SELECT * FROM lawncaretrips
     WHERE `date` >= NOW() - INTERVAL 10 DAY
     "

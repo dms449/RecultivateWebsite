@@ -1,6 +1,6 @@
 <form action="$(person!=nothing ? Genie.Router.linkto(:update_person, id=person.id) : Genie.Router.linkto(:create_person))" method="POST" class="row g-3 align-items-center">
 
-  <div class="row m-3">
+  <div class="row mb-3">
     <div class="col-5">
       <label for="first">First</label>
       <% if person != nothing %>
@@ -13,7 +13,7 @@
     <div class="col-5">
       <label for="last">Last</label>
       <% if person != nothing %>
-      <input type="text" placeholder="last name" class="form-control" name="last" value="(person.last)" required>
+      <input type="text" placeholder="last name" class="form-control" name="last" value="$(person.last)" required>
       <% else %>
       <input type="text" placeholder="last name" class="form-control" name="last" value="" required>
       <% end %>
@@ -23,7 +23,7 @@
     <div class="col-2">
       <label for="mi">mi</label>
       <% if person != nothing %>
-      <input type="text" placeholder="mi" class="form-control" name="mi" value="(person.mi)">
+      <input type="text" placeholder="mi" class="form-control" name="mi" value="$(person.mi)">
       <% else %>
       <input type="text" placeholder="mi" class="form-control" name="mi" value="">
       <% end %>
@@ -34,7 +34,7 @@
     <div class="col-7">
       <label for="email">Email</label>
       <% if person != nothing %>
-      <input type="email" class="form-control" name="email" value="(person.email)" required>
+      <input type="email" class="form-control" name="email" value="$(person.email)" required>
       <% else %>
       <input type="email" class="form-control" name="email" value="" required>
       <% end %>
@@ -46,7 +46,7 @@
     <div class="col-4">
       <label for="phone">Phone</label>
       <% if person != nothing %>
-      <input type="phone" class="form-control" name="phone" value="(person.phone)" required>
+      <input type="phone" class="form-control" name="phone" value="$(person.phone)" required>
       <% else %>
       <input type="phone" class="form-control" name="phone" value="" required>
       <% end %>

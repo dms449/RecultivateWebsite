@@ -7,7 +7,7 @@ import SearchLight: AbstractModel, DbId, Validation
 
 import Base: @kwdef
 
-export Contractor, contractors_sql
+export Contractor, contractors_query
 
 @kwdef mutable struct Contractor <: AbstractModel
   id::DbId = DbId()
@@ -25,7 +25,7 @@ end
 
 # function set_password(Person, password)
 #
-contractors_sql = "SELECT 
+contractors_query = "SELECT 
     contractors.id,
     contractors.pay_rate,
     contractors.person_id,

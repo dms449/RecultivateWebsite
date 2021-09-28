@@ -51,7 +51,7 @@
   </nav>
 
   <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-1">
       <nav id="sidebarMenu" class="d-md-block sidebar collapse">
         <div class="position-sticky pt-3">
           <ul class="nav flex-column">
@@ -64,13 +64,13 @@
             <li class="nav-item">
               <a class="nav-link" href="/lawncare-properties">
                 <span data-feather="file-text"></span>
-                Lawncare Properties
+                Personal
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">
+              <a class="nav-link" href="/time-records">
                 <span data-feather="bar-chart-2"></span>
-                TimeCard
+                Time
               </a>
             </li>
             <!-- <li class="nav-item"> -->
@@ -88,36 +88,37 @@
           </ul>
 
           <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
-            <span>Other</span>
+            <span>Lawncare</span>
             <a class="link-secondary" href="#" aria-label="Add a new report">
               <span data-feather="plus-circle"></span>
             </a>
           </h6>
           <ul class="nav flex-column mb-2">
             <li class="nav-item">
-              <a class="nav-link" href="/properties">
+              <a class="nav-link" href="/lawncare-properties">
                 <span data-feather="file-text"></span>
                 Properties
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/persons">
+              <a class="nav-link" href="/lawncare-clients">
                 <span data-feather="file-text"></span>
-                Persons
+                Clients
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/lawncare-events">
+              <a class="nav-link" href="/lawncare-trips">
                 <span data-feather="file-text"></span>
-                Lawncare Events
+                Trips
               </a>
             </li>
+
           </ul>
         </div>
       </nav>
     </div>
 
-    <div class="col-md-10">
+    <div class="col-md-11 justify-content-center">
       <%
         @yield
       %>

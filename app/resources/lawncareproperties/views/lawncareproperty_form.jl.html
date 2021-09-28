@@ -67,14 +67,21 @@
     <div class="col-auto">
       <label for="group_id">Group</label>
       <select class="form-select" id="group_id" name="group_id" required>
-        <option value="$(groups[1])" selected>$(groups[1])</option>
-        <% for_each(groups[2:end]) do i %>
-          <option value="$i">$i</option>
+        <% for_each(groups) do g %>
+          <% if group != nothing %>
+          <% if g.id==group.id %>
+            <option value="$(g.id.value)" selected>$(g.name)</option>
+          <% else %>
+            <option value="$(g.id.value)">$(g.name)</option>
+          <%end%>
+          <%else%>
+            <option value="$(g.id.value)">$(g.name)</option>
+          <%end%>
         <%end%>
       </select>
     </div>
 
-    <div class="col-auto">
+    <div class="col-md-2">
       <label for="payment_method">Payment Method</label>
       <select class="form-select" id="payment_method" name="payment_method" required>
         <option value="$(payment_methods[1])" selected>$(payment_methods[1])</option>
@@ -84,7 +91,7 @@
       </select>
     </div>
 
-    <div class="col-auto">
+    <div class="col-md-2">
       <label for="deck">Deck Height</label>
       <input type="number" placeholder="0.25" class="form-control" name="deck" >
     </div>

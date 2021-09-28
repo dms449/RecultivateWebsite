@@ -43,7 +43,7 @@ module DashboardController
     error = payload(:error, "")
 
     # get all contractors
-    contractors = collect(eachrow(SearchLight.query(contractors_sql)))
+    contractors = collect(eachrow(SearchLight.query(contractors_query)))
 
     # get recent trips
     # recent_trips = collect(eachrow(SearchLight.query(recent_trips_sql)))
