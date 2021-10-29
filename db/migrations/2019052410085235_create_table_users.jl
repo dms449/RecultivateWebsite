@@ -6,14 +6,15 @@ function up()
   create_table(:users) do
     [
       primary_key()
+      column(:person_id, :int)
       column(:username, :string, limit = 100)
       column(:password, :string, limit = 100)
-      column(:account_type, :int)
-      column(:person_id, :int)
+      column(:imgpath, :string, limit = 100)
     ]
   end
 
   add_index(:users, :username)
+  add_index(:users, :person_id)
 end
 
 function down()

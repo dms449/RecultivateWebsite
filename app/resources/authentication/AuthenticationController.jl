@@ -4,11 +4,12 @@ using Genie, Genie.Renderer, Genie.Renderer.Html, Genie.Flash
 using SearchLight
 using GenieAuthentication
 using ViewHelper
-using Logging
 using Users
+using Logging
 
 
 function show_login()
+  @show Genie.Requests.request()
   html(:authentication, :login, context = @__MODULE__)
 end
 
@@ -26,6 +27,7 @@ function login()
 end
 
 function success()
+
   html(:authentication, :success, context = @__MODULE__)
 end
 
@@ -41,27 +43,27 @@ function show_register()
   html(:authentication, :register, context = @__MODULE__)
 end
 
-# function register()
-#   try
-#     user = User(username  = params(:username),
-#                 password  = params(:password) |> Users.hash_password,
-#                 name      = params(:name),
-#                 email     = params(:email)) |> save!
+function register()
+  try
+    user = User(username  = params(:username),
+                password  = params(:password) |> Users.hash_password,
+                name      = params(:name),
+                email     = params(:email)) |> save!
 
-#     authenticate(user.id, Genie.Sessions.session(params()))
+    authenticate(user.id, Genie.Sessions.session(params()))
 
-#     "Registration successful"
-#   catch ex
-#     @error ex
+    "Registration successful"
+  catch ex
+    @error ex
 
-#     if hasfield(typeof(ex), :msg)
-#       flash(ex.msg)
-#     else
-#       flash(string(ex))
-#     end
+    if hasfield(typeof(ex), :msg)
+      flash(ex.msg)
+    else
+      flash(string(ex))
+    end
 
-#     redirect(:show_register)
-#   end
-# end
+    redirect(:show_register)
+  end
+end
 
 end

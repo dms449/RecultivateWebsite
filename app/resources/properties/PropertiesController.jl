@@ -7,19 +7,18 @@ module PropertiesController
   using SearchLight
   using Genie.Router, Genie.Renderer, Genie.Sessions, Genie.Requests
   using Genie.Renderer.Html
-  import GeneralUtils: activePage
 
   function index()
     Sessions.set!(Sessions.session(Requests.payload()), :current_page, :properties_index)
     properties_df = SearchLight.query(properties_query) |> DataFrame
-    return html(:properties, :properties_index, layout=:employee, persons=all(Person), properties=collect(eachrow(properties_df)), activePage=activePage)
+    return html(:properties, :properties_index, layout=:employee, persons=all(Person), properties=collect(eachrow(properties_df)))
   end
 
   function edit()
     try
-      property = SearchLight.findone(Property, id=payload(:id))
+      property = SearchLight.findone(Property, id=payload(:property_id))
       person = SearchLight.findone(Person, id=property.person_id)
-      return html(:properties, :property_form, layout=:employee, person=person, property=property, persons=all(Person), activePage=activePage)
+      return html(:properties, :property_form, layout=:employee, person=person, property=property, persons=all(Person))
     catch e
       @warn e
       redirect(Sessions.get(Sessions.session(Router.params()), :properties_index))
@@ -27,7 +26,7 @@ module PropertiesController
   end
 
   function new()
-    return html(:properties, :property_form, layout=:employee, persons=all(Person), activePage=activePage)
+    return html(:properties, :property_form, layout=:employee, persons=all(Person))
   end
 
 
@@ -51,7 +50,7 @@ module PropertiesController
 
   function update()
     try
-      property = SearchLight.findone(Property, id=payload(:id))
+      property = SearchLight.findone(Property, id=payload(:property_id))
 
       # TODO Check for errors or duplicates
       property.address = payload(:address)

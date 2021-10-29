@@ -1,19 +1,128 @@
+<form method="POST" action="$(trip!=nothing ? Genie.Router.linkto(:update_lawncare_trip, id=trip.id) : Genie.Router.linkto(:create_lawncare_trip))" method="POST" class="row g-3 align-items-center">
 
-<form method="POST" action="$(Genie.Router.linkto(:create_lawncare_trip))" >
-  <div class="row py-1 g-3">
-    <!-- <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"> -->
-    <div class="col-2"><input type="date" class="form-control datepicker" name="date" placeholder="Select Date" value=$(string(td))></div>
-    <div class="col-1"><input type="float" class="form-control" name="hours" value=""></div>
-    <div class="col-1">
-      <select class="form-select" name="group_id" required>
-        <% for_each(groups) do group %>
-          <% if group.id==trip.group_id %>
-            <option value="$(group.id)" selected>$(group.name)</option>
+  <div class="row py-1 g-3 justify-content-center">
+    <div class="col-md-2">
+      <input type="text" class="form-control-plaintext"> Trip Info</input>
+    </div>
+
+    <div class="col-md-3">
+      <label for="date" class="form-label">date</label>
+      <input type="date" class="form-control datepicker" id="date" name="date" placeholder="Select Date" value=$(if trip!=nothing ? trip.date : string(today()) required>
+    </div>
+property
+    <div class="col-md-3">
+      <label for="hours" class="form-label">hours</label>
+      <input type="float" class="form-control" id="hours" name="hours" value=""required>
+    </div>
+
+    <div class="col-md-3" required>
+      <label for="group" class="form-label">group</label>
+      <select class="form-select" onchange="selectedGroup(this.value)" id="group" name="group_id" required>
+      <!-- <select class="form-select" id="group" name="group_id" required> -->
+        <% for_each(groups) do g %>
+          <% if group != nothing %>
+          <% if g.id==group.id %>
+            <option value="$(g.id.value)" selected>$(g.name)</option>
           <% else %>
-          <option value="$(group.id)">$(group.name)</option>
+            <option value="$(g.id.value)">$(g.name)</option>
+          <%end%>
+          <%else%>
+            <option value="$(g.id.value)">$(g.name)</option>
           <%end%>
         <%end%>
       </select>
     </div>
-  <!-- <div><input type="hidden" class="form-control" name="lawncare_property_id" value="$(property.lawn_id)"></div> -->
+  </div>
+
+
+  <div class="row py-1 g-3 justify-content-center" id="contractorContainer">
+    <% for_each(contractors) do c %>
+    <div class="form-check form-check-inline col">
+      <input class="form-check-input" type="checkbox" data-groupid=$(c.group_id) id=i$(c.id) name=i$(c.id) value="">
+      <label class="form-check-label" for="$(c.id)">$(c.first)</label>
+    </div>
+    <%end%>
+  </div>
+
+
+  <div class="row justify-content-center pt-4 ">
+    <h5> Stops </h5>
+    <a class="btn btn-primary col-1" data-bs-toggle="modal" href="#stopsModal" role="button" aria-expanded="false" aria-controls="addStops">
+  </div>
+  <hr class="my-1">
+  <div class="container" id="eventsContainer">
+    <div class="row py-1 g-3">
+      <div class="col-md-2">name</div>
+      <div class="col-md-3">address</div>
+      <div class="col-md-2">hours</div>
+      <div class="col-md-2">cost</div>
+      <div class="col-md-2">notes</div>
+      <!-- <div class="col-1"><input type="text" class="form-control" name="notes" value=""></div> -->
+      <div class="col-1"></div>
+      <!-- <div><input type="hidden" class="form-control" name="lp_id" value=${id}></div> -->
+    </div>
+
+  </div>
+
+  <!-- <button class="btn btn-secondary px-5" type="button" id="addEventBtn">+</button> -->
+  <div class="row justify-content-center m-2">
+    <button type="submit" class="w-35 btn btn-primary">$(trip==nothing ? "Create" : "Update")</button>
+  </div>
+
+  <!-- <div class="row justify-content-center py-5"><button type="submit" class="btn btn-primary">submit</button></div> -->
+  <!-- <div><input type="hidden" class="form-control" id="property_ids" name="property_ids" value=""></div> -->
 </form>
+
+
+<div class="modal fade" id="stopsModal" tabindex="-1" >
+  <div class="modal-dialog">
+    <!--"$(Genie.Router.linkto(:contactPage()))"-->
+    <!-- Modal content-->
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title">Select Stops</h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+
+  <table class="table"
+      data-toggle="table"
+      data-height="800"
+      data-sortable="true"
+      data-pagination="true"
+      data-search="true"
+      data-classes="table table-hover"
+    >
+    <thead>
+      <tr>
+        <th data-field="id" data-sortable="true">id</th>
+        <th data-field="date" data-sortable="true">date</th>
+        <th data-field="group" data-sortable="true">group</th>
+        <th data-field="hours" data-sortable="true">hours</th>
+        <th ></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% for_each(trips) do trip %>
+      <tr>
+        <th scope="row">$(trip.id.value)</th>
+        <td>$(trip.date)</td>
+        <td>$(trip.group_id)</td>
+        <td>$(trip.hours)</td>
+        <!-- <td><a class="btn btn-primary" href="/properties/$(row.property_id)/edit" role="button">Edit</a></td> -->
+      </tr>
+    <% end %>
+
+    </tbody>
+  </table>
+
+      </div>
+
+      <div class="modal-footer justify-content-center">
+        <button type="button" class="btn w-40  py-2n btn-lg">Submit</button>
+      </div>
+    </div>
+  </div>
+</div>

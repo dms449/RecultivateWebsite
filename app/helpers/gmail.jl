@@ -1,54 +1,39 @@
 using HTTP
 using JSON
 using Base64: base64encode, base64decode
+using SHA
+using JWTs
+using MbedTLS
+using Dates
 
-using PyCall
 
-py"""
-from googleapiclient.discovery import build
-from apiclient import errors
-from httplib2 import Http
-from email.mime.text import MIMEText
-import base64
-from google.oauth2 import service_account
+jwt_combine(x::Dict...) = join(map(base64encode ∘ JSON.json, x), ".")
 
-# Email variables. Modify this!
-EMAIL_FROM = 'noreply@lyfpedia.com'
-EMAIL_TO = 'mark.zuckerber@facebook.com'
-EMAIL_SUBJECT = 'Hello  from Lyfepedia!'
-EMAIL_CONTENT = 'Hello, this is a test\nLyfepedia\nhttps://lyfepedia.com'
+function authenticate(scope, service_account_file)
 
-service = service_account_login()
-# Call the Gmail API
-message = create_message(EMAIL_FROM, EMAIL_TO, EMAIL_SUBJECT, EMAIL_CONTENT)
-sent = send_message(service,'me', message)
+  service_account = JSON.parsefile(service_account_file)
 
-def create_message(sender, to, subject, message_text):
-  message = MIMEText(message_text)
-  message['to'] = to
-  message['from'] = sender
-  message['subject'] = subject
-  return {'raw': base64.urlsafe_b64encode(message.as_string())}
+  jwt_header = Dict("alg"=>"RS256","typ"=>"JWT")
 
-def send_message(service, user_id, message):
-  try:
-    message = (service.users().messages().send(userId=user_id, body=message)
-               .execute())
-    print('Message Id: %s' % message['id'])
-    return message
-  except errors.HttpError as error:
-    print('An error occurred: %s' % error)
+  iat = Int(floor(Dates.value(now())/1000))
+  exp = iat + 3600
+  jwt_claims = Dict(
+                    "iss"=>service_account["client_email"],
+                    "scope"=>scope,
+                    "aud"=>service_account["auth_uri"],
+                    "exp"=>exp,
+                    "iat"=>iat
+  )
 
-def service_account_login():
-  SCOPES = ['https://www.googleapis.com/auth/gmail.send']
-  SERVICE_ACCOUNT_FILE = 'service-key.json'
+  jwt_signature = sha256(jwt_combine(jwt_header, jwt_claims))
 
-  credentials = service_account.Credentials.from_service_account_file(
-          SERVICE_ACCOUNT_FILE, scopes=SCOPES)
-  delegated_credentials = credentials.with_subject(EMAIL_FROM)
-  service = build('gmail', 'v1', credentials=delegated_credentials)
-  return service
-"""
+  jwt = jwt_combine(jwt_header, jwt_claims, jwt_signature)
+
+  # r = HTTP.request(:POST, "https://oauth2.googleapis.com/token", body=) 
+  r = HTTP.post("https://accounts.google.com/o/oauth2/v2/auth?client_id=$(credentials["client_id"])&redirect_uri=&response_type=code&scope=https://mail.google.com/")
+
+
+end
 
 """
 Build a Gmail message
@@ -85,13 +70,80 @@ function sendMsg(msg::Dict)
   return HTTP.post("https://gmail.googleapis.com/upload/gmail/v1/users/me/messages/send", ["Content-Type" => "application/json"], JSON.json(msg))
 end
 
-function authenticate()
-  global credentials
-  r = HTTP.get("https://accounts.google.com/o/oauth2/v2/auth?client_id=$(credentials["client_id"])&redirect_uri=&response_type=code&scope=https://mail.google.com/")
+# function authenticate()
+#   global credentials
+#   r = HTTP.get("https://accounts.google.com/o/oauth2/v2/auth?client_id=$(credentials["client_id"])&redirect_uri=&response_type=code&scope=https://mail.google.com/")
 
-  # https://developers.google.com/identity/protocols/oauth2/web-server#httprest
+#   # https://developers.google.com/identity/protocols/oauth2/web-server#httprest
+# end
+
+
+function buildJWT(scope="https://mail.google.com", service_account_file="./config/service_account.json")
+
+  service_account = JSON.parsefile(service_account_file)
+
+  n1 = Dates.datetime2unix(now(Dates.UTC))
+  n2 = n1 + 3599
+  jwt_claims = Dict(
+                    "iss"=>service_account["client_email"],
+                    "scope"=>scope,
+                    "aud"=>service_account["token_uri"],
+                    "exp"=>n2,
+                    "iat"=>n1
+  )
+  jwt = JWT(; payload=jwt_claims)
+
+  ctx = MbedTLS.PKContext()
+  MbedTLS.parse_key!(ctx, service_account["private_key"])
+  key = JWKRSA(MbedTLS.MD_SHA256, ctx)
+
+  sign!(jwt, key)
+
+  if !issigned(jwt)
+    @warn "jwt failed to sign"
+  end
+
+  return jwt
+
+  # r = HTTP.request(:POST, "https://oauth2.googleapis.com/token", body="$jwt") 
+
+  # return r
+
 end
 
+buildBody(jwt) = Dict(
+                      "grant_type"=>"urn:ietf:params:oauth:grant-type:jwt-bearer",
+                      "assertion"=>"$jwt"
+                     )
 
-# for testing purposes
-test_msg = buildMsg("lawncare@recultivate.net", "testing testig", "hi there,\n this is Daniel \n bye")
+function getToken(jwt::JWT) 
+  body = Dict(
+              "grant_type"=>"urn:ietf:params:oauth:grant-type:jwt-bearer",
+              "assertion"=>"$jwt"
+             )
+
+  r = HTTP.post("https://oauth2.googleapis.com/token", [], JSON.json(body))
+  
+  if r.status_code != 200
+    @warn "failed to get access token"
+  end
+  return 
+end
+
+all() = buildJWT ∘ buildBody ∘ requestToken
+
+
+
+
+
+
+
+
+
+# test_msg = buildMsg("lawncare@recultivate.net", "testing testig", "hi there,\n this is Daniel \n bye")
+
+
+
+
+
+

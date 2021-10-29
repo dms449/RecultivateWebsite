@@ -2,10 +2,10 @@ env: ENV["GENIE_ENV"]
 
 dev:
   adapter: MySQL
-  database: recultivate
+  database: recultivate_test
   host: 127.0.0.1
-  username: dms
-  password: Recultivate!t23
+  username: test_user
+  password: test_pass
   port: 3306
   config:
 
@@ -19,10 +19,10 @@ prod:
   config:
 
 test:
-  adapter:
-  database:
-  host:
-  username:
-  password:
-  port:
+  adapter: MySQL
+  database: recultivate_test
+  host: 127.0.0.1
+  username: test_user
+  password: test_pass
+  port: 3306
   config:

@@ -29,7 +29,7 @@
       <label for="weeks">Period (weeks)</label>
       <select class="form-select" id="weeks, "name="weeks" required>
         <option value="1" selected>1</option>
-        <% @foreach([2, 3, 4]) do i %>
+        <% for_each([2, 3, 4]) do i %>
           <option value="$i">$i</option>
         <%end%>
       </select>
@@ -39,7 +39,7 @@
       <label for="group_id">Group</label>
       <select class="form-select" id="group_id" name="group_id" required>
         <option value="$(groups[1])" selected>$(groups[1])</option>
-        <% @foreach(groups[2:end]) do i %>
+        <% for_each(groups[2:end]) do i %>
           <option value="$i">$i</option>
         <%end%>
       </select>
@@ -49,7 +49,7 @@
       <label for="payment_method">Payment Method</label>
       <select class="form-select" id="payment_method" name="payment_method" required>
         <option value="$(payment_methods[1]" selected>$(payment_methods[1])</option>
-        <% @foreach(payment_methods[2:end]) do i %>
+        <% for_each(payment_methods[2:end]) do i %>
           <option value="$i">$i</option>
         <%end%>
       </select>

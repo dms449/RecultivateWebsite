@@ -1,29 +1,35 @@
 <div class="container">
   
 
-  <!-- add new property -->
-  <a class="btn btn-primary" data-bs-toggle="collapse" href="#createLawncareProperty" role="button" aria-expanded="false" aria-controls="createLawncareProperty">
-    Create
-  </a>
-  <div class="collapse" id="createLawncareProperty">
-    <% partial(joinpath(Genie.config.path_resources, "lawncareproperties", "views", "lawncareproperty_form.jl.html"), lp=nothing, property=nothing, properties=properties, groups=groups, group=group, payment_methods=payment_methods, context=@__MODULE__) %>
-
+  <div class="row justify-content-between">
+    <h3 class="col-2"> Lawncare Properties</h3>
+    <!-- <button class="btn px-4 col-1" type="button" data-bs-toggle="modal" data-bs-target="#personModal">Add</button> -->
+    <a class="btn btn-primary col-1" data-bs-toggle="modal" href="#lawncarePropertyModal" role="button" aria-expanded="false" aria-controls="createPerson">
+    Add
+    </a>
   </div>
 
 
   <!-- show properties -->
   <div class="row justify-content-center py-5"><h3>Lawncare Properties</h3></div>
   <hr class="my-4">
-  <table class="table">
+  <table class="table"
+      data-toggle="table"
+      data-height="800"
+      data-sortable="true"
+      data-pagination="true"
+      data-search="true"
+      data-classes="table table-hover"
+    >
     <thead>
       <tr>
-        <th scope="col">id</th>
-        <th scope="col">active</th>
-        <th scope="col">client</th>
-        <th scope="col">address</th>
-        <th scope="col">weeks</th>
-        <th scope="col">cost</th>
-        <th scope="col"></th>
+        <th data-field="id" data-sortable="true">id</th>
+        <th data-field="active" data-sortable="true">active</th>
+        <th data-field="client" data-sortable="true">client</th>
+        <th data-field="address" data-sortable="true">address</th>
+        <th data-field="weeks">weeks</th>
+        <th data-field="cost" data-sortable="true">cost</th>
+        <th ></th>
       </tr>
     </thead>
     <tbody>
@@ -43,3 +49,22 @@
   </table>
 </div>
 
+
+<div class="modal fade" id="lawncareClientModal" tabindex="-1" >
+  <div class="modal-dialog">
+    <!--"$(Genie.Router.linkto(:contactPage()))"-->
+    <!-- Modal content-->
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title">Add Lawncare Client </h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+        <% partial(joinpath(Genie.config.path_resources, "lawncareproperties", "views", "lawncareproperty_form.jl.html"), lp=nothing, property=nothing, properties=properties, groups=groups, group=group, payment_methods=payment_methods, context=@__MODULE__) %>
+      </div>
+
+    </div>
+  </div>
+</div>

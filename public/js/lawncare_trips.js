@@ -27,6 +27,8 @@ function selectedGroup(group){
   });
 }
 
+
 // execute a change command 
 $("select#group").change();
+
 

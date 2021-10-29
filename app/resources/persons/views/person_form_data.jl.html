@@ -1,0 +1,72 @@
+<div class="container" >
+  <div class="row mb-3">
+    <div class="col-5">
+      <label for="first">First</label>
+      <input type="text" placeholder="first name" class="form-control" name="first" value="$(if person!=nothing person.first else `` end)" required>
+      <!-- <input type="text" placeholder="first name" class="form-control" name="first" <% if person!=nothing %> value="$(person.first)" <% end %> required> -->
+    </div>
+
+    <div class="col-2">
+      <label for="mi">mi</label>
+      <input type="text" placeholder="mi" class="form-control" name="mi" value="$(if person!=nothing person.mi end)">
+    </div>
+
+    <div class="col-5">
+      <label for="last">Last</label>
+      <input type="text" placeholder="last name" class="form-control" name="last" value="$(if person!=nothing person.last end)" required>
+    </div>
+
+  </div>
+
+  <div class="row mb-3">
+    <div class="col-7">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" name="email" value="$(if person!=nothing person.email end)" required>
+      <div class="invalid-feedback">
+        Invalid email format
+      </div>
+    </div>
+
+    <div class="col-4">
+      <label for="phone">Phone</label>
+      <input type="phone" class="form-control" id="phone" name="phone" value="$(if person!= nothing person.phone end)" required>
+      <div class="invalid-feedback">
+        Invalid phone number
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col py-3">
+      <div class="pt-3 fs-4"> Contact Preference </div>
+      <div class="form-check form-check-inline">
+        <label class="form-check-label" for="email_radio">email</label>
+        <% if person != nothing && person.contact_preference=="email"%>
+        <input class="form-check-input" type="radio" name="contact_preference" id="email_radio" onclick="document.getElementById('email').required = true;" checked>
+        <% else %>
+        <input class="form-check-input" type="radio" name="contact_preference" id="email_radio" checked>
+        <% end %>
+      </div>
+      <div class="form-check form-check-inline">
+        <label class="form-check-label" for="phone_radio">phone</label>
+        <% if person != nothing && person.contact_preference=="phone"%>
+        <!-- <input class="form-check-input" type="radio" name="contact_preference" id="phone_radio" onclick="updateRequired(this, 'phone')" checked> -->
+        <input class="form-check-input" type="radio" name="contact_preference" id="phone_radio"  checked>
+        <% else %>
+        <!-- <input class="form-check-input" type="radio" name="contact_preference" id="phone_radio" onclick="updateRequired(this, 'phone')"> -->
+        <input class="form-check-input" type="radio" name="contact_preference" id="phone_radio" >
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <script> -->
+<!-- function updateRequired(selected_item, required_item){ -->
+<!--   console.log(selected_item) -->
+<!--   document.getElementById(required_item).required = selected_item.checked -->
+<!-- } -->
+
+<!-- </script> -->
+
+

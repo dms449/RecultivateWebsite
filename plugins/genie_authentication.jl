@@ -4,7 +4,6 @@ Genie.Sessions.init()
 
 import AuthenticationController
 import SearchLight: findone
-import DashboardController
 import Users
 
 export current_user
@@ -12,7 +11,7 @@ current_user() = findone(Users.User, id = get_authentication())
 
 route("/login", AuthenticationController.show_login, named = :show_login)
 route("/login", AuthenticationController.login, method = POST, named = :login)
-route("/success", DashboardController.dashboard, method = GET, named = :success)
+route("/success", AuthenticationController.success, method = GET, named = :success)
 route("/logout", AuthenticationController.logout, named = :logout)
 
 #===#

@@ -1,14 +1,20 @@
 module PortfolioController
   using Genie.Sessions, Genie.Router, Genie.Requests
   using Genie.Renderer.Html
-  import GeneralUtils: activePage
+
+  struct PortfolioImg
+    path::String
+    title::String
+    desc::String
+  end
+
 
   struct PortfolioProject
     id::String
     title::String
     cost::String
     desc::String
-    imgs
+    imgs::Vector{PortfolioImg}
   end
   
 
@@ -27,6 +33,8 @@ module PortfolioController
       # replace the "./public" part of the path with "/"
       imgs = map(x->joinpath("/", splitpath(x)[3:end]...), imgs)
 
+      new_imgs = [PortfolioImg(img, split(basename(img), "-")[end]=="a" ? "Before" : "After", "$j / $(length(imgs))") for (j,img) in enumerate(imgs)]
+
       # load description if it exists
       desc = ""
       try
@@ -36,11 +44,11 @@ module PortfolioController
       end
       
 
-      push!(projects, PortfolioProject(repr(i), title, cost, desc, imgs))
+      push!(projects, PortfolioProject(repr(i), title, cost, desc, new_imgs))
     end
 
     # imgs = [joinpath("/img/landscaping/carosel",basename(p)) for p in imgs]
 
-    html(:portfolio, :portfolio, activePage=activePage, projects=projects)
+    html(:portfolio, :portfolio, projects=projects)
   end
 end

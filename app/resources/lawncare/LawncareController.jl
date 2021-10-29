@@ -1,7 +1,6 @@
 module LawncareController
   using Genie.Renderer.Html
   using Genie.Sessions, Genie.Requests, Genie.Router
-  import GeneralUtils: activePage
   include("../../helpers/google_maps.jl")
   include("../../helpers/lawncare_equation.jl")
 
@@ -59,7 +58,7 @@ module LawncareController
       if warning != "" push!(warnings, warning) end
     end
 
-    html(:lawncare, :lawncare, activePage=activePage, street=street, city=city, acres=acres, items=items, warnings=warnings)
+    html(:lawncare, :lawncare, street=street, city=city, acres=acres, items=items, warnings=warnings)
   end
 
 

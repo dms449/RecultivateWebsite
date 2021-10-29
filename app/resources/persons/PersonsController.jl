@@ -5,37 +5,48 @@ module PersonsController
   using SearchLight
   using Genie.Router, Genie.Renderer, Genie.Sessions, Genie.Requests
   using Genie.Renderer.Html
-  import GeneralUtils: activePage
-
-  I = 10
+  using Users
+  using GenieAuthentication
+  export current_user
+  # current_user() = findone(Users.User, id = get_authentication())
+  # using GenieAuthentication: current_user
+  
+    
 
   # Build something great
   function index()
-    pgn = parse(Int32, payload(:pgn, "1"))
-    Sessions.set!(Sessions.session(Requests.payload()), :current_page, :persons_index)
-    # properties_df = SearchLight.query("SELECT * FROM persons") |> DataFrame
-    persons = all(Person)
-    num_pages = (length(persons) ÷ I) + 1
+    # Sessions.set!(Sessions.session(Requests.payload()), :current_page, :persons_index)
 
-    if num_pages < pgn < 1
-      @warn "invalid page number. pages range from 1-$num_pages"
-      pgn = pgn < 1 ? 1 : num_pages
-    end
+    # println("current user = $current_user()")
+    # persons = all(Person)
 
-    # get the index range for this page
-    idx2 = pgn == num_pages ? length(persons) : pgn*I+1
-    idx1 = (pgn*I+1-I)
-    return html(:persons, :persons_index, layout=:employee, num_pages=num_pages, pgn=pgn, persons=persons[idx1:idx2], activePage=activePage)
+    return html(:persons, :persons_index, layout=:employee)
+  end
+
+  lawncare_clients = "SELECT * FROM persons 
+  INNER JOIN 
+    (SELECT DISTINCT(p.person_id)
+      FROM properties p 
+      INNER JOIN lawncareproperties lp ON lp.property_id=p.id) AS x ON persons.id=x.person_id
+    "
+
+
+  function clients_index()
+    clients = SearchLight.query(lawncare_clients)
+
+    persons=all(Person)
+
+
   end
 
   function edit()
     try
-      person = SearchLight.findone(Person, id=payload(:id))
+      person = SearchLight.findone(Person, id=payload(:person_id))
       if person == nothing 
         @warn "No Person with id=$(payload(:id))"
         # Throw error
       else
-        return html(:persons, :person_form, layout=:employee, person=person, activePage=activePage)
+        return html(:persons, :person_form, layout=:employee, person=person)
       end
     catch e
       @warn e
@@ -44,7 +55,7 @@ module PersonsController
   end
 
   function new()
-    return html(:persons, :person_form, layout=:employee, activePage=activePage)
+    return html(:persons, :person_form, layout=:employee)
   end
 
 
@@ -58,7 +69,7 @@ module PersonsController
                       email = payload(:email),
                       contact_preference = payload(:contact_preference)
                       )
-      save!(lp)
+      save!(person)
     catch e
       @warn e
     finally
@@ -68,7 +79,7 @@ module PersonsController
 
   function update()
     try
-      person = SearchLight.findone(Person, id=payload(:id))
+      person = SearchLight.findone(Person, id=payload(:person_id))
 
       person.first = payload(:first)
       person.last = payload(:last)
@@ -79,11 +90,11 @@ module PersonsController
 
       # TODO Check for errors or duplicates
                            
-      save!(property)
+      save!(person)
     catch e
       @warn e
     finally
-      redirect(:persons_index)
+      redirect(Sessions.get(Sessions.session(Router.params())), :persons_index)
     end
   end
 end

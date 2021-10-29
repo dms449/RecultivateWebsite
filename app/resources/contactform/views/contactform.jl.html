@@ -1,29 +1,15 @@
 
-<form action="$(Genie.Router.linkto(:contact_submit))" method="POST">
-  <div class="row mb-3">
-    <div class="col-6">
-      <label for="first">First</label>
-      <input type="text" placeholder="first name" class="form-control" name="first">
-    </div>
-    <div class="col-6">
-      <label for="last">Last</label>
-      <input type="text" placeholder="last name" class="form-control" name="last">
-    </div>
-  </div>
-  <div class="row mb-3">
-    <div class="col-4">
-      <label for="phone">Phone</label>
-      <input type="tel" placeholder="phone" class="form-control" name="phone">
-    </div>
-    <div class="col-8">
-      <label for="email">Email</label>
-      <input type="email" placeholder="email" class="form-control" name="email">
-    </div>
-  </div>
+<form action="$(Genie.Router.linkto(:contact_form_submit))" method="POST">
+  <% partial(joinpath(Genie.config.path_resources, "persons", "views", "person_form_data.jl.html"), person=nothing) %>
   <div class="row mb-3">
     <div class="col-12">
       <label for="msg">Message</label>
       <textarea class="form-control" name="msg"></textarea>
     </div>
+  </div>
+
+
+  <div class="modal-footer justify-content-center">
+    <button type="submit" class="btn w-40 my-btn py-2n btn-lg">Submit</button>
   </div>
 </form>

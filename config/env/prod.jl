@@ -5,7 +5,8 @@ const config = Settings(
   server_host                     = "0.0.0.0",
   log_level                       = Logging.Error,
   log_to_file                     = true,
-  server_handle_static_files      = true
+  server_handle_static_files      = true,
+  ssl_enabled                     = true
 )
 
 if config.server_handle_static_files

@@ -1,161 +1,32 @@
 
-<div class="row" >
+<div class="container">
 
-  
-
-  <!-- add new property -->
-  <!-- <a class="btn btn-primary mb-3" data-bs-toggle="collapse" href="#createTrip" role="button" aria-expanded="false" aria-controls="createTrip"> -->
-  <!--   Create -->
-  <!-- </a> -->
-  <!-- <div class="collapse" id="createTrip"> -->
-  <!-- <hr class="my-4"> -->
-  <div class="col-md-7">
-    <div class="row py-1 g-3 fs-3 justify-content-center">New Trip</div>
-    <form method="POST" action="$(Genie.Router.linkto(:create_lawncare_trip))" >
-      <div class="row py-1 g-3 justify-content-center">
-        <div class="col-md-2">
-          <input type="text" class="form-control-plaintext"> Trip Info</input>
-        </div>
-
-        <div class="col-md-3">
-          <label for="date" class="form-label">date</label>
-          <input type="date" class="form-control datepicker" id="date" name="date" placeholder="Select Date" value=$(string(td)) required>
-        </div>
-
-        <div class="col-md-3">
-          <label for="hours" class="form-label">hours</label>
-          <input type="float" class="form-control" id="hours" name="hours" value=""required>
-        </div>
-
-        <div class="col-md-3" required>
-          <label for="group" class="form-label">group</label>
-          <select class="form-select" onchange="selectedGroup(this.value)" id="group" name="group_id" required>
-          <!-- <select class="form-select" id="group" name="group_id" required> -->
-            <% for_each(groups) do g %>
-              <% if group != nothing %>
-              <% if g.id==group.id %>
-                <option value="$(g.id.value)" selected>$(g.name)</option>
-              <% else %>
-                <option value="$(g.id.value)">$(g.name)</option>
-              <%end%>
-              <%else%>
-                <option value="$(g.id.value)">$(g.name)</option>
-              <%end%>
-            <%end%>
-          </select>
-        </div>
-      </div>
-
-
-      <div class="row py-1 g-3 justify-content-center" id="contractorContainer">
-        <% for_each(contractors) do c %>
-        <div class="form-check form-check-inline col">
-          <input class="form-check-input" type="checkbox" data-groupid=$(c.group_id) id=i$(c.id) name=i$(c.id) value="">
-          <label class="form-check-label" for="$(c.id)">$(c.first)</label>
-        </div>
-        <%end%>
-      </div>
-
-
-      <div class="row justify-content-center pt-4 "><h5> Stops </h5></div>
-      <hr class="my-1">
-      <div class="container" id="eventsContainer">
-        <div class="row py-1 g-3">
-          <div class="col-md-2">name</div>
-          <div class="col-md-3">address</div>
-          <div class="col-md-2">hours</div>
-          <div class="col-md-2">cost</div>
-          <div class="col-md-2">notes</div>
-          <!-- <div class="col-1"><input type="text" class="form-control" name="notes" value=""></div> -->
-          <div class="col-1"></div>
-          <!-- <div><input type="hidden" class="form-control" name="lp_id" value=${id}></div> -->
-        </div>
-
-      </div>
-
-      <!-- <button class="btn btn-secondary px-5" type="button" id="addEventBtn">+</button> -->
-
-      <div class="row justify-content-center py-5"><button type="submit" class="btn btn-primary">submit</button></div>
-      <div><input type="hidden" class="form-control" id="property_ids" name="property_ids" value=""></div>
-    </form>
+  <!-- show trips -->
+  <div class="row justify-content-between">
+    <h3 class="col-2"> Lawncare Trips</h3>
+    <a class="btn btn-primary col-1" href="/lawncare-trips/create" role="button" aria-expanded="false" >
+    Add
+    </a>
   </div>
 
-  <div class="col-md-5">
-    <div class="row py-1 g-3 fs-3 justify-content-center">Lawncare Properties</div>
-    <div class="row py-1 g-3 align-content-center">
-      <div class"col-auto" >
-        <div class="form-check">
-          <label class="form-check-label" for="active_filter">active</label>
-          <input class="form-check-input" type="checkbox" id="active_filer" checked>
-        </div>
-      </div>
-      <div class"col-auto" >
-        <div class="form-check">
-          <label class="form-check-label" for="due_filter">due</label>
-          <input class="form-check-input" type="checkbox" id="due_filter" checked>
-        </div>
-      </div>
-
-      <div class"col-auto" >
-        <label class="form-label" for="filter" >filter</label>
-        <input class="form-control" type="text" id="filter" value="">
-      </div>
-
-    </div>
-    <table class="table" style="max-height: 500px;">
-      <thead class="fixed">
-        <tr>
-          <th scope="col">id</th>
-          <!-- <th scope="col">active</th> -->
-          <th scope="col">client</th>
-          <th scope="col">address</th>
-          <th scope="col">city</th>
-          <th scope="col"></th>
-        </tr>
-      </thead>
-      <tbody>
-      <% for_each(lawn_properties) do row %>
-        <tr>
-          <th scope="row">$(row.lawn_id)</th>
-          <!-- <td>$(row.active)</td> -->
-          <td><a href="/persons/$(row.person_id)/edit">$(row.first*" "*row.last)</a></td> <td><a href="/properties/$(row.property_id)/edit">$(row.address)</a></td>
-          <td>$(row.city)</td>
-          <!-- <td>$(row.weeks_between_visits)</td> -->
-          <!-- <td>$(row.cost)</td> -->
-          <!-- <td><a class="btn btn-secondary" id="lp$(row.lawn_id)" role="button">add</a></td> -->
-          <td><button class="btn btn-secondary" onclick="addEvent('$(row.lawn_id)', '$(row.first)', '$(row.last)', '$(row.address)', 0.0, '$(row.cost)')" type="button">add</button></td>
-          
-        </tr>
-      <% end %>
-
-      </tbody>
-    </table>
-      <!--   <% for_each(trips) do trip %> -->
-
-  </div>
-</div>
-
-
-
-
-      <!-- <div><input type="hidden" class="form-control" name="lawncare_property_id" value="$(property.lawn_id)"></div> -->
-
-    <!-- <% partial(joinpath(Genie.config.path_resources, "properties", "views", "property_form.jl.html"),person=nothing, property=nothing, persons=persons, context=@__MODULE__) %> -->
-
-
-  <!-- show properties -->
-
-<div class="row justify-content-center py-5">
-  <h3> Trips</h3>
   <hr class="my-4">
-  <table class="table">
+  <table class="table"
+      data-toggle="table"
+      data-height="800"
+      data-sortable="true"
+      data-pagination="true"
+      data-search="true"
+      data-classes="table table-hover"
+    >
     <thead>
       <tr>
-        <th scope="col">id</th>
-        <th scope="col">date</th>
-        <th scope="col">group</th>
-        <th scope="col">hours</th>
-        <th scope="col"></th>
+        <th data-field="id" data-sortable="true">id</th>
+        <th data-field="date" data-sortable="true">date</th>
+        <th data-field="group" data-sortable="true">group</th>
+        <th data-field="hours" data-sortable="true">hours</th>
+        <!-- <th data-field="stops">stops</th> -->
+        <th data-field="people">people</th>
+        <th ></th>
       </tr>
     </thead>
     <tbody>
@@ -165,7 +36,9 @@
         <td>$(trip.date)</td>
         <td>$(trip.group_id)</td>
         <td>$(trip.hours)</td>
-        <!-- <td><a class="btn btn-primary" href="/properties/$(row.property_id)/edit" role="button">Edit</a></td> -->
+        <!-- <td>$(length(stops))</td> -->
+        <td>$(length(time_records))</td>
+        <td><a class="btn btn-primary" href="/lawncare-trips/$(row.trip_id)/edit" role="button">Edit</a></td>
       </tr>
     <% end %>
 
@@ -173,4 +46,8 @@
   </table>
 </div>
 
+
 <script src="/js/lawncare_trips.js"></script>
+
+
+

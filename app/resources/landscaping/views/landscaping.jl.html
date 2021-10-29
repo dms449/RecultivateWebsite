@@ -4,7 +4,7 @@
     <div class="carousel-indicators">
       <!-- <% for (i,v) in enumerate(imgs)%> -->
       <button type="button" data-bs-target="#landscapingExamples" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 0"></button>
-      <% @foreach(1:length(imgs)-1) do i %>
+      <% for_each(1:length(imgs)-1) do i %>
         <button type="button" data-bs-target="#landscapingExamples" data-bs-slide-to="$i" aria-current="true" aria-label="Slide $i"></button>
       <% end %>
     </div>
@@ -17,7 +17,7 @@
 
       
       <!-- the rest of the images -->
-      <% @foreach(imgs[2:end]) do image %>
+      <% for_each(imgs[2:end]) do image %>
         <div class="carousel-item">
           <img src="$image" class="d-block w-100" alt="$image">
         </div>

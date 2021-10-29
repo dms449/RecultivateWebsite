@@ -8,17 +8,19 @@ export User
 Base.@kwdef mutable struct User <: AbstractModel
   ### FIELDS
   id::DbId = DbId()
+  person_id::Int = DbId()
   username::String = ""
   password::String = ""
-  account_type::Int = 0
-  person_id::Int = 0
+  imgpath::String = ""
 end
 
 Validation.validator(u::Type{User}) = ModelValidator([
   ValidationRule(:username, UsersValidator.not_empty),
   ValidationRule(:username, UsersValidator.unique),
   ValidationRule(:password, UsersValidator.not_empty)
-  # ValidationRule(:user_type,UsersValidator.valid_type)
+  # ValidationRule(:email,    UsersValidator.not_empty),
+  # ValidationRule(:email,    UsersValidator.unique),
+  # ValidationRule(:name,     UsersValidator.not_empty)
 ])
 
 function hash_password(password::String)

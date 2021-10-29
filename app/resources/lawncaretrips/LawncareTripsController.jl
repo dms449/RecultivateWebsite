@@ -11,7 +11,6 @@ module LawncareTripsController
   using Groups
   using DbTools
   using LawncareTrips
-  import GeneralUtils: activePage
 
   function index()
     # get lawncare properties
@@ -24,9 +23,27 @@ module LawncareTripsController
 
     # get mygroup. i.e. the group associated with this person
     mygroup=nothing
-
     
-    return html(:lawncaretrips, :lawncaretrips_index, layout=:employee, lawn_properties=lps, td=today(), groups=all(Group), contractors=c_df, group=mygroup, trips=all(LawncareTrip), activePage=activePage)
+    return html(:lawncaretrips, :lawncaretrips_index, layout=:employee, lawn_properties=lps, td=today(), groups=all(Group), contractors=c_df, group=mygroup, trips=all(LawncareTrip))
+  end
+
+  function edit()
+    try
+      lawcare_properties = collect(eachrow(SearchLight.query(lawn_events_query)))
+      c_df = collect(eachrow(SearchLight.query(contractors_query)))
+      trip = SearchLight.findone(LawncareTrip, id=payload(:lt_id))
+      stops = SearchLight.query("SELECT * FROM lawncareevents WHERE trip_id=$(payload(:id))")
+      time_records = SearchLight.query("SELECT * FROM timerecords WHERE type=1 AND project_id=$(payload(:id))")
+      return html(:lawncaretrips, :lawncare_trip_form, layout=:employee, trip=trip, stops=stops, time_records=time_records, groups=all(Group), contractors=c_df)
+    catch e
+      @warn e
+      redirect(Sessions.get(Sessions.session(Router.params()), :properties_index))
+    end
+  end
+
+  function new()
+    c_df = collect(eachrow(SearchLight.query(contractors_query)))
+    return html(:lawncaretrips, :lawncaretrip_form, layout=:employee, trip=nothing, stops=[], time_records=[], groups=all(Group), contractors=c_df)
   end
 
   function create()
@@ -75,6 +92,27 @@ module LawncareTripsController
       @warn e
     finally
       return redirect(:lawncare_trips_index)
+    end
+  end
+
+  function update()
+    try
+      trip = SearchLight.findone(LawncareTrip, id=payload(:lt_id))
+
+      # person.first = payload(:first)
+      # person.last = payload(:last)
+      # person.mi = payload(:mi)
+      # person.phone = payload(:phone)
+      # person.email = payload(:email)
+      # person.contact_preference = payload(:contact_preference)
+
+      # TODO Check for errors or duplicates
+                           
+      # save!(person)
+    catch e
+      @warn e
+    finally
+      redirect(:lawncare_trips_index)
     end
   end
 
