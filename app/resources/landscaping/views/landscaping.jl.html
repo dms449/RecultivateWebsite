@@ -1,115 +1,128 @@
-<div class="container">
 
-  <div id="landscapingExamples" class="carousel slide" data-bs-ride="carousel" style="max-height: 500px; overflow:hidden">
-    <div class="carousel-indicators">
-      <!-- <% for (i,v) in enumerate(imgs)%> -->
-      <button type="button" data-bs-target="#landscapingExamples" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 0"></button>
-      <% for_each(1:length(imgs)-1) do i %>
-        <button type="button" data-bs-target="#landscapingExamples" data-bs-slide-to="$i" aria-current="true" aria-label="Slide $i"></button>
-      <% end %>
-    </div>
+<!-- <div class="d-flex" style="max-height: 500px; overflow: hidden;" > -->
+<!-- <span> -->
+  <!-- <div style="position:relative;max-height: 500px; z-index:-1;overflow: hidden;"> -->
 
-    <div class="carousel-inner">
-      <!-- first image -->
-      <div class="carousel-item active">
-        <img src="$(imgs[1])" class="d-block w-100" alt="$(imgs[1])">
-      </div>
-
-      
-      <!-- the rest of the images -->
-      <% for_each(imgs[2:end]) do image %>
-        <div class="carousel-item">
-          <img src="$image" class="d-block w-100" alt="$image">
-        </div>
-      <% end %>
-
-    </div>
-
-    <button class="carousel-control-prev" type="button" data-bs-target="#landscapingExamples"  data-bs-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Previous</span>
-    </button>
-    <button class="carousel-control-next" type="button" data-bs-target="#landscapingExamples"  data-bs-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
-      <span class="visually-hidden">Next</span>
-    </button>
+<div class="img-container mb-5" style="height:600px; width:100%; overflow:hidden;">
+  <div style="position:absolute;bottom:0px;left:0px;z-index:-1;" >
+    <img src="/img/landscaping/wide/287A8700.jpg" alt="/img/landscaping/wide/287A8700.jpg" class="img-fluid">
   </div>
-
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5"> <div class="col-lg-10 col-md-12 mx-auto">
-        <h1 class="fw-light">Our Portfolio</h1>
-        <p class="lead text-muted">We have a growing portfolio of small landscaping projects and are always looking to add more. If you have a project in mind and would like a quote please contact us. In the meantime, enjoy browsing through our portfolio. </p>
-        <p>
-        <a href="/landscaping/portfolio" class="btn btn-primary my-2">View Full Portfolio &#8594;</a>
-        </p>
-      </div>
+  <div class="img-overlay" style="background-color: transparent;"> 
+    <div class="caption"><!-- <span> -->
+      <h1 class="display-5 fw-bold special-header"> The Landscape should match the Lifestyle</h1>
     </div>
-  </section>
+    <!-- </span> -->
+  </div>
+</div>
 
-  <section class="py-5 text-center container">
-    <div class="row py-lg-5">
-      <div class="col-lg-6 col-md-8 mx-auto">
-        <img src="/img/dan_mowing_1.jpg" alt="Dan" class="rounded d-block" style="max-height:1000px;z-index:-1;" >
+<div class="b-example-divider"></div>
+
+<!-- <div class="container"> -->
+<!--   <section class="py-5 text-center container"> -->
+<!--     <div class="row py-lg-5"> <div class="col-lg-10 col-md-12 mx-auto"> -->
+<!--         <h1 class="fw-light">Our Portfolio</h1> -->
+<!--         <p class="lead text-muted">We have a growing portfolio of small landscaping projects and are always looking to add more. If you have a project in mind and would like a quote please contact us. In the meantime, enjoy browsing through our portfolio. </p> -->
+<!--         <p> -->
+<!--         <a href="/landscaping/portfolio" class="btn btn-primary my-2">View Full Portfolio &#8594;</a> -->
+<!--         </p> -->
+<!--       </div> -->
+<!--     </div> -->
+<!--   </section> --> <!-- </div> -->
+
+<div class="container-fluid py-3">
+  <div class="row flex-lg-row align-items-center justify-content-evenly g-5 py-5">
+
+    <div class="col-10 col-sm-8 col-lg-4 text-center">
+      <h1 class="fw-light ">Landscaping</h1>
+      <p class="lead text-muted mb-5"> Maintenance &#8226 Design &#8226 Installation</p>
+
+      <div class="m-4">
+        <p class="lead text-left" style="text-align:left;">We can help design and install your new landscape or garden. Whether decorative plants, gardens, or both, we can help.</p>
+        <p class="lead" style="text-align:left;">We also provide landscape maintenance or cleanup, as long as it isn't trees. </p>
       </div>
 
-      <div class="col-lg-6 col-md-4 position-relative">
-        <div class="position-absolute top-50 start-0 p-5 translate-middle-y " style="background-color: #dcd1b9; width: 600px;">
-          <h1 class="fw-light">Services We Provide</h1>
-          <ul class="list-group list-group-flush">
-            <li class="list-group-item" style="background-color: #dcd1b9;"></li>
-            <li class="list-group-item" style="background-color: #dcd1b9;">Landscape design</li>
-            <li class="list-group-item" style="background-color: #dcd1b9;">Landscape Installation</li>
-            <li class="list-group-item" style="background-color: #dcd1b9;">Flagstone Hardscapes</li>
-            <li class="list-group-item" style="background-color: #dcd1b9;">Brush Clearing and Weeding</li>
-            <li class="list-group-item" style="background-color: #dcd1b9;">Shrub Trimming and Pruning</li>
-          </ul>
+
+      <!-- <a type="button" class="btn btn-primary btn-lg px-4 me-md-2" data-bs-toggle="modal" data-bs-target="#contactModal" href="#">Let's Get Started</a> -->
+      <button class="btn btn-primary btn-lg px-4 py-2" type="button" data-bs-toggle="modal" data-bs-target="#contactModal">Let's Get Started</button>
+    </div>
+
+    <div class="col-12 col-sm-10 col-lg-7 text-center" style="overflow:hidden; height:700px; ">
+      <div style="position:relative;top:0;right:0;width:100%;height:100%;">
+
+        <div id="landscapingSlide" class="carousel slide" data-bs-ride="carousel">
+          <% partial("app/resources/carosel.jl.html", imgs=landscapingImgs(), my_target="#landscapingSlide", titles=[], descriptions=[], show_indicators=true) %>
         </div>
       </div>
     </div>
-  </section>
 
+  </div>
+</div>
+
+
+<div class="container-fluid" style="background-color:#dcd1b9;">
+  <div class="row flex-lg-row align-items-center justify-content-evenly g-5 py-5">
+
+    <div class="col-12 col-sm-10 col-lg-7 text-center" style="overflow:hidden; height:700px; max-height:700px;">
+      <div style="position:relative;top:0;right:0;width:100%;height:100%;">
+
+        <div id="masonrySlide" class="carousel slide" data-bs-ride="carousel">
+          <% partial("app/resources/carosel.jl.html", imgs=masonryImgs(), my_target="#masonrySlide", titles=[], descriptions=[], show_indicators=true) %>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-10 col-sm-8 col-lg-4 text-center">
+      <h1 class="fw-light">Masonry</h1>
+      <p class="lead text-muted mb-5"> Walkways &#8226 Patios &#8226 Borders</p>
+      <div class="m-4">
+        <ul style="list-style-type:disc; text-align: left;">
+          <li class="lead">Materials typically cost between \$2 and \$6 per square foot </li>
+          <li class="lead">Labor is \$10 per square foot </li>
+        </ul>
+      </div>
+      <button class="btn btn-primary btn-lg px-4 py-2" type="button" data-bs-toggle="modal" data-bs-target="#contactModal">Let's Get Started</button>
+      <!-- <div class="d-grid gap-2 d-md-flex justify-content-md-start"> -->
+        <!-- <a type="button" class="btn btn-outline-secondary btn-lg px-4" href="/landscaping/portfolio">portfolio</a> -->
+      <!-- </div> -->
+    </div>
+  </div>
+</div>
+
+
+<div class="container-fluid">
+  <div class="row flex-lg-row align-items-center justify-content-evenly g-5 py-5">
+    <div class="col-10 col-sm-8 col-lg-5 text-center">
+      <h1 class="fw-light">Garden Bed Preparation</h1>
+        <p class="lead text-muted mb-5" >Want a garden but don’t have the time to get it started? We’ll do the groundwork.</p>
+      <div class="m-4">
+        <ul style="list-style-type:disc; text-align: left;">
+          <li class="lead">\$2.75 per square foot including labor and materials removing sod, tilling in compost and wood chips, layering on cardboard and more wood chips!</li>
+          <li class="lead">This kind of garden bed can be planted in immediately, but is best if it sits for a season. This makes it just perfect for prepping your garden for spring!</li>
+          <li class="lead">Borders, specialized fertilizer, and other customizations are welcome at an additional cost.</li>
+        </ul>
+      </div>
+      <button class="btn btn-primary btn-lg px-4 py-2" type="button" data-bs-toggle="modal" data-bs-target="#contactModal">Let's Get Started</button>
+    </div>
+
+    <div class="col-10 col-sm-8 col-lg-6 text-center" style="overflow:hidden; height:700px">
+      <div style="position:relative;top:0;left:0;width:100%;height:100%;">
+        <img src="/img/landscaping/garden/287A8627.jpg" class="caption" style="height:700px;width:auto;left:50%;top:50%;position:absolute;transform:translate(-50%,-50%);" alt="image" loading="lazy">
+        <!-- </div> -->
+      </div>
+    </div>
+  </div>
 </div>
 
 
 
-<!--<div class="modal fade" id="viewModal" tabindex="-1" >-->
-<!--  <div class="modal-dialog">-->
-<!--    <!-1-"$(Genie.router.linkto(:contactPage()))"-1->-->
-<!--    <!-1- Modal content-1->-->
-<!--    <div class="modal-content">-->
-<!--      <% partial("app/resources/contactform/views/portfoliomodal.jl.html", context = @__MODULE__) %>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
+<!-- <div class="container-fluid" style="background-color:#B09259;"> -->
+<!--   <div class="row flex-lg-row align-items-center justify-content-evenly g-5 py-5"> -->
+<!--     <div class="col-10 col-sm-8 col-lg-6 text-center"> -->
+<!--       <h1 class="fw-light mb-5">Garden Bed Prep</h1> -->
+<!--       <p class="lead text-muted">Want a garden but don’t have the time to get it started? -->
+<!-- We’ll do the groundwork.</p> -->
 
-  <!-- <h2>Lawncare Pricing</h2> -->
-  <!-- <table class="table "> -->
-  <!--   <thead> -->
-  <!--     <tr class="table_row"> -->
-  <!--       <th>Dos</th> -->
-  <!--       <th>Don'ts</th> -->
-  <!--     </tr> -->
-  <!--   </thead> -->
-  <!--   <tbody> -->
-  <!--     <tr> -->
-  <!--       <td class="table_row"><span>Brush clearing and weeding </span></td> -->
-  <!--       <td class="table_row"><span>✔</span></td> -->
-  <!--     </tr> -->
-  <!--     <tr> -->
-  <!--       <td class="table_row"><span>Trimming and runing</span></td> -->
-  <!--       <td class="table_row"><span>✔</span></td> -->
-  <!--     </tr> -->
-  <!--     <tr> -->
-  <!--       <td class="table_row"><span>Setting plants</span></td> -->
-  <!--       <td class="table_row"><span>✔</span></td> -->
-  <!--     </tr> -->
-  <!--     <tr> -->
-  <!--       <td class="table_row"><span>Laying flagstone hardscapes</span></td> -->
-  <!--       <td class="table_row"><span>✔</span></td> -->
-  <!--     </tr> -->
-  <!--     <tr><td class="table_row text-muted"><span>Lawncare chemical treatments</span></td><td></td></tr> -->
-  <!--   </tbody> -->
-  <!-- </table> -->
+
 
 
   

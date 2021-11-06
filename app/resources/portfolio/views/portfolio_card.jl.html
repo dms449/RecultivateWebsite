@@ -1,7 +1,11 @@
 <div class="modal fade" id="portfolioCarosel$(project.id)" tabindex="-1">
   <div class="modal-dialog modal-xl">
     <div class="modal-content">
-      <% partial("app/resources/portfolio/views/portfolio_carosel.jl.html", imgs=project.imgs, id=project.id, context = @__MODULE__) %>
+      <div class="container gx-0" >
+        <div id="$(project.id)" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+          <% partial("app/resources/carosel.jl.html", imgs=project.imgs, my_target=$(project.id)) %>
+        </div>
+      </div>
     </div>
   </div>
 </div>

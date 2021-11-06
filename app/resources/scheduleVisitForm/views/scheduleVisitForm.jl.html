@@ -1,15 +1,9 @@
 <form action="$(Genie.Router.linkto(:schedule_visit_submit))" method="POST">
 
-  <div class="row mb-3">
-    <div class="col-6">
-      <label for="first">First</label>
-      <input type="text" placeholder="first name" class="form-control" name="first" >
-    </div>
-    <div class="col-6">
-      <label for="last">Last</label>
-      <input type="text" placeholder="last name" class="form-control" name="last">
-    </div>
-  </div>
+  <% partial(joinpath(Genie.config.path_resources, "persons", "views", "person_form_data.jl.html"), person=nothing, context=@__MODULE__) %>
+
+
+
   <div class="row mb-3">
     <div class="col-7">
       <label for="street">Street address 1</label>
@@ -29,13 +23,13 @@
     </div>
     <div class="col-1">
       <label for="state">State</label>
-      <input type="text" readonly class="form-control-plaintext" value="AL">
+      <input type="text" name="state" readonly class="form-control-plaintext" value="AL" required>
     </div>
   </div>
   <div class="row mb-2">
     <div class="col-3">
-      <label for="date">Date</label>
-      <input type="" placeholder="date" class="form-control" name="date">
+      <label for="date">Requested Date</label>
+      <input type="date" id="date" placeholder="date" class="form-control" name="date" required>
     </div>
     <div class="col-9">
       <label for="reason-group">Reason for visit</label>

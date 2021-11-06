@@ -16,13 +16,13 @@ using LawncareTripsController
 using PropertiesController
 using PersonsController
 using MessagesController
-import GeneralUtils: isActivePage
+import GeneralUtils: isActivePage, @activePage
 current_user() = findone(Users.User, id = get_authentication())
+
 
 # using Genie.Renderer.Html: html 
 
 Genie.Sessions.init()
-
 
 route("/", HomeController.homePage, named=:home_page)
 route("/landscaping", LandscapingController.landscapingPage, named=:landscaping_page)

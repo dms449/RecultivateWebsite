@@ -4,6 +4,7 @@ bin/*
 cache/*
 config/secrets.jl
 config/service_account.json
+config/oauth_credentials.json
 docs/build
 log/*
 data/

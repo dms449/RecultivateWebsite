@@ -1,20 +1,14 @@
 module PortfolioController
+  using GeneralUtils: Img, getImgsFromDir
   using Genie.Sessions, Genie.Router, Genie.Requests
   using Genie.Renderer.Html
-
-  struct PortfolioImg
-    path::String
-    title::String
-    desc::String
-  end
-
 
   struct PortfolioProject
     id::String
     title::String
     cost::String
     desc::String
-    imgs::Vector{PortfolioImg}
+    imgs::Vector{Img}
   end
   
 
@@ -24,28 +18,30 @@ module PortfolioController
     project_dirs = filter(isdir, readdir("./public/img/landscaping/portfolio", sort=false, join=true))
 
     projects = []
-    for (i,p) in enumerate(project_dirs)
-      info = split(basename(p), '_')
-      title = info[1]
-      cost = length(info) >= 2 ? info[2] : ""
-      imgs = filter(x->isfile(x) && !endswith(x, "txt"), readdir(p, sort=false, join=true))
+    # for (i,p) in enumerate(project_dirs)
+    #   info = split(basename(p), '_')
+    #   title = info[1]
+    #   cost = length(info) >= 2 ? info[2] : ""
 
-      # replace the "./public" part of the path with "/"
-      imgs = map(x->joinpath("/", splitpath(x)[3:end]...), imgs)
+    #   imgs = getImgsFromDir(p)
+    #   # imgs = filter(x->isfile(x) && !endswith(x, "txt"), readdir(p, sort=false, join=true))
 
-      new_imgs = [PortfolioImg(img, split(basename(img), "-")[end]=="a" ? "Before" : "After", "$j / $(length(imgs))") for (j,img) in enumerate(imgs)]
+    #   # replace the "./public" part of the path with "/"
+    #   # imgs = map(x->joinpath("/", splitpath(x)[3:end]...), imgs)
 
-      # load description if it exists
-      desc = ""
-      try
-        desc = isfile(joinpath(p, "desc.txt")) ? read(joinpath(p,"desc.txt"), String) : ""
-      catch
-        desc = ""
-      end
+    #   new_imgs = [Img(img, split(basename(img), "-")[end]=="a" ? "Before" : "After", "$j / $(length(imgs))") for (j,img) in enumerate(imgs)]
+
+    #   # load description if it exists
+    #   desc = ""
+    #   try
+    #     desc = isfile(joinpath(p, "desc.txt")) ? read(joinpath(p,"desc.txt"), String) : ""
+    #   catch
+    #     desc = ""
+    #   end
       
 
-      push!(projects, PortfolioProject(repr(i), title, cost, desc, new_imgs))
-    end
+    #   push!(projects, PortfolioProject(repr(i), title, cost, desc, new_imgs))
+    # end
 
     # imgs = [joinpath("/img/landscaping/carosel",basename(p)) for p in imgs]
 

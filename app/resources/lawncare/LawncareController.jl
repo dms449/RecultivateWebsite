@@ -1,7 +1,10 @@
 module LawncareController
   using Genie.Renderer.Html
-  using Genie.Sessions, Genie.Requests, Genie.Router
-  include("../../helpers/google_maps.jl")
+  using Genie.Sessions, Genie.Requests, Genie.Router, Genie.Flash
+  using Maps
+  using JSON
+  using ViewHelper
+  using HTTP
   include("../../helpers/lawncare_equation.jl")
 
   #TODO limit number of requests for estimates for each device  per day
@@ -12,6 +15,7 @@ module LawncareController
   #TODO 'schedule a visit' button
   #TODO route should include the fields for the form
 
+  # a price item (or discount)
   struct Item
     name::String
     desc::String
@@ -24,12 +28,10 @@ module LawncareController
     #set!(session(Genie.Requests.payload()), :current_page, get_route(:lawncare_page))
     street=payload(:street, "")
     city=payload(:city, "madison")
-    #state=payload(:state, "")
+    state=payload(:state, "AL")
     acres=payload(:acres, "0.25")
     repeat=payload(:repeat, "1")
 
-
-    est = ""
     warnings = [] 
     items = []
 
@@ -38,6 +40,7 @@ module LawncareController
     try
       acre_num = parse(Float32, acres)
     catch e
+      # flash( "Invalid `acres` entry.")
       push!(warnings, "Invalid `acres` entry.")
     end
 
@@ -48,17 +51,60 @@ module LawncareController
         push!(items, Item("Discount", "scheduled for $repeat_num  month", -5.0))
       end
     catch e
+      # flash()
       push!(warnings, "Invalid `repeat` entry. (This shouldn't be possible)")
     end
 
     # if no errors have occured yet
-    if (isempty(warnings))
-      est, warning = getEstimate(acre_num, Address(street, city, "AL"))
+    if (isempty(warnings) && street!="")
+      est = 0.0
+
+      # the address
+      addr1 = Address(street, city, state)
+
+      # query googlemaps distance matrix api
+      response_data = JSON.parse(HTTP.payload(queryDistance(addr1), String))
+
+      # verify response is ok (did we successfully make a query?)
+      if (response_data["status"] == "OK")
+
+        # get the address that google used as the dstination
+        # NOTE: this may have been auto corrected by google to a significantly different address
+        addr_temp = split(response_data["destination_addresses"][1], ",")
+        street = addr_temp[1]
+        city = addr_temp[2]
+        state = split(addr_temp[3], " ")[1]
+
+        # if its greater than 32 km ≈ 20 mi then it is too far
+        if response_data["rows"][1]["elements"][1]["distance"]["value"] < 32000
+
+          # get the first item (Will I ever need anything other than this??)
+          item = response_data["rows"][1]["elements"][1]
+
+          # is this element ok? (was it able to locate and calculate for the provided address)
+          if (item["status"] == "OK")
+            mins = floor(item["duration"]["value"]/60)
+            est = cost(acre_num, mins)
+          else 
+            @warn item["status"]
+          end
+
+        else
+          push!(warnings, "This address appears to be beyond our current service area. sorry.")
+        end
+      else 
+        @warn response_data["error_message"]
+      end
+
       push!(items, Item("Basic Lawncare", "a description", est))
-      if warning != "" push!(warnings, warning) end
     end
 
-    html(:lawncare, :lawncare, street=street, city=city, acres=acres, items=items, warnings=warnings)
+
+    if sum([each.value for each in items]) > 100
+      push!(warnings, "Does this seem too high? These estimates are based on an algorithm and may be less accurate as the distance and size of the property increase. Feel free to contact us for clarification.")
+    end
+
+    html(:lawncare, :lawncare, street=street, city=city, acres=acres, items=items, warnings=warnings, context=@__MODULE__)
   end
 
 
@@ -66,8 +112,7 @@ module LawncareController
   Returns the String dollar value and any error message
   """
   function getEstimate(acres::Float32, address::Address)
-    # parse the JSON body of the HTTP response
-    response_data = JSON.parse(String(queryDistance(address).body))
+    response_data = JSON.parse(HTTP.payload(queryDistance(address), String))
 
     # verify response is ok (did we successfully make a query?)
     if (response_data["status"] == "OK")

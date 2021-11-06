@@ -1,6 +1,6 @@
 
 <form action="$(Genie.Router.linkto(:contact_form_submit))" method="POST">
-  <% partial(joinpath(Genie.config.path_resources, "persons", "views", "person_form_data.jl.html"), person=nothing) %>
+  <% partial(joinpath(Genie.config.path_resources, "persons", "views", "person_form_data.jl.html"), person=nothing, context=@__MODULE__) %>
   <div class="row mb-3">
     <div class="col-12">
       <label for="msg">Message</label>

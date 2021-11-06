@@ -11,8 +11,14 @@
     </div>
   </section>
 
-  <!-- <% for_each(warnings) do warn %> -->
-  <!--   <div class="text-danger">$warn</div> -->
+  <span >
+  <% for_each(warnings) do warn %>
+    <div class="alert alert-danger">$warn</div>
+  <% end %>
+  </span>
+  <!-- <% if flash_has_message() %> -->
+
+  <!--   <div class="alert alert-danger" role="alert">$(output_flash())</div> -->
   <!-- <% end %> -->
 
   <div class=" container"> 
@@ -21,8 +27,9 @@
 
       <div class="col-md-5 col-lg-4 order-md-last">
         <h4 class="d-flex justify-content-between align-items-center mb-3">
-          <span class="text-primary">Your Lawncare Estimate</span>
-          <!-- <span class="badge bg-primary rounded-pill">3</span> -->
+          <span><h3>Your Lawncare Estimate</h3></span>
+          <!-- <span><h3>Your Lawncare Estimate</h3></s3pan> -->
+          <!-- <span class="badge bg-primary rounded-pill"></span> -->
         </h4>
         <ul class="list-group mb-3">
           <% for_each(items) do item %>
@@ -43,7 +50,7 @@
           <!-- </li> -->
           <li class="list-group-item d-flex justify-content-between">
             <span><strong>Total (USD)</strong></span>
-            <strong>$("\$")$(sum([each.value for each in items]))</strong>
+            <strong>\$ $(sum([each.value for each in items]))</strong>
           </li>
         </ul>
 
@@ -56,7 +63,7 @@
       </div>
       <div class="col-md-7 col-lg-8">
         <h4 class="mb-3 ">Calculate Your Lawncare Estimate</h4>
-        <form class="needs-validation" action="$(Genie.Router.linkto(:lawncare_page))" method="GET" novalidate>
+        <form action="$(Genie.Router.linkto(:lawncare_page))" method="GET">
           <div class="row g-3">
 
             <div class="col-12">
@@ -96,9 +103,9 @@
 
             <div class="col-md-2">
               <label for="acres" class="form-label">Lot Size</label>
-              <input type="text" class="form-control" name="acres" placeholder="" value="$acres" required>
+              <input type="number" min="0.1" max="10.0" step="0.1" class="form-control" id="acres" name="acres" placeholder="" value="$acres" required>
               <div class="invalid-feedback">
-                Approximate acreage is required.
+                Approximate acreage is required. Must be between 0.1 - 10.
               </div>
             </div>
             <div class="col-md-1">
@@ -127,7 +134,7 @@
 
             <div class="col-md-7">
               <label for="" class="form-label"></label>
-              <p class="text-muted"><small>(save $("\$5.00 per visit when you schedule at least twice / month"))</small></p>
+              <p class="text-muted"><small>(save \$5.00 per visit when you schedule at least twice / month")</small></p>
             </div>
           </div>
           <div class="row justify-content-center">
@@ -135,8 +142,7 @@
           </div>
         </form>
       </div>
-    </div>
-    <hr class="my-4">
+    </div> <hr class="my-4">
 
 
     <!-- <div class="row justify-content-center"> -->

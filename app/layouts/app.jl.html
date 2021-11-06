@@ -23,10 +23,7 @@
 </head>
 <body>
 
-<div class="modal fade" id="contactModal" tabindex="-1" >
-  <div class="modal-dialog">
-    <!--"$(Genie.Router.linkto(:contactPage()))"-->
-    <!-- Modal content-->
+<div class="modal fade" id="contactModal" tabindex="-1" > <div class="modal-dialog"> <!--"$(Genie.Router.linkto(:contactPage()))"--> <!-- Modal content-->
     <div class="modal-content">
 
       <div class="modal-header">
@@ -60,7 +57,7 @@
       <li class="nav-item"><a class="px-3 nav-link $(Main.UserApp.isActivePage(:home_page))" href="/">Home</a></li>
       <li class="nav-item"><a class="px-3 nav-link $(Main.UserApp.isActivePage(:landscaping_page))" href="/landscaping">Landscaping</a></li>
       <li class="nav-item"><a class="px-3 nav-link $(Main.UserApp.isActivePage(:lawncare_page))" href="/lawncare">Lawncare</a></li>
-      <li class="nav-item"><a class="px-3 nav-link $(Main.UserApp.isActivePage(:about_page))" href="/about">About</a></li>
+      <!-- <li class="nav-item"><a class="px-3 nav-link $(Main.UserApp.isActivePage(:about_page))" href="/about">About</a></li> -->
       <!-- <li class="nav-item"><a class="px-3 nav-link " href="/">Home</a></li> -->
       <!-- <li class="nav-item"><a class="px-3 nav-link " href="/landscaping">Landscaping</a></li> -->
       <!-- <li class="nav-item"><a class="px-3 nav-link " href="/lawncare">Lawncare</a></li> -->
@@ -70,15 +67,16 @@
     <!-- -->
     <button class="btn my-btn px-4 py-2" type="button" data-bs-toggle="modal" data-bs-target="#contactModal">Contact Us</button>
   </nav>
-
-
-
-
-  <script src="/js/application.js"></script>
-    <%
-      @yield
-    %>
 </div>
+
+
+
+
+<script src="/js/application.js"></script>
+<!-- <span>$(output_flash())</span> -->
+<%
+  @yield
+%>
 
 
 <footer id="sticky-footer" class="footer">
