@@ -100,7 +100,7 @@ module LawncareController
     end
 
 
-    if sum([each.value for each in items]) > 100
+    if !isempty(items) && sum([each.value for each in items]) > 100
       push!(warnings, "Does this seem too high? These estimates are based on an algorithm and may be less accurate as the distance and size of the property increase. Feel free to contact us for clarification.")
     end
 

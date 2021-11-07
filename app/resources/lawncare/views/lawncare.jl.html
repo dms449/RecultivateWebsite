@@ -50,7 +50,7 @@
           <!-- </li> -->
           <li class="list-group-item d-flex justify-content-between">
             <span><strong>Total (USD)</strong></span>
-            <strong>\$ $(sum([each.value for each in items]))</strong>
+            <strong>\$ $(isempty(items) ? 0 : sum([each.value for each in items]))</strong>
           </li>
         </ul>
 
@@ -167,10 +167,7 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <% partial("app/resources/scheduleVisitForm/views/scheduleVisitForm.jl.html", context = @__MODULE__) %>
-      </div>
-      <div class="modal-footer justify-content-center">
-        <button type="button" class="btn w-40 my-btn py-2n">Submit</button>
+        <% partial("app/resources/scheduleVisitForm/views/scheduleVisitForm.jl.html", reason="lawncare", context = @__MODULE__) %>
       </div>
     </div>
   </div>

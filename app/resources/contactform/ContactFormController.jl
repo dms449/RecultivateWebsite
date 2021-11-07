@@ -32,7 +32,7 @@ module ContactFormController
 
       # TODO send email
       subject = "Contact Request From: $first $last"
-      msg_body =  "$first $last\n$(msg.contact_preference == String(:email) ? email : format_phone_string(phone)) \n $(message)"
+      msg_body =  "$first $last\n$(contact_preference == String(:email) ? email : format_phone_string(phone)) \n $(message)"
       @info "Message: \n'SUBJECT: $subject'"
       r = sendEmail(buildEmail("lawncare@recultivate.net", msg_body, subject=subject))
 
