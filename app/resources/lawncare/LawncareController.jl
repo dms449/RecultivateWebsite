@@ -85,6 +85,7 @@ module LawncareController
           if (item["status"] == "OK")
             mins = floor(item["duration"]["value"]/60)
             est = cost(acre_num, mins)
+            @info "mins=$mins acres=$acre_num est=$est"
           else 
             @warn item["status"]
           end
