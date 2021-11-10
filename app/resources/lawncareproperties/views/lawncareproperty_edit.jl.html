@@ -1,0 +1,10 @@
+<form class="row py-1 g-3" method="POST" action="$(Genie.Router.linkto(:update_lawncare_property))" >
+
+    <% partial(joinpath(Genie.config.path_resources, "lawncareproperties", "views", "lawncareproperty_form.jl.html"), lp=lp, property=property, properties=properties, groups=groups, payment_methods=payment_methods, context=@__MODULE__) %>
+
+  <div class="row mb-2">
+    <div class="col"><button type="submit" class="btn btn-primary">Update</button></div>
+  </div>
+  <div><input type="hidden" class="form-control" name="id" value="$(lp.id)"></div>
+
+</form>

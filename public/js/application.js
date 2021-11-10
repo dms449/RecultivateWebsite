@@ -1,2 +1,2 @@
 //document.getElementById("demo").innerHTML = "Hello JavaScript";
-$('a[href="' + this.location.pathname + '"]').parents('li,ul').addClass('active');
+//$('a[href="' + this.location.pathname + '"]').parents('li,ul').addClass('active');

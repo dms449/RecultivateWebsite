@@ -1,0 +1,53 @@
+
+<div class="container">
+
+  <!-- show trips -->
+  <div class="row justify-content-between">
+    <h3 class="col-2"> Lawncare Trips</h3>
+    <a class="btn btn-primary col-1" href="/lawncare-trips/create" role="button" aria-expanded="false" >
+    Add
+    </a>
+  </div>
+
+  <hr class="my-4">
+  <table class="table"
+      data-toggle="table"
+      data-height="800"
+      data-sortable="true"
+      data-pagination="true"
+      data-search="true"
+      data-classes="table table-hover"
+    >
+    <thead>
+      <tr>
+        <th data-field="id" data-sortable="true">id</th>
+        <th data-field="date" data-sortable="true">date</th>
+        <th data-field="group" data-sortable="true">group</th>
+        <th data-field="hours" data-sortable="true">hours</th>
+        <!-- <th data-field="stops">stops</th> -->
+        <th data-field="people">people</th>
+        <th ></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% for_each(trips) do trip %>
+      <tr>
+        <th scope="row">$(trip.id.value)</th>
+        <td>$(trip.date)</td>
+        <td>$(trip.group_id)</td>
+        <td>$(trip.hours)</td>
+        <!-- <td>$(length(stops))</td> -->
+        <td>$(length(time_records))</td>
+        <td><a class="btn btn-primary" href="/lawncare-trips/$(row.trip_id)/edit" role="button">Edit</a></td>
+      </tr>
+    <% end %>
+
+    </tbody>
+  </table>
+</div>
+
+
+<script src="/js/lawncare_trips.js"></script>
+
+
+

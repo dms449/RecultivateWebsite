@@ -1,0 +1,46 @@
+
+<form method="POST" action="$(Genie.Router.linkto(:create_lawncare_event))" >
+  <div class="row py-1 g-3">
+    <!-- <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3"> -->
+    <div class="col-3"><input type="text" class="form-control" value="$(property.address)" readonly></div>
+    <div class="col-2"><input type="date" class="form-control datepicker" name="date" placeholder="Select Date" value=$(string(td))></div>
+    <div class="col-1"><input type="float" class="form-control" name="hours" value="$(property.last_time_spent)"></div>
+    <div class="col-1"><input type="float" class="form-control" name="cost" value="$(property.cost)"></div>
+    <div class="col-1"><input type="text" class="form-control" value="$(property.lawn_id)" readonly>
+      
+      <!-- <select class="form-select" name="trip_id" required> -->
+      <!--   <% for_each(trips) do trip %> -->
+      <!--     <!-1- <% if group.id==property.group_id %> -1-> -->
+      <!--     <!-1-   <option value="$(group.id)" selected>$(group.name)</option> -1-> -->
+      <!--     <!-1- <% else %> -1-> -->
+      <!--     <option value="$(trip.id)">$(trip.date)</option> -->
+      <!--     <!-1- <%end%> -1-> -->
+      <!--   <%end%> -->
+      <!--   <option><a href="/lawncaretrips/new">Create New</a></option> -->
+      <!-- </select> -->
+    </div>
+
+
+    <div class="col-1">
+      <a class="btn btn-primary" data-bs-toggle="collapse" href="#extra" role="button" aria-expanded="false" aria-controls="extra">+</a>
+    </div>
+    <!-- <div class="col-1"><input type="int" class="form-control" name="group_id" value="$(property.group_id)"></div> -->
+    <div class="col-2"><button type="submit" class="btn btn-primary">submit</button></div>
+  </div>
+
+  <!-- <div class ="row py-1 g-3 collapse" id="extra"> -->
+    <!-- <% if contractors != nothing %> -->
+    <!-- <% for_each(contractors) do c %> -->
+    <!-- <div class="form-check form-check-inline col-1"> -->
+    <!--   <% if c.group_id==property.group_id %> -->
+    <!--   <input class="form-check-input" type="checkbox" id=i$(c.id) name=i$(c.id) value="" checked> -->
+    <!--   <%else%> -->
+    <!--   <input class="form-check-input" type="checkbox" id=i$(c.id) name=i$(c.id) value=""> -->
+    <!--   <%end%> -->
+    <!--   <label class="form-check-label" for="$(c.id)">$(c.first)</label> -->
+    <!-- </div> -->
+    <!-- <%end%> -->
+    <!-- <%end%> -->
+  <!-- </div> -->
+  <div><input type="hidden" class="form-control" name="lawncare_property_id" value="$(property.lawn_id)"></div>
+</form>

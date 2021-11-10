@@ -1,10 +1,14 @@
 # App
 build/*
+bin/*
 cache/*
 config/secrets.jl
+config/service_account.json
+config/oauth_credentials.json
 docs/build
 log/*
-session/*
+data/
+sessions/*
 !*.gitkeep
 Manifest.toml
 
@@ -40,3 +44,9 @@ Thumbs.db
 
 # NPM packages folder.
 node_modules/
+
+# api key file
+recultivate_google_api_key.txt
+
+# images
+public/img/*

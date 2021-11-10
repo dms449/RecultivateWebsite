@@ -1,0 +1,60 @@
+<form action="$(property!=nothing ? Genie.Router.linkto(:update_property, id=property.id) : Genie.Router.linkto(:create_property))" method="POST" class="row g-3 align-items-center">
+
+  <!-- PERSON -->
+  <div class="row g-3 m-2">
+    <div class="col-auto">
+      <label for="person_id">person</label>
+      <select class="form-select" name="person_id" required>
+        <% for_each(persons) do p %>
+          <% if person != nothing && person==p %>
+        <option value="$p.id" selected>$(p.first * " " * p.last)</option>
+          <% else %>
+        <option value="$p.id">$(p.first * " " * p.last)</option>
+          <% end %>
+        <%end%>
+      </select>
+    </div>
+  </div>
+
+  <div class="row g-3 m-2">
+    <div class="col-3">
+      <label for="address">Street address 1</label>
+      <% if property != nothing %>
+      <input type="address" class="form-control" placeholder="address" name="address" value="$(replace(property.address, '+'=>' '))" required>
+      <% else %>
+      <input type="address" class="form-control" placeholder="address" name="address" value="" required>
+      <%end%>
+
+    </div>
+    <div class="col-3">
+      <label for="addr1">City</label>
+      <select class="form-select" name="city" required>
+        <% for_each(["madison","huntsville"]) do c %>
+          <% if property != nothing && c==property.city %>
+            <option value="$c" selected>$c</option>
+          <% else %>
+            <option value="$c">$c</option>
+          <%end%>
+        <%end%>
+      </select>
+    </div>
+    <div class="col-1">
+      <label for="state">State</label>
+      <input type="text" name="state" readonly class="form-control-plaintext" value="AL">
+    </div>
+    <div class="col-3">
+      <label for="acres">Acres</label>
+
+      <% if property != nothing %>
+      <input type="number" placeholder="0.25" class="form-control" name="acres" value="property.acres">
+      <% else %>
+      <input type="number" placeholder="0.25" class="form-control" name="acres" value="">
+      <% end %>
+    </div>
+
+  </div>
+
+  <div class="row justify-content-center m-2">
+    <button type="submit" class="w-35 btn btn-primary">$(property==nothing ? "Create" : "Update")</button>
+  </div>
+</form>

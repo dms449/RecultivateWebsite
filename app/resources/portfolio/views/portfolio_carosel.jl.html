@@ -1,0 +1,45 @@
+<div class="container gx-0" >
+<div id="c$(id)" class="carousel slide" data-bs-ride="carousel" data-bs-interval="false">
+  <!-- <div class="carousel-indicators"> -->
+  <!--     <!-1- <% for (i,v) in enumerate(imgs)%> -1-> -->
+  <!--     <button type="button" data-bs-target="#c$(id)" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 0"></button> -->
+  <!--     <% for_each(1:length(imgs)-1) do i %> -->
+  <!--       <button type="button" data-bs-target="#c$(id)" data-bs-slide-to="$i" aria-current="true" aria-label="Slide $i"></button> -->
+  <!--     <% end %> -->
+  <!--   </div> -->
+
+    <div class="carousel-inner">
+      <!-- first image -->
+      <div class="carousel-item active">
+        <img src="$(imgs[1])" class="d-block w-100" alt="$(imgs[1])">
+      </div>
+
+      
+      <!-- the rest of the images -->
+      <% for_each(1:length(imgs)) do j %>
+        <!-- <% if j==1 %> -->
+        <!--   <div class="carousel-item active"> -->
+        <!-- <% else %> -->
+        <div class="carousel-item">
+        <!-- <%end%> -->
+          <img src="$(imgs[j].path)" class="d-block w-100" alt="$imgs[j].desc">
+          <div class="carousel-caption d-none d-md-block">
+            <h4>$(imgs[j].title)</h4>
+            <p>$(imgs[j].desc)</p>
+          </div>
+        </div>
+      <% end %>
+
+    </div>
+
+    <button class="carousel-control-prev" type="button" data-bs-target="#c$(id)"  data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#c$(id)"  data-bs-slide="next">
+      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+</div>
+</div>

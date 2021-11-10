@@ -1,0 +1,44 @@
+
+<div class="container">
+<h1> Properties Due  </h1>
+  <div class="row py-1">
+    <div class="col-3">address</div>
+    <div class="col-2">date</div>
+    <div class="col-1">hours</div>
+    <div class="col-1">cost</div>
+    <div class="col-1">group_id</div>
+  </div>
+  <% for_each(properties_due) do property %>
+    <% partial(joinpath(Genie.config.path_resources, "lawncareevents", "views", "lawncare_event_form.jl.html"), property=property, td=td, groups=groups, context=@__MODULE__) %>
+  <% end %>
+</div>
+
+<!--<div class="container">--> 
+  <!--<h1> New Client </h1>-->
+  <!--<button class="btn px-4 py-2" type="button" data-bs-toggle="modal" data-bs-target="#personModal">Test Person</button>-->
+<!--</div>-->
+
+<!--<div class="modal fade" id="personModal" tabindex="-1" >-->
+  <!--<div class="modal-dialog">-->
+  <!--  <!-1-"$(Genie.Router.linkto(:contactPage()))"-1->-->
+  <!--  <!-1- Modal content-1->-->
+  <!--  <div class="modal-content">-->
+<!--    <div class="modal-header">-->
+  <!--      <h4 class="modal-title">Modify Person</h4>-->
+  <!--      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>-->
+  <!--    </div>-->
+
+  <!--    <div class="modal-body">-->
+  <!--      <form action="$(Genie.Router.linkto(:edit_person_submit))" method="POST">-->
+  <!--        <% partial(joinpath(Genie.config.path_resources, "persons", "views", "new_person_form.jl.html"), context = @__MODULE__) %>-->
+  <!--      </form>-->
+  <!--    </div>-->
+
+  <!--    <div class="modal-footer justify-content-center">-->
+  <!--      <button type="button" class="btn w-40 my-btn py-2n btn-lg">Submit</button>-->
+  <!--    </div>-->
+  <!--  </div>-->
+  <!--</div>-->
+<!-- </div> -->
+
+

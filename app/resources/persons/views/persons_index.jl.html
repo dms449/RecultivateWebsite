@@ -1,0 +1,66 @@
+<div class="container">
+  
+
+
+  <div class="row justify-content-between">
+    <h3 class="col-2"> Persons</h3>
+    <a class="btn btn-primary col-1" data-bs-toggle="modal" href="#personModal" role="button" aria-expanded="false" aria-controls="createPerson">
+    Add
+    </a>
+  </div>
+
+  <hr class="my-4">
+  <table 
+      data-toggle="table"
+      data-height="800"
+      data-sortable="true"
+      data-pagination="true"
+      data-search="true"
+      data-classes="table table-hover"
+    >
+    <thead>
+      <tr>
+        <th data-field="first" data-sortable="true">first</th>
+        <th data-field="last" data-sortable="true">last</th>
+        <th data-field="mi">mi</th>
+        <th data-field="email">email</th>
+        <th data-field="phone">phone</th>
+        <th data-field="preference">preference</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+    <% for_each(all(Person)) do p %>
+      <tr>
+        <td>$(p.first)</td>
+        <td>$(p.last)</td>
+        <td>$(p.mi)</td>
+        <td>$(p.email)</td>
+        <td>$(p.phone)</td>
+        <td>$(p.contact_preference)</td>
+        <td><a class="btn btn-primary" href="/persons/$(p.id)/edit" role="button">Edit</a></td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+<div class="modal fade" id="personModal" tabindex="-1" >
+  <div class="modal-dialog">
+    <!--"$(Genie.Router.linkto(:contactPage()))"-->
+    <!-- Modal content-->
+    <div class="modal-content">
+
+      <div class="modal-header">
+        <h4 class="modal-title">Add Person </h4>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+
+      <div class="modal-body">
+          <% partial(joinpath(Genie.config.path_resources, "persons", "views", "person_form.jl.html"),person=nothing%>
+      </div>
+
+    </div>
+  </div>
+</div>
+
