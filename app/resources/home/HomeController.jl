@@ -6,7 +6,7 @@ module HomeController
   
 
   function homePage()
-    Sessions.set!(Sessions.session(Router.params()), :current_page, :home_page)
-    html(:home, :home)
+    Sessions.set!(Sessions.session(Requests.payload()), :current_page, :home_page)
+    html(:home, :homepage)
   end
 end

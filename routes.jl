@@ -17,7 +17,7 @@ using AboutController
 # using PersonsController
 # using MessagesController
 import GeneralUtils: isActivePage, @activePage
-current_user() = findone(Users.User, id = get_authentication())
+# current_user() = findone(Users.User, id = get_authentication())
 
 
 # using Genie.Renderer.Html: html 

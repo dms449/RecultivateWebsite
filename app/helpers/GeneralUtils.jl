@@ -48,7 +48,7 @@ the string "active". This is used from within html.jl files to add the 'active'
 class to items
 """
 function isActivePage(pageSymbol::Symbol)
-  cp = Genie.Sessions.get(Genie.Sessions.session(Router.params()), :active_page)
+  cp = Genie.Sessions.get(Genie.Sessions.session(Requests.payload()), :active_page)
   return cp == pageSymbol ? "active-item" : ""
 end
 
